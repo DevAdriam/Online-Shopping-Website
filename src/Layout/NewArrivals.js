@@ -68,7 +68,7 @@ const NewArrivals = () => {
 	};
 
 	return (
-		<div className={` w-full px-10 py-10 mx-auto ${darkmode ? "bg-[var(--blue-dark)] " : "bg-white"}`}>
+		<div className={` w-full px-8 py-10 mx-auto ${darkmode ? "bg-[var(--blue-dark)] " : "bg-white"}`}>
 			<h1 className={`text-4xl font-bold  leading-normal ${darkmode ? "text-white" : "text-[var(--blue-dark)]"}`}>
 				New Arrivals.<span className="text-gray-500">REY badpacks & bags</span>
 			</h1>

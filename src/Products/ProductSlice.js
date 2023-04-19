@@ -26,22 +26,36 @@ const ProductSlice = createSlice({
 					totalprice: newItem.price,
 					quantity: 1,
 					price: newItem.price,
-					name: newItem.name,
+					title: newItem.title,
+					image: newItem.image,
 				});
 			}
-
-			console.log(state.cartList);
 		},
-		addToWishList: (state, action) => {
-			const existingItem = state.wishList.find((item) => item.id === action.payload.id);
 
-			if (existingItem) {
-				return;
-			} else {
-				state.wishList = [...state.wishList, action.payload];
+		addItem: (state, action) => {
+			const item = state.cartList.find((item) => item.id === action.payload);
+
+			if (item) {
+				item.quantity++;
+				item.totalprice += item.price;
 			}
+			console.log(item);
+		},
+		removeItem: (state, action) => {
+			const rmvItem = state.cartList.find((item) => item.id === action.payload);
 
-			console.log(state.wishList);
+			if (rmvItem) {
+				if (rmvItem.quantity === 1) {
+					state.cartList = state.cartList.filter((item) => item.id !== rmvItem.id);
+				} else {
+					rmvItem.quantity--;
+					rmvItem.totalprice -= rmvItem.price;
+				}
+			}
+		},
+
+		deleteItem: (state, action) => {
+			state.cartList = state.cartList.filter((item) => item.id !== action.payload);
 		},
 	},
 });
@@ -49,7 +63,10 @@ const ProductSlice = createSlice({
 export const selectAllProducts = (state) => state.products;
 export const darkMode = (state) => state.products.darkMode;
 export const wishList = (state) => state.products.wishList;
-console.warn(wishList);
-export const { changeMode, addToCart, addToWishList } = ProductSlice.actions;
+
+export const cartCount = (state) => state.products.cartList.length;
+export const cartList = (state) => state.products.cartList;
+
+export const { changeMode, addToCart, addToWishList, addItem, removeItem, deleteItem } = ProductSlice.actions;
 
 export default ProductSlice.reducer;

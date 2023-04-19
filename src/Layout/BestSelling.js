@@ -66,7 +66,7 @@ const BestSelling = () => {
 	};
 
 	return (
-		<div className={` w-full px-10 py-10 mx-auto ${darkmode ? "bg-[var(--blue-dark)] " : "bg-white"}`}>
+		<div className={` w-full px-8 py-10 mx-auto ${darkmode ? "bg-[var(--blue-dark)] " : "bg-white"}`}>
 			<h1 className={`text-4xl font-bold  leading-normal ${darkmode ? "text-white" : "text-[var(--blue-dark)]"}`}>
 				Best Sellers.<span className="text-gray-500">Best selling of the month</span>
 			</h1>

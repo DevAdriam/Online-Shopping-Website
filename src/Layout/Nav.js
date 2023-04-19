@@ -4,7 +4,7 @@ import { IoCartOutline } from "react-icons/io5";
 import { VscClose } from "react-icons/vsc";
 import { BsFacebook, BsMessenger, BsTwitter } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import { changeMode, darkMode } from "../Products/ProductSlice";
+import { cartCount, changeMode, darkMode } from "../Products/ProductSlice";
 import { MdOutlineDarkMode, MdDarkMode } from "react-icons/md";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 
@@ -12,6 +12,7 @@ import { HiMenuAlt2 } from "react-icons/hi";
 const Nav = () => {
 	const [open, SetOpen] = useState(false);
 	const darkmode = useSelector(darkMode);
+	const cartLength = useSelector(cartCount);
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -83,7 +84,10 @@ const Nav = () => {
 					<button>
 						<AiOutlineUser size={40} className="py-2 px-2 hover:bg-slate-400/20 rounded-full " />
 					</button>
-					<button>
+					<button className="relative" onClick={() => navigate("/shoppingCart")}>
+						<div className="w-[18px] h-[18px] bg-sky-500 rounded-full absolute top-[2px] right-[2px] font-bold  text-xs text-center text-white">
+							{cartLength}
+						</div>
 						<IoCartOutline size={40} className="py-2 px-2 hover:bg-slate-400/20 rounded-full " />
 					</button>
 					<button onClick={chgDarkMode}>

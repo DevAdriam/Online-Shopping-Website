@@ -2,10 +2,25 @@ import React from "react";
 
 import { AiFillStar, AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { TbShoppingCartPlus } from "react-icons/tb";
-import { useSelector } from "react-redux";
-import { darkMode } from "./ProductSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, cartList, darkMode } from "./ProductSlice";
 const Products = ({ item }) => {
 	const darkmode = useSelector(darkMode);
+	const dispatch = useDispatch();
+	const cartlist = useSelector(cartList);
+	console.log(cartlist);
+
+	const addCart = () => {
+		dispatch(
+			addToCart({
+				id: item.id,
+				image: item.image,
+				category: item.category,
+				title: item.title,
+				price: item.price,
+			})
+		);
+	};
 	return (
 		<div
 			key={item.id}
@@ -21,7 +36,10 @@ const Products = ({ item }) => {
 			</div>
 
 			<div className="actionsBtn flex ">
-				<button className="w-[130px] h-[37px]  rounded-full flex gap-1 items-center shadow-sm mx-2 text-white bg-[var(--blue-dark)] text-center hover:opacity-90">
+				<button
+					onClick={addCart}
+					className="w-[130px] h-[37px]  rounded-full flex gap-1 items-center shadow-sm mx-2 text-white bg-[var(--blue-dark)] text-center hover:opacity-90"
+				>
 					<TbShoppingCartPlus size={20} className="ml-2" />
 					<span className="mx-2">AddToCart</span>
 				</button>

@@ -35,7 +35,7 @@ const Collection = () => {
 	console.warn(darkmode);
 
 	return (
-		<div className={`py-28 w-full px-10 ${darkmode ? "bg-[var(--blue-dark)] " : "bg-white"}`}>
+		<div className={`py-28 w-full px-8 ${darkmode ? "bg-[var(--blue-dark)] " : "bg-white"}`}>
 			<h1 className={`text-4xl font-bold leading-normal ${darkmode ? "text-white" : "text-[var(--blue-dark)]"}`}>
 				Discover More.<span className="text-gray-500">Good Things are waiting For You</span>
 			</h1>

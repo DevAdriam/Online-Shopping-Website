@@ -5,13 +5,14 @@ import { darkMode } from "./ProductSlice";
 
 import Nav from "../Layout/Nav";
 import Products from "./Products";
+import Loading from "../Loading/Loading";
 const ProductList = () => {
 	const { data, isLoading, isError, error } = Customhook();
 	const darkmode = useSelector(darkMode);
 	console.log(data);
 
 	if (isLoading) {
-		return <h3>loading</h3>;
+		return <Loading />;
 	}
 	return (
 		<div>

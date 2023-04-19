@@ -4,19 +4,21 @@ import "./index.css";
 import App from "./App";
 import { Provider } from "react-redux";
 import Estore from "./Store/Store";
-import { BrowserRouter, Router } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const queryClient = new QueryClient();
 root.render(
 	<React.StrictMode>
-		<BrowserRouter>
-			<Provider store={Estore}>
-				<QueryClientProvider client={queryClient}>
-					<App />
-				</QueryClientProvider>
-			</Provider>
-		</BrowserRouter>
+		<Provider store={Estore}>
+			<QueryClientProvider client={queryClient}>
+				<Router>
+					<Routes>
+						<Route path="/*" element={<App />} />
+					</Routes>
+				</Router>
+			</QueryClientProvider>
+		</Provider>
 	</React.StrictMode>
 );
 

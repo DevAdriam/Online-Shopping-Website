@@ -1,18 +1,19 @@
 import React from "react";
-import { Customhook } from "../../Hooks/Customhook";
+import { Customhook } from "../Hooks/Customhook";
 import { BsArrowRight } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { darkMode } from "../Products/ProductSlice";
-import Nav from "../../Layout/Nav";
+import Nav from "../Layout/Nav";
 import { useNavigate } from "react-router-dom";
 import Products from "../Products/Products";
+import Loading from "../Loading/Loading";
 const WomenClothing = () => {
 	const { data, isLoading, isError, error } = Customhook();
 	const navigate = useNavigate();
 	const darkmode = useSelector(darkMode);
 
 	if (isLoading) {
-		return <h3>loading ...</h3>;
+		return <Loading />;
 	}
 
 	const womenArr = data?.data.filter((item) => item.category === "women's clothing");

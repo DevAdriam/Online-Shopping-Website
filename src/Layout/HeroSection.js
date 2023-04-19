@@ -1,6 +1,8 @@
 import React from "react";
 import { CiSearch } from "react-icons/ci";
+import { useNavigate } from "react-router-dom";
 const HeroSection = () => {
+	const navigate = useNavigate();
 	return (
 		<div className="w-full lg:h-[100vh] md:h-[80vh] h-[55vh] bg-[var(--soft-blue)] relative overflow-hidden mt-20">
 			<div className="w-full ">
@@ -12,7 +14,8 @@ const HeroSection = () => {
 					</h1>
 
 					<button className="w-[180px] py-5  flex items-center justify-center bg-[var(--blue-dark)] text-white  rounded-full font-bold font-[Roboto] leading-normal hover:opacity-90">
-						<span>Explore now</span> <CiSearch size={25} className="text-slate-400 ml-2" />
+						<span onClick={() => navigate("/allProducts")}>Explore now</span>{" "}
+						<CiSearch size={25} className="text-slate-400 ml-2" />
 					</button>
 				</div>
 				<img
