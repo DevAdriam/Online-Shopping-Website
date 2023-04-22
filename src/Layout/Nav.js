@@ -4,7 +4,8 @@ import { IoCartOutline } from "react-icons/io5";
 import { VscClose } from "react-icons/vsc";
 import { BsFacebook, BsMessenger, BsTwitter } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import { cartCount, changeMode, darkMode } from "../Products/ProductSlice";
+import { changeMode, darkMode } from "../Products/ProductSlice";
+import { cartCount } from "../Cart/CartSLice";
 import { MdOutlineDarkMode, MdDarkMode } from "react-icons/md";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, addToWishList, darkMode } from "../Products/ProductSlice";
+import { addToCart, addToWishList } from "../Cart/CartSLice";
+import { darkMode } from "../Products/ProductSlice";
 import { Customhook } from "../Hooks/Customhook";
 import { AiFillStar, AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { TbShoppingCartPlus } from "react-icons/tb";

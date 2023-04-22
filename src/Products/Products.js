@@ -1,25 +1,41 @@
-import React from "react";
-
+import React, { useState } from "react";
+import "react-toastify/dist/ReactToastify.css";
 import { AiFillStar, AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { TbShoppingCartPlus } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, cartList, darkMode } from "./ProductSlice";
+import { addToCart, addToWishList, deleteFromWishList, wishList } from "../Cart/CartSLice";
+import { darkMode } from "./ProductSlice";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 const Products = ({ item }) => {
 	const darkmode = useSelector(darkMode);
 	const dispatch = useDispatch();
-	const cartlist = useSelector(cartList);
-	console.log(cartlist);
+	const navigate = useNavigate();
+
+	//getting wishlist item
+	const wishlist = useSelector(wishList);
+	const haveWish = wishlist.find((product) => product.id === item.id);
+
+	const [wish, Setwish] = useState(item.save);
+
+	// Notification
+	const notiAddCart = () => {
+		toast.success("item added to cart");
+	};
+	const notiWishList = () => {
+		wish === true ? toast.error("removed from wishlist") : toast.success("added to wishlist");
+	};
 
 	const addCart = () => {
-		dispatch(
-			addToCart({
-				id: item.id,
-				image: item.image,
-				category: item.category,
-				title: item.title,
-				price: item.price,
-			})
-		);
+		const product = {
+			id: item.id,
+			image: item.image,
+			category: item.category,
+			title: item.title,
+			price: item.price,
+		};
+		dispatch(addToCart(product));
+		notiAddCart();
 	};
 	return (
 		<div
@@ -28,8 +44,26 @@ const Products = ({ item }) => {
 				darkmode ? "bg-white " : "bg-sky-100/20"
 			}  `}
 		>
-			<div className="absolute top-4 right-6 cursor-pointer">
-				<AiOutlineHeart size={25} />
+			<div
+				className="absolute top-4 right-6 cursor-pointer"
+				onClick={(e) => {
+					Setwish(!wish);
+					notiWishList();
+
+					haveWish
+						? dispatch(deleteFromWishList(item.id))
+						: dispatch(
+								addToWishList({
+									id: item.id,
+									image: item.image,
+									category: item.category,
+									title: item.title,
+									price: item.price,
+								})
+						  );
+				}}
+			>
+				{haveWish ? <AiFillHeart size={25} fill="red" /> : <AiOutlineHeart size={25} />}
 			</div>
 			<div className="absolute top-8 left-[30%] z-[-1]">
 				<img src={item.image} alt={item.category} className=" object-cover bg-center" width={80} />
@@ -43,7 +77,10 @@ const Products = ({ item }) => {
 					<TbShoppingCartPlus size={20} className="ml-2" />
 					<span className="mx-2">AddToCart</span>
 				</button>
-				<button className="w-[120px] h-[37px] rounded-full shadow-sm bg-white  hover:bg-gray-300/60">
+				<button
+					className="w-[120px] h-[37px] rounded-full shadow-sm bg-white  hover:bg-gray-300/60"
+					onClick={() => navigate(`/allProducts/${item.id}`)}
+				>
 					Quick View
 				</button>
 			</div>

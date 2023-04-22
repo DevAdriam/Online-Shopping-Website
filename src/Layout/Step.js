@@ -20,7 +20,7 @@ const Step = () => {
 					<img
 						src="https://ciseco-nextjs.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FHIW1img.5d05ab6a.png&w=256&q=75"
 						alt="step1"
-						className="w-[50%] object-cover mx-5 rounded-3xl"
+						className="w-[45%] object-cover mx-5 rounded-3xl"
 					/>
 					<div className="w-4/6 flex flex-col items-center  ">
 						<h2 className=" w-fit py-1 px-3 my-5 text-center bg-rose-200/80 rounded-full text-rose-800 font-bold  text-xs ">
@@ -37,7 +37,7 @@ const Step = () => {
 					<img
 						src="https://ciseco-nextjs.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FHIW2img.4553ec6b.png&w=256&q=75"
 						alt="step1"
-						className="w-[50%] object-cover mx-5 rounded-3xl"
+						className="w-[45%] object-cover mx-5 rounded-3xl"
 					/>
 					<div className="w-4/6 flex flex-col items-center  ">
 						<h2 className=" w-fit py-1 px-3 my-5 text-center bg-sky-200/80 rounded-full text-sky-800 font-bold  text-xs ">
@@ -52,7 +52,7 @@ const Step = () => {
 					<img
 						src="https://ciseco-nextjs.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FHIW3img.63a41796.png&w=256&q=75"
 						alt="step1"
-						className="w-[50%] object-cover mx-5 rounded-3xl"
+						className="w-[45%] object-cover mx-5 rounded-3xl"
 					/>
 					<div className="w-4/6 flex flex-col items-center  ">
 						<h2 className=" w-fit py-1 px-3 my-5 text-center  bg-orange-200/80 rounded-full text-orange-800 font-bold  text-xs ">
@@ -69,7 +69,7 @@ const Step = () => {
 					<img
 						src="https://ciseco-nextjs.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FHIW4img.10d25987.png&w=256&q=75"
 						alt="step1"
-						className="w-[50%] object-cover mx-5 rounded-3xl"
+						className="w-[45%] object-cover mx-5 rounded-3xl"
 					/>
 					<div className="w-4/6 flex flex-col items-center  ">
 						<h2 className=" w-fit py-1 px-3 my-5 text-center  bg-violet-200/80 rounded-full text-violet-800 font-bold  text-xs ">

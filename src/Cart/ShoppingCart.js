@@ -1,7 +1,8 @@
 import React from "react";
 import Nav from "../Layout/Nav";
 import { useDispatch, useSelector } from "react-redux";
-import { cartList, darkMode } from "../Products/ProductSlice";
+import { darkMode } from "../Products/ProductSlice";
+import { cartList } from "./CartSLice";
 import { Link } from "react-router-dom";
 
 import ProductsCheckOut from "./ProductsCheckOut";

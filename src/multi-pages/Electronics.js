@@ -7,6 +7,7 @@ import Nav from "../Layout/Nav";
 import { useNavigate } from "react-router-dom";
 import Products from "../Products/Products";
 import Loading from "../Loading/Loading";
+import { ToastContainer } from "react-toastify";
 const Electronics = () => {
 	const { data, isLoading, isError, error } = Customhook();
 	const navigate = useNavigate();
@@ -20,6 +21,19 @@ const Electronics = () => {
 	console.log(electronicArr);
 	return (
 		<div>
+			<ToastContainer
+				className="toast-position"
+				position="top-right"
+				autoClose={500}
+				hideProgressBar={true}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme="light"
+			/>
 			<Nav />
 			<div className={`md:px-20 px-4 pt-32 w-full ${darkmode ? "bg-[var(--blue-dark)]" : "bg-transparent"}`}>
 				<div aria-label="title">

@@ -1,20 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { addItem, cartList, darkMode, deleteItem, removeItem } from "../Products/ProductSlice";
-
+import { addItem, cartList, deleteItem, removeItem } from "../Cart/CartSLice";
+import { darkMode } from "../Products/ProductSlice";
 import { VscSymbolColor } from "react-icons/vsc";
 import { IoIosResize } from "react-icons/io";
 import { ReactComponent as Cart } from "../No data-cuate.svg";
 const ProductsCheckOut = () => {
 	const darkmode = useSelector(darkMode);
 	const cartlist = useSelector(cartList);
+	console.log(cartlist);
+
 	const shippingEstimate = 2.89;
 	const taxEstimate = 4.76;
 	const subTotalPrice = cartlist
-		.map((item) => item.totalprice)
-		.reduce((total, curr) => (total += curr))
-		.toFixed(2);
+		? cartlist
+				.map((item) => item.totalprice)
+				.reduce((total, curr) => (total += curr))
+				.toFixed(2)
+		: 0;
 
 	const totalPrice = (Number(subTotalPrice) + shippingEstimate + taxEstimate).toFixed(2);
 
@@ -30,26 +34,31 @@ const ProductsCheckOut = () => {
 			<div aria-label="cartItems" className={`lg:w-1/2 w-full flex flex-col gap-10 lg:overflow-y-scroll lg:h-[100vh]`}>
 				{cartlist.map((item) => {
 					return (
-						<>
-							<div className="w-full h-[200px] flex " key={item.id}>
+						<div key={item.id}>
+							<div className="w-full sm:h-[200px] h-fit-contet py-3 sm:py-1 sm:flex ">
 								<div
-									className={`md:w-[200px] w-[25%] md:h-full h-[100px] rounded-md ${
+									className={`md:w-[200px] w-1/2 block md:h-full sm:h-[100px] h-[150px] rounded-md mx-auto ${
 										darkmode ? "bg-white" : "bg-sky-100/20"
 									} `}
 								>
 									<img
 										src={item.image}
 										alt={item.category}
-										className="md:w-[100px] w-full h-full object-contain mx-auto p-4"
+										className="md:w-[100px] w-[150px] h-[150px] object-contain mx-auto p-4"
 									/>
 								</div>
+
 								<div className="flex flex-col w-full">
-									<div className="flex justify-between w-full  px-5 ">
+									<div className="flex justify-between w-full  sm:px-5 px-1 pt-3 ">
 										<div className="flex flex-col px-5 ">
 											<span className={`font-bold ${darkmode ? "text-white" : "text-black"}`}>
 												{item.title}
 											</span>
-											<div className="flex gap-6 my-2 ">
+											<div
+												className={`flex gap-6 my-2 ${
+													darkmode ? "text-white" : "text-black"
+												}`}
+											>
 												<span>
 													<VscSymbolColor size={20} className="mr-1 inline-block" /> black
 												</span>
@@ -64,7 +73,7 @@ const ProductsCheckOut = () => {
 									</div>
 
 									<div className="flex justify-between w-full px-5 pt-6">
-										<div className="flex gap-3 items-center px-5">
+										<div className="flex gap-3 items-center sm:px-5 px-1">
 											<button
 												className={`w-[30px] h-[30px]  border-2 leading-[20px] rounded-full text-center ${
 													darkmode ? "text-gray-200/80" : "text-gray-700"
@@ -102,7 +111,7 @@ const ProductsCheckOut = () => {
 								</div>
 							</div>
 							<hr />
-						</>
+						</div>
 					);
 				})}
 			</div>
@@ -114,7 +123,7 @@ const ProductsCheckOut = () => {
 
 				<div className="flex flex-col ">
 					<div className="flex items-center justify-between py-4">
-						<p className={`text-gray-600/80`}>Subtotal</p>
+						<p className={`text-gray-500/90`}>Subtotal</p>
 						<span className={`font-bold ${darkmode ? "text-white" : "text-[var(--blue-dark)]"}`}>
 							$ {subTotalPrice}
 						</span>
@@ -122,13 +131,13 @@ const ProductsCheckOut = () => {
 					<hr />
 
 					<div className="flex items-center justify-between py-4">
-						<p className={`text-gray-600/80`}>Shipping estimate</p>
+						<p className={`text-gray-500/90`}>Shipping estimate</p>
 						<span className={`font-bold ${darkmode ? "text-white" : "text-[var(--blue-dark)]"}`}>$ 2.98</span>
 					</div>
 					<hr />
 
 					<div className="flex items-center justify-between py-4">
-						<p className={`text-gray-600/80`}>Tax estimate</p>
+						<p className={`text-gray-500/90`}>Tax estimate</p>
 						<span className={`font-bold ${darkmode ? "text-white" : "text-[var(--blue-dark)]"}`}>$ 4.76</span>
 					</div>
 					<hr />
@@ -140,7 +149,11 @@ const ProductsCheckOut = () => {
 					</div>
 				</div>
 
-				<button className="w-full mx-auto h-[50px] shadow-md font-bold text-white text-md tracking-widest rounded-full bg-[var(--blue-dark)] hover:opacity-[0.9] duration-200 ">
+				<button
+					className={`w-full mx-auto h-[50px] shadow-md font-bold  text-md tracking-widest rounded-full ${
+						darkmode ? "bg-white text-[var(--blue-dark)]" : "bg-[var(--blue-dark)] text-white"
+					}  hover:opacity-[0.9] duration-200 `}
+				>
 					Checkout
 				</button>
 			</div>

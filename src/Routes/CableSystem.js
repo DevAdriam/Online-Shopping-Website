@@ -9,6 +9,7 @@ import Electronics from "../multi-pages/Electronics";
 import Jewelery from "../multi-pages/Jewelery";
 import ProductList from "../Products/ProductList";
 import ShoppingCart from "../Cart/ShoppingCart";
+import DetailPage from "../multi-pages/DetailPage";
 
 const CableSystem = () => {
 	return (
@@ -22,6 +23,7 @@ const CableSystem = () => {
 				<Route path="/jewelery" element={<Jewelery />}></Route>
 
 				<Route path="/allProducts" element={<ProductList />}></Route>
+				<Route path="allProducts/:pId" element={<DetailPage />}></Route>
 				<Route path="/shoppingCart" element={<ShoppingCart />}></Route>
 			</Routes>
 		</>

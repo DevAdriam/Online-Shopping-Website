@@ -5,6 +5,7 @@ import Collection from "./Collection";
 import NewArrivals from "./NewArrivals";
 import BestSelling from "./BestSelling";
 import Step from "./Step";
+import { ToastContainer } from "react-toastify";
 const MainPage = () => {
 	return (
 		<>
@@ -14,6 +15,7 @@ const MainPage = () => {
 			<NewArrivals />
 			<BestSelling />
 			<Step />
+			
 		</>
 	);
 };

@@ -1,15 +1,14 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Customhook } from "../Hooks/Customhook";
-import { darkMode } from "./ProductSlice";
-
+import { darkMode, initializeProductsState } from "./ProductSlice";
 import Nav from "../Layout/Nav";
 import Products from "./Products";
 import Loading from "../Loading/Loading";
+import { ToastContainer } from "react-toastify";
 const ProductList = () => {
-	const { data, isLoading, isError, error } = Customhook();
 	const darkmode = useSelector(darkMode);
-	console.log(data);
+	const { data, isLoading, isError, error } = Customhook();
 
 	if (isLoading) {
 		return <Loading />;
@@ -33,6 +32,19 @@ const ProductList = () => {
 					className={`w-full flex md:justify-start justify-center relative z-20 items-center px-5 flex-wrap md:gap-16 gap-2 
 					`}
 				>
+					<ToastContainer
+						className="toast-position"
+						position="top-right"
+						autoClose={500}
+						hideProgressBar={true}
+						newestOnTop={false}
+						closeOnClick
+						rtl={false}
+						pauseOnFocusLoss
+						draggable
+						pauseOnHover
+						theme="light"
+					/>
 					{data?.data.map((item) => (
 						<Products key={item.id} item={item} />
 					))}
