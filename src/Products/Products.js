@@ -15,7 +15,6 @@ const Products = ({ item }) => {
 	//getting wishlist item
 	const wishlist = useSelector(wishList);
 	const haveWish = wishlist.find((product) => product.id === item.id);
-
 	const [wish, Setwish] = useState(item.save);
 
 	// Notification
@@ -59,6 +58,10 @@ const Products = ({ item }) => {
 									category: item.category,
 									title: item.title,
 									price: item.price,
+									rating: {
+										rate: item.rating.rate,
+										count: item.rating.count,
+									},
 								})
 						  );
 				}}

@@ -5,7 +5,6 @@ const CartSlice = createSlice({
 	initialState: {
 		cartList: JSON.parse(localStorage.getItem("cartlist")) || [],
 		wishList: JSON.parse(localStorage.getItem("wishlist")) || [],
-		totalPrice: 0,
 	},
 	reducers: {
 		addToCart: (state, action) => {
@@ -68,6 +67,10 @@ const CartSlice = createSlice({
 				price: item.price,
 				title: item.title,
 				image: item.image,
+				rating: {
+					rate: item.rating.rate,
+					count: item.rating.count,
+				},
 			});
 			localStorage.setItem("wishlist", JSON.stringify(state.wishList));
 		},

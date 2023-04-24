@@ -24,8 +24,8 @@ const Jewelery = () => {
 			<ToastContainer
 				className="toast-position"
 				position="top-right"
-				autoClose={2000}
-				hideProgressBar={false}
+				autoClose={500}
+				hideProgressBar={true}
 				newestOnTop={false}
 				closeOnClick
 				rtl={false}

@@ -1,13 +1,15 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Customhook } from "../Hooks/Customhook";
-import { darkMode, initializeProductsState } from "./ProductSlice";
+import { allProducts, darkMode } from "./ProductSlice";
 import Nav from "../Layout/Nav";
 import Products from "./Products";
 import Loading from "../Loading/Loading";
 import { ToastContainer } from "react-toastify";
 const ProductList = () => {
 	const darkmode = useSelector(darkMode);
+	const allitems = useSelector(allProducts);
+	console.log(allitems);
 	const { data, isLoading, isError, error } = Customhook();
 
 	if (isLoading) {
