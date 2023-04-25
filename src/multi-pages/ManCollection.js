@@ -1,23 +1,19 @@
 import React from "react";
-import { Customhook } from "../Hooks/Customhook";
+import { useCustomHook } from "../Hooks/useCustomHook";
 import { BsArrowRight } from "react-icons/bs";
 import { useSelector } from "react-redux";
-import { darkMode } from "../Products/ProductSlice";
+import { allProducts, darkMode } from "../Products/ProductSlice";
 import Nav from "../Layout/Nav";
 import { useNavigate } from "react-router-dom";
 import Products from "../Products/Products";
 import Loading from "../Loading/Loading";
 import { ToastContainer } from "react-toastify";
 const ManCollection = () => {
-	const { data, isLoading, isError, error } = Customhook();
 	const navigate = useNavigate();
+	const data = useSelector(allProducts);
 	const darkmode = useSelector(darkMode);
 
-	if (isLoading) {
-		return <Loading />;
-	}
-
-	const manArr = data?.data.filter((item) => item.category === "men's clothing");
+	const manArr = data?.filter((item) => item.category === "men's clothing");
 	console.log(manArr);
 	return (
 		<div>

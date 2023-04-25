@@ -4,11 +4,13 @@ import { wishList } from "../Cart/CartSLice";
 import Products from "../Products/Products";
 import { ToastContainer } from "react-toastify";
 import { ReactComponent as EmptyWishlist } from "../Empty-pana.svg";
+import { darkMode } from "../Products/ProductSlice";
 const Accwishlist = () => {
+	const darkmode = useSelector(darkMode);
 	const wishlist = useSelector(wishList);
 
 	return (
-		<div>
+		<div className={`w-full ${darkmode && "bg-[var(--blue-dark)]"}`}>
 			<ToastContainer
 				className="toast-position"
 				position="top-right"
@@ -22,7 +24,7 @@ const Accwishlist = () => {
 				pauseOnHover
 				theme="light"
 			/>
-			<h1 className="py-10 text-2xl font-bold">List of wishList</h1>
+			<h1 className={`py-10 text-2xl font-bold ${darkmode && "text-white"}`}>List of wishList</h1>
 
 			{wishlist.length === 0 ? (
 				<EmptyWishlist className="w-[50%] mx-auto" />
@@ -39,7 +41,7 @@ const Accwishlist = () => {
 			)}
 
 			{wishlist.length === 0 && (
-				<h1 className="font-bold lg:text-3xl md:text-2xl text-xl text-sky-500 text-center tracking-wider pb-5 pt-2">
+				<h1 className="font-bold lg:text-3xl md:text-2xl text-xl text-sky-500 text-center tracking-wider pb-10 pt-2">
 					There is no wishlists
 				</h1>
 			)}

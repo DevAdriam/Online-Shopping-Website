@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Customhook } from "../Hooks/Customhook";
+import { useCustomHook } from "../Hooks/useCustomHook";
 import { allProducts, darkMode } from "./ProductSlice";
 import Nav from "../Layout/Nav";
 import Products from "./Products";
@@ -8,13 +8,7 @@ import Loading from "../Loading/Loading";
 import { ToastContainer } from "react-toastify";
 const ProductList = () => {
 	const darkmode = useSelector(darkMode);
-	const allitems = useSelector(allProducts);
-	console.log(allitems);
-	const { data, isLoading, isError, error } = Customhook();
-
-	if (isLoading) {
-		return <Loading />;
-	}
+	const data = useSelector(allProducts);
 	return (
 		<div>
 			<Nav />
@@ -47,7 +41,7 @@ const ProductList = () => {
 						pauseOnHover
 						theme="light"
 					/>
-					{data?.data.map((item) => (
+					{data?.map((item) => (
 						<Products key={item.id} item={item} />
 					))}
 				</div>

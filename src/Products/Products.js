@@ -22,7 +22,7 @@ const Products = ({ item }) => {
 		toast.success("item added to cart");
 	};
 	const notiWishList = () => {
-		wish === true ? toast.error("removed from wishlist") : toast.success("added to wishlist");
+		wish ? toast.error("removed from wishlist") : toast.success("added to wishlist");
 	};
 
 	const addCart = () => {
@@ -47,7 +47,7 @@ const Products = ({ item }) => {
 				className="absolute top-4 right-6 cursor-pointer"
 				onClick={(e) => {
 					Setwish(!wish);
-					notiWishList();
+					// notiWishList();
 
 					haveWish
 						? dispatch(deleteFromWishList(item.id))

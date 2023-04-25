@@ -152,7 +152,7 @@ const ProductsCheckOut = () => {
 				<button
 					className={`w-full mx-auto h-[50px] shadow-md font-bold  text-md tracking-widest rounded-full ${
 						darkmode ? "bg-white text-[var(--blue-dark)]" : "bg-[var(--blue-dark)] text-white"
-					}  hover:opacity-[0.9] duration-200 `}
+					}  hover:opacity-[0.9] duration-200 hover:shadow-sm hover:shadow-slate-300/70`}
 				>
 					Checkout
 				</button>

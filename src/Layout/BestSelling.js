@@ -1,26 +1,22 @@
 import React, { useState } from "react";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, addToWishList } from "../Cart/CartSLice";
-import { darkMode } from "../Products/ProductSlice";
-import { Customhook } from "../Hooks/Customhook";
+import { addToCart, addToWishList, deleteFromWishList, wishList } from "../Cart/CartSLice";
+import { allProducts, darkMode } from "../Products/ProductSlice";
 import { AiFillStar, AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { TbShoppingCartPlus } from "react-icons/tb";
 import Slider from "react-slick";
+import { ToastContainer } from "react-toastify";
 
 const BestSelling = () => {
 	const darkmode = useSelector(darkMode);
 	const dispatch = useDispatch();
-	const { data, error, isLoading, isError } = Customhook();
-	console.log(data, error);
+	const data = useSelector(allProducts);
+	console.log(data);
 
-	if (isLoading) {
-		return <h2>Loading....</h2>;
-	}
-	if (isError) {
-		return <h2>{error}</h2>;
-	}
-	const bestselling = data?.data.slice(10, 12);
-	const secondBestSelling = data?.data.slice(5, 8);
+	const bestselling = data?.slice(10, 12);
+	const secondBestSelling = data?.slice(5, 8);
 	const extractedArr = bestselling.concat(secondBestSelling);
 
 	const settings = {
@@ -65,36 +61,69 @@ const BestSelling = () => {
 			},
 		],
 	};
+	const wishlist = useSelector(wishList);
+	const [wish, Setwish] = useState(false);
 
 	return (
 		<div className={` w-full px-8 py-10 mx-auto ${darkmode ? "bg-[var(--blue-dark)] " : "bg-white"}`}>
 			<h1 className={`text-4xl font-bold  leading-normal ${darkmode ? "text-white" : "text-[var(--blue-dark)]"}`}>
 				Best Sellers.<span className="text-gray-500">Best selling of the month</span>
 			</h1>
+			<ToastContainer
+				className="toast-position"
+				position="top-right"
+				autoClose={500}
+				hideProgressBar={true}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme="light"
+			/>
 
 			<Slider {...settings} className="py-10">
 				{extractedArr?.map((item) => {
+					const haveWish = wishlist.find((product) => product.id === item.id);
+					const notiAddCart = () => {
+						toast.success("item added to cart");
+					};
+					const notiWishList = () => {
+						wish ? toast.error("removed from wishlist") : toast.success("added to wishlist");
+					};
 					const addCart = () => {
 						const cartItem = {
 							id: item.id,
-							title: item.title,
 							image: item.image,
+							category: item.category,
+							title: item.title,
 							price: item.price,
 						};
 
 						dispatch(addToCart(cartItem));
+						notiAddCart();
 					};
 
 					const addWish = () => {
-						const cartItem = {
-							id: item.id,
-							title: item.title,
-							image: item.image,
-							price: item.price,
-							quantity: 1,
-						};
+						Setwish(!wish);
+						// notiWishList();
 
-						dispatch(addToWishList(cartItem));
+						haveWish
+							? dispatch(deleteFromWishList(item.id))
+							: dispatch(
+									addToWishList({
+										id: item.id,
+										image: item.image,
+										category: item.category,
+										title: item.title,
+										price: item.price,
+										rating: {
+											rate: item.rating.rate,
+											count: item.rating.count,
+										},
+									})
+							  );
 					};
 					return (
 						<div
@@ -104,7 +133,7 @@ const BestSelling = () => {
 							}  `}
 						>
 							<div className="absolute top-4 right-6 cursor-pointer" onClick={addWish}>
-								<AiOutlineHeart size={25} />
+								{haveWish ? <AiFillHeart size={25} fill="red" /> : <AiOutlineHeart size={25} />}
 							</div>
 							<div className="absolute top-8 left-[30%] z-[-1]">
 								<img

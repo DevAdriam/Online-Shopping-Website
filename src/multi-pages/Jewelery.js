@@ -1,23 +1,18 @@
 import React from "react";
-import { Customhook } from "../Hooks/Customhook";
 import { BsArrowRight } from "react-icons/bs";
 import { useSelector } from "react-redux";
-import { darkMode } from "../Products/ProductSlice";
+import { allProducts, darkMode } from "../Products/ProductSlice";
 import Nav from "../Layout/Nav";
 import { useNavigate } from "react-router-dom";
 import Products from "../Products/Products";
 import Loading from "../Loading/Loading";
 import { ToastContainer } from "react-toastify";
 const Jewelery = () => {
-	const { data, isLoading, isError, error } = Customhook();
+	const data = useSelector(allProducts);
 	const navigate = useNavigate();
 	const darkmode = useSelector(darkMode);
 
-	if (isLoading) {
-		return <Loading />;
-	}
-
-	const jeweleryArr = data?.data.filter((item) => item.category === "jewelery");
+	const jeweleryArr = data?.filter((item) => item.category === "jewelery");
 	console.log(jeweleryArr);
 	return (
 		<div>

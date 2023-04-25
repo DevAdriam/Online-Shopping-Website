@@ -13,6 +13,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 
 import { HiMenuAlt2 } from "react-icons/hi";
 import Acclayout from "../Account/Acclayout";
+import { useCustomHook } from "../Hooks/useCustomHook";
 const Nav = () => {
 	const [open, SetOpen] = useState(false);
 	const [acc, Setacc] = useState(false);

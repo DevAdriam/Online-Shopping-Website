@@ -29,18 +29,18 @@ const Accinfo = () => {
 	};
 	return (
 		<div className="pt-5 pb-14">
-			<h1 className="py-10 text-2xl font-bold">Account Information</h1>
+			<h1 className={`py-10 text-2xl font-bold ${darkmode && "text-white"}`}>Account Information</h1>
 
-			<div className="flex w-full gap-10 ">
+			<div className="flex w-full sm:gap-10 gap-4 flex-col sm:flex-row ">
 				<div>
 					<img
 						src="https://ciseco-nextjs.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FImage-8.a9a0d423.png&w=128&q=75"
 						alt="userphoto"
-						className="w-[250px]  rounded-full object-cover border mt-4"
+						className="sm:w-[250px] max-w-[120px] rounded-full object-cover border mt-4"
 					/>
 				</div>
 
-				<form onSubmit={updAccount}>
+				<form onSubmit={updAccount} className={`${darkmode && "text-white"}`}>
 					<label htmlFor="fullname" className="inline-block w-full font-bold pt-6 pb-2">
 						Full name
 					</label>
@@ -123,8 +123,8 @@ const Accinfo = () => {
 					/>
 
 					<button
-						className={`w-[200px] h-[60px] shadow-md my-5 rounded-full py-3 px-10 text-white font-bold ${
-							!darkmode && "bg-[var(--blue-dark)]"
+						className={`w-[200px] h-[60px] shadow-md my-5 rounded-full py-3 px-10 font-bold hover:opacity-90 hover:shadow-sm hover:shadow-slate-300/70 ${
+							!darkmode ? "bg-[var(--blue-dark)] text-white" : "bg-white text-black"
 						}`}
 						type="submit"
 					>
