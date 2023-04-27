@@ -1,15 +1,26 @@
 import React, { useState } from "react";
 import Nav from "../Layout/Nav";
 import { useSelector } from "react-redux";
-import { userData } from "./Accslice";
+import { navAcc, userData } from "./Accslice";
 import { darkMode } from "../Products/ProductSlice";
 import Accinfo from "./Accinfo";
 import Accwishlist from "./Accwishlist";
 
 const Acclayout = () => {
 	const darkmode = useSelector(darkMode);
-	const [chgLi, SetchgLi] = useState("accinfo");
+	const accNav = useSelector(navAcc);
+	console.log(accNav);
+	const [chgLi, SetchgLi] = useState(accNav);
+	console.log(accNav);
+
 	const personinfo = useSelector(userData);
+	const navlinkStyles = ({ isActive }) => {
+		return {
+			backgroundColor: isActive ? "rgb(148 163 184/0.2 )" : "none",
+			padding: isActive ? "0.5rem 1rem " : "0.5rem 1rem",
+			borderRadius: "9999px",
+		};
+	};
 
 	return (
 		<>
@@ -26,27 +37,27 @@ const Acclayout = () => {
 				</h2>
 				<hr />
 
-				<ul className="flex justify-between items-center py-5 h-[80px] text-gray-500/80 sm:text-[18px] text-[13.5px] gap-2 ">
+				<ul className="flex justify-between items-center py-5 h-[80px] text-gray-500/80 sm:text-[18px] text-[13.5px] gap-2 accNav">
 					<li
-						className={` hover:text-black ${darkmode && "hover:text-white/90"} cursor-pointer `}
+						className={` ${darkmode && "hover:text-white/90"} cursor-pointer `}
 						onClick={() => SetchgLi("accinfo")}
 					>
 						Account info
 					</li>
 					<li
-						className={` hover:text-black ${darkmode && "hover:text-white/90"} cursor-pointer `}
-						onClick={() => SetchgLi("order")}
+						className={` ${darkmode && "hover:text-white/90"} cursor-pointer `}
+						onClick={() => SetchgLi("wishlist")}
 					>
-						Save lists
+						Wishlist
 					</li>
 					<li
-						className={` hover:text-black ${darkmode && "hover:text-white/90"} cursor-pointer `}
-						onClick={() => SetchgLi("wishlist")}
+						className={` ${darkmode && "hover:text-white/90"} cursor-pointer `}
+						onClick={() => SetchgLi("myorder")}
 					>
 						My order
 					</li>
 					<li
-						className={` hover:text-black ${darkmode && "hover:text-white/90"} cursor-pointer `}
+						className={` ${darkmode && "hover:text-white/90"} cursor-pointer `}
 						onClick={() => SetchgLi("chgpw")}
 					>
 						Change password
@@ -56,12 +67,12 @@ const Acclayout = () => {
 				<hr />
 
 				{chgLi === "accinfo" && <Accinfo />}
-				{chgLi === "order" && (
+				{chgLi === "wishlist" && (
 					<div>
 						<Accwishlist />
 					</div>
 				)}
-				{chgLi === "wishlist" && <div>wishlist</div>}
+				{chgLi === "myorder" && <div>myorder</div>}
 				{chgLi === "chgpw" && <div>chgpw</div>}
 			</div>
 		</>

@@ -1,7 +1,8 @@
 import React, { useRef } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
-import { darkMode } from "../Products/ProductSlice";
 import { updateAccount } from "./Accslice";
+import { darkMode } from "../Products/ProductSlice";
 const Accinfo = () => {
 	const darkmode = useSelector(darkMode);
 	const dispatch = useDispatch();
@@ -40,7 +41,7 @@ const Accinfo = () => {
 					/>
 				</div>
 
-				<form onSubmit={updAccount} className={`${darkmode && "text-white"}`}>
+				<form onSubmit={updAccount} className={`w-[90%] mx-auto ${darkmode && "text-white"}`}>
 					<label htmlFor="fullname" className="inline-block w-full font-bold pt-6 pb-2">
 						Full name
 					</label>

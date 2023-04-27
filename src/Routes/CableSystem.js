@@ -11,6 +11,7 @@ import ProductList from "../Products/ProductList";
 import ShoppingCart from "../Cart/ShoppingCart";
 import DetailPage from "../multi-pages/DetailPage";
 import Acclayout from "../Account/Acclayout";
+import CreateAccount from "../Account/CreateAccount";
 
 const CableSystem = () => {
 	return (
@@ -27,7 +28,8 @@ const CableSystem = () => {
 				<Route path="allProducts/:pId" element={<DetailPage />}></Route>
 				<Route path="/shoppingCart" element={<ShoppingCart />}></Route>
 
-				<Route path="/myaccount" element={<Acclayout />}></Route>
+				<Route path="/myAccount" element={<Acclayout />}></Route>
+				<Route path="/createAccount" element={<CreateAccount />}></Route>
 			</Routes>
 		</>
 	);

@@ -1,19 +1,18 @@
 import React, { useState } from "react";
-import { AiOutlineHeart, AiOutlineUser } from "react-icons/ai";
-import { IoCartOutline, IoHelpBuoyOutline } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+
+import { AiOutlineUser } from "react-icons/ai";
+import { MdOutlineDarkMode, MdDarkMode } from "react-icons/md";
+import { IoCartOutline } from "react-icons/io5";
 import { VscClose } from "react-icons/vsc";
 import { BsFacebook, BsMessenger, BsTwitter } from "react-icons/bs";
-import { CiLogout, CiUser } from "react-icons/ci";
-import { TbClipboard, TbClipboardText } from "react-icons/tb";
-import { useDispatch, useSelector } from "react-redux";
+import { HiMenuAlt2 } from "react-icons/hi";
+
 import { changeMode, darkMode } from "../Products/ProductSlice";
 import { cartCount } from "../Cart/CartSLice";
-import { MdOutlineDarkMode, MdDarkMode } from "react-icons/md";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import DetermineLogin from "../Account/DetermineLogin";
 
-import { HiMenuAlt2 } from "react-icons/hi";
-import Acclayout from "../Account/Acclayout";
-import { useCustomHook } from "../Hooks/useCustomHook";
 const Nav = () => {
 	const [open, SetOpen] = useState(false);
 	const [acc, Setacc] = useState(false);
@@ -26,7 +25,7 @@ const Nav = () => {
 	const navlinkStyles = ({ isActive }) => {
 		return {
 			backgroundColor: isActive ? "rgb(148 163 184/0.2 )" : "none",
-			padding: isActive ? "0.5rem 1rem " : "0.5rem 1rem",
+			padding: isActive && "0.5rem 1rem ",
 			borderRadius: "9999px",
 		};
 	};
@@ -91,65 +90,14 @@ const Nav = () => {
 
 				<div className="flex gap-2">
 					<button onClick={openAcc}>
-						<AiOutlineUser size={40} className="py-2 px-2 hover:bg-slate-400/20 rounded-full " />
+						<AiOutlineUser
+							size={40}
+							className="py-2 px-2 hover:bg-slate-400/20 rounded-full "
+							style={navlinkStyles}
+						/>
 					</button>
 					{/* account */}
-					{acc && (
-						<div
-							className={`w-[250px] h-[380px] rounded-3xl  absolute top-[83px] right-[20px] shadow-md ${
-								darkmode ? "bg-[var(--blue-minidark)]" : "bg-white"
-							}`}
-						>
-							<div className="flex items-center justify-start gap-3 p-5">
-								<img
-									src="https://ciseco-nextjs.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FImage-8.a9a0d423.png&w=128&q=75"
-									alt="userphoto"
-									className="w-[50px] h-[50px] object-cover rounded-full"
-								/>
-
-								<div>
-									<span className={`inline-block ${darkmode && "text-white"} font-bold text-[17px]`}>
-										Eden Smith
-									</span>
-									<span className={`inline-block  text-xs ${darkmode && "text-white"}`}>
-										Los Angeles,US
-									</span>
-								</div>
-							</div>
-							<hr className=" w-[85%] mx-auto" />
-
-							<div className=" py-4 px-3">
-								<ul className="w-full ">
-									<li
-										onClick={() => navigate("/myaccount")}
-										className="w-full py-3 px-4 hover:bg-gray-300/60 cursor-pointer rounded-md transition-all duration-300"
-									>
-										<CiUser className="mx-2 inline-block" size={25} />
-										My Account
-									</li>
-									<li className="w-full py-3 px-4 hover:bg-gray-300/60 cursor-pointer rounded-md transition-all duration-300">
-										<TbClipboard className="mx-2 inline-block" size={25} /> My Orders
-									</li>
-									<li className="w-full py-3 px-4 hover:bg-gray-300/60 cursor-pointer rounded-md transition-all duration-300">
-										<AiOutlineHeart className="mx-2 inline-block" size={25} /> Wishlist
-									</li>
-								</ul>
-							</div>
-							<hr className=" w-[85%] mx-auto" />
-
-							<div className=" pt-2  px-3">
-								<ul className="w-full ">
-									<li className="w-full py-3 px-4 hover:bg-gray-300/60 cursor-pointer rounded-md transition-all duration-300">
-										<IoHelpBuoyOutline className="mx-2 inline-block" size={25} />
-										Help
-									</li>
-									<li className="w-full py-3 px-4 hover:bg-gray-300/60 cursor-pointer rounded-md transition-all duration-300">
-										<CiLogout className="mx-2 inline-block" size={25} /> LogOut
-									</li>
-								</ul>
-							</div>
-						</div>
-					)}
+					{acc && <DetermineLogin />}
 
 					<button className="relative" onClick={() => navigate("/shoppingCart")}>
 						<div className="w-[18px] h-[18px] bg-sky-500 rounded-full absolute top-[2px] right-[2px] font-bold  text-xs text-center text-white">

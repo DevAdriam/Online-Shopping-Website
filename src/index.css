@@ -29,6 +29,20 @@
 	li a {
 		@apply relative py-2 px-4 hover:bg-slate-400/20 rounded-full;
 	}
+	input {
+		color: black;
+	}
+
+	::-webkit-scrollbar {
+		width: 5px;
+	}
+	::-webkit-scrollbar-track {
+		background: var(--pastel-blue);
+	}
+	::-webkit-scrollbar-thumb {
+		background-color: var(--pastel-blue);
+		box-shadow: 0 -100vh 0 100vh var(--blue-dark), 0 0 15px 5px black;
+	}
 
 	.slick-slide {
 		padding: 0 10px;
@@ -121,6 +135,22 @@
 	.toast-position {
 		top: 70px !important;
 		flex-direction: row-reverse !important;
+	}
+	.accNav li {
+		position: relative;
+	}
+	.accNav li::before {
+		content: "";
+		width: 0%;
+		height: 3px;
+		background: rgb(63, 210, 230);
+
+		position: absolute;
+		bottom: -28px;
+	}
+	.accNav li:hover > li::before {
+		display: block !important;
+		width: 100% !important;
 	}
 
 	@media (max-width: 500px) {
