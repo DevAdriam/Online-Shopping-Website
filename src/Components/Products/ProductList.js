@@ -1,10 +1,8 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useCustomHook } from "../Hooks/useCustomHook";
+import React from "react";
+import { useSelector } from "react-redux";
 import { allProducts, darkMode } from "./ProductSlice";
 import Nav from "../Layout/Nav";
 import Products from "./Products";
-import Loading from "../Loading/Loading";
 import { ToastContainer } from "react-toastify";
 const ProductList = () => {
 	const darkmode = useSelector(darkMode);

@@ -1,19 +1,21 @@
 import React, { useRef } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { updateAccount } from "./Accslice";
+import { updateAccount, userData } from "./Accslice";
 import { darkMode } from "../Products/ProductSlice";
 const Accinfo = () => {
 	const darkmode = useSelector(darkMode);
 	const dispatch = useDispatch();
+	const personinfo = useSelector(userData);
+	console.log(personinfo);
 
-	let usernameRef,
-		emailRef,
-		dateRef,
-		genderRef,
-		phoneRef,
-		addressRef,
-		aboutRef = useRef();
+	let usernameRef = useRef();
+	let emailRef = useRef();
+	let dateRef = useRef();
+	let genderRef = useRef();
+	let phoneRef = useRef();
+	let addressRef = useRef();
+	let aboutRef = useRef();
 
 	const updAccount = (e) => {
 		e.preventDefault();
@@ -26,6 +28,7 @@ const Accinfo = () => {
 			address: addressRef.current.value,
 			about: aboutRef.current.value,
 		};
+		console.log(personalInfo);
 		dispatch(updateAccount(personalInfo));
 	};
 	return (

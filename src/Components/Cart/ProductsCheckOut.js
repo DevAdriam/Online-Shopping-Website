@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, cartList, deleteItem, removeItem } from "../Cart/CartSLice";
 import { darkMode } from "../Products/ProductSlice";
 import { VscSymbolColor } from "react-icons/vsc";
 import { IoIosResize } from "react-icons/io";
-import { ReactComponent as Cart } from "../No data-cuate.svg";
 const ProductsCheckOut = () => {
 	const darkmode = useSelector(darkMode);
 	const cartlist = useSelector(cartList);

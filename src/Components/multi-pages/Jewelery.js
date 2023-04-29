@@ -1,20 +1,20 @@
 import React from "react";
-import { useCustomHook } from "../Hooks/useCustomHook";
-import { BsArrowRight } from "react-icons/bs";
+import { ToastContainer } from "react-toastify";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
+import { BsArrowRight } from "react-icons/bs";
+
 import { allProducts, darkMode } from "../Products/ProductSlice";
 import Nav from "../Layout/Nav";
-import { useNavigate } from "react-router-dom";
 import Products from "../Products/Products";
-import Loading from "../Loading/Loading";
-import { ToastContainer } from "react-toastify";
-const ManCollection = () => {
-	const navigate = useNavigate();
+const Jewelery = () => {
 	const data = useSelector(allProducts);
+	const navigate = useNavigate();
 	const darkmode = useSelector(darkMode);
 
-	const manArr = data?.filter((item) => item.category === "men's clothing");
-	console.log(manArr);
+	const jeweleryArr = data?.filter((item) => item.category === "jewelery");
+	console.log(jeweleryArr);
 	return (
 		<div>
 			<ToastContainer
@@ -33,10 +33,9 @@ const ManCollection = () => {
 			<Nav />
 			<div className={`md:px-20 px-4 pt-32 w-full ${darkmode ? "bg-[var(--blue-dark)]" : "bg-transparent"}`}>
 				<div aria-label="title">
-					<h1 className={`text-3xl font-bold ${darkmode ? "text-white" : "text-black"}`}>Man Collection</h1>
+					<h1 className={`text-3xl font-bold ${darkmode ? "text-white" : "text-black"}`}>Jewelery</h1>
 					<p className="py-10 text-gray-500 leading-6">
-						Fashion is a playground up until a certain age. But then you have to find your own signature and
-						your own style.”
+						Jewelery has the power to be the one litle thing that makes you feel unique.
 					</p>
 					<hr className="py-16" />
 				</div>
@@ -46,7 +45,7 @@ const ManCollection = () => {
 					className={`w-full flex md:justify-start justify-center relative z-20 items-center px-5 flex-wrap lg:gap-16 gap-2 
 					`}
 				>
-					{manArr.map((item) => (
+					{jeweleryArr.map((item) => (
 						<Products key={item.id} item={item} />
 					))}
 				</div>
@@ -64,4 +63,4 @@ const ManCollection = () => {
 	);
 };
 
-export default ManCollection;
+export default Jewelery;

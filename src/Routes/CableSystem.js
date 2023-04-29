@@ -1,17 +1,14 @@
 import React from "react";
-import { QueryClient, QueryClientProvider } from "react-query";
-import { Route, Router, Routes } from "react-router-dom";
-import App from "../App";
-import MainPage from "../Layout/MainPage";
-import ManCollection from "../multi-pages/ManCollection";
-import WomenCollection from "../multi-pages/WomenCollection";
-import Electronics from "../multi-pages/Electronics";
-import Jewelery from "../multi-pages/Jewelery";
-import ProductList from "../Products/ProductList";
-import ShoppingCart from "../Cart/ShoppingCart";
-import DetailPage from "../multi-pages/DetailPage";
-import Acclayout from "../Account/Acclayout";
-import CreateAccount from "../Account/CreateAccount";
+import { Route, Routes } from "react-router-dom";
+import MainPage from "../Components/Layout/MainPage";
+import ManCollection from "../Components/multi-pages/ManCollection";
+import WomenCollection from "../Components/multi-pages/WomenCollection";
+import Electronics from "../Components/multi-pages/Electronics";
+import Jewelery from "../Components/multi-pages/Jewelery";
+import ProductList from "../Components/Products/ProductList";
+import ShoppingCart from "../Components/Cart/ShoppingCart";
+import DetailPage from "../Components/multi-pages/DetailPage";
+import Acclayout from "../Components/Account/Acclayout";
 
 const CableSystem = () => {
 	return (
@@ -29,7 +26,6 @@ const CableSystem = () => {
 				<Route path="/shoppingCart" element={<ShoppingCart />}></Route>
 
 				<Route path="/myAccount" element={<Acclayout />}></Route>
-				<Route path="/createAccount" element={<CreateAccount />}></Route>
 			</Routes>
 		</>
 	);

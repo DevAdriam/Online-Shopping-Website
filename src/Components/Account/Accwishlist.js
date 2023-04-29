@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { wishList } from "../Cart/CartSLice";
 import Products from "../Products/Products";
 import { ToastContainer } from "react-toastify";
-import { ReactComponent as EmptyWishlist } from "../Empty-pana.svg";
+import { ReactComponent as EmptyWishlist } from "../SVG/Empty-pana.svg";
 import { darkMode } from "../Products/ProductSlice";
 const Accwishlist = () => {
 	const darkmode = useSelector(darkMode);

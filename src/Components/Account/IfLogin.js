@@ -2,17 +2,21 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { darkMode } from "../Products/ProductSlice";
-import { changeNavlink } from "./Accslice";
+import { changeNavlink, isloggedin, login, userData } from "./Accslice";
 
 import { AiOutlineHeart } from "react-icons/ai";
 import { IoHelpBuoyOutline } from "react-icons/io5";
 import { CiLogout, CiUser } from "react-icons/ci";
 import { TbClipboard } from "react-icons/tb";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 const IfLogin = () => {
 	const darkmode = useSelector(darkMode);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const islogin = useSelector(isloggedin);
+	const personifo = useSelector(userData);
+	console.log(personifo);
+	console.log(islogin);
 	return (
 		<div
 			className={`w-[280px] h-[380px] rounded-3xl  absolute top-[83px] right-[20px] shadow-md ${
@@ -27,8 +31,15 @@ const IfLogin = () => {
 				/>
 
 				<div>
-					<span className={`inline-block ${darkmode && "text-white"} font-bold text-[17px]`}>Eden Smith</span>
-					<span className={`inline-block  text-xs ${darkmode && "text-white"}`}>Los Angeles,US</span>
+					<span className={`block ${darkmode && "text-white"} font-bold text-[17px]`}>
+						{personifo ? personifo.username : "User"}
+					</span>
+					<span className={`inline-block  text-sm ${darkmode && "text-white"}`}>
+						Yangon
+						<NavLink className="mx-2 text-xs text-sky-400 undelrine underline-offset-auto" to="/myAccount">
+							Change Location
+						</NavLink>
+					</span>
 				</div>
 			</div>
 			<hr className=" w-[85%] mx-auto" />
@@ -73,7 +84,13 @@ const IfLogin = () => {
 						<IoHelpBuoyOutline className="mx-2 inline-block" size={25} />
 						Help
 					</li>
-					<li className="w-full py-3 px-4 hover:bg-gray-300/60 cursor-pointer rounded-md transition-all duration-300">
+					<li
+						onClick={() => {
+							dispatch(login());
+							console.log(islogin);
+						}}
+						className="w-full py-3 px-4 hover:bg-gray-300/60 cursor-pointer rounded-md transition-all duration-300"
+					>
 						<CiLogout className="mx-2 inline-block" size={25} /> LogOut
 					</li>
 				</ul>

@@ -1,7 +1,6 @@
-import React from "react";
 import { useQuery } from "react-query";
 import { requestData } from "../axios-utils/axiosUltil";
-import { setProducts } from "../Products/ProductSlice";
+import { setProducts } from "../Components/Products/ProductSlice";
 import { useDispatch } from "react-redux";
 
 const getProducts = () => {

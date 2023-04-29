@@ -21,9 +21,6 @@ const Products = ({ item }) => {
 	const notiAddCart = () => {
 		toast.success("item added to cart");
 	};
-	const notiWishList = () => {
-		wish ? toast.error("removed from wishlist") : toast.success("added to wishlist");
-	};
 
 	const addCart = () => {
 		const product = {

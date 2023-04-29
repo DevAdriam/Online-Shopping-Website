@@ -9,18 +9,9 @@ import Accwishlist from "./Accwishlist";
 const Acclayout = () => {
 	const darkmode = useSelector(darkMode);
 	const accNav = useSelector(navAcc);
-	console.log(accNav);
 	const [chgLi, SetchgLi] = useState(accNav);
-	console.log(accNav);
 
 	const personinfo = useSelector(userData);
-	const navlinkStyles = ({ isActive }) => {
-		return {
-			backgroundColor: isActive ? "rgb(148 163 184/0.2 )" : "none",
-			padding: isActive ? "0.5rem 1rem " : "0.5rem 1rem",
-			borderRadius: "9999px",
-		};
-	};
 
 	return (
 		<>

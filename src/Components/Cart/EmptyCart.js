@@ -1,8 +1,7 @@
 import React from "react";
-import { ReactComponent as Cart } from "../No data-cuate.svg";
+import { ReactComponent as Cart } from "../SVG/No data-cuate.svg";
 import { useSelector } from "react-redux";
 import { darkMode } from "../Products/ProductSlice";
-import { BsArrowBarRight, BsArrowRightSquareFill } from "react-icons/bs";
 import { TbArrowRight } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 const EmptyCart = () => {

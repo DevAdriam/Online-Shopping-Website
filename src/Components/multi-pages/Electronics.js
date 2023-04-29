@@ -1,13 +1,14 @@
 import React from "react";
-import { useCustomHook } from "../Hooks/useCustomHook";
-import { BsArrowRight } from "react-icons/bs";
 import { useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
+import { BsArrowRight } from "react-icons/bs";
+
 import { allProducts, darkMode } from "../Products/ProductSlice";
 import Nav from "../Layout/Nav";
-import { useNavigate } from "react-router-dom";
+
 import Products from "../Products/Products";
-import Loading from "../Loading/Loading";
-import { ToastContainer } from "react-toastify";
 const Electronics = () => {
 	const navigate = useNavigate();
 	const darkmode = useSelector(darkMode);

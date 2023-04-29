@@ -9,15 +9,15 @@ import { TbShoppingCartPlus } from "react-icons/tb";
 import Slider from "react-slick";
 import { ToastContainer } from "react-toastify";
 
-const BestSelling = () => {
+const NewArrival = () => {
 	const darkmode = useSelector(darkMode);
 	const dispatch = useDispatch();
 	const data = useSelector(allProducts);
 	console.log(data);
 
-	const bestselling = data?.slice(10, 12);
-	const secondBestSelling = data?.slice(5, 8);
-	const extractedArr = bestselling.concat(secondBestSelling);
+	const menClothes = data?.slice(0, 2);
+	const womenCLothes = data?.slice(15, 18);
+	const extractedArr = womenCLothes.concat(menClothes);
 
 	const settings = {
 		dots: true,
@@ -89,9 +89,7 @@ const BestSelling = () => {
 					const notiAddCart = () => {
 						toast.success("item added to cart");
 					};
-					const notiWishList = () => {
-						wish ? toast.error("removed from wishlist") : toast.success("added to wishlist");
-					};
+
 					const addCart = () => {
 						const cartItem = {
 							id: item.id,
@@ -180,4 +178,4 @@ const BestSelling = () => {
 	);
 };
 
-export default BestSelling;
+export default NewArrival;
