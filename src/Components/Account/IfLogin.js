@@ -19,7 +19,7 @@ const IfLogin = () => {
 	console.log(islogin);
 	return (
 		<div
-			className={`w-[280px] h-[380px] rounded-3xl  absolute top-[83px] right-[20px] shadow-md ${
+			className={`w-[280px] h-[400px] rounded-3xl  absolute top-[83px] right-[20px] shadow-md ${
 				darkmode ? "bg-[var(--blue-minidark)]" : "bg-white"
 			}`}
 		>
@@ -34,9 +34,13 @@ const IfLogin = () => {
 					<span className={`block ${darkmode && "text-white"} font-bold text-[17px]`}>
 						{personifo ? personifo.username : "User"}
 					</span>
-					<span className={`inline-block  text-sm ${darkmode && "text-white"}`}>
-						Yangon
-						<NavLink className="mx-2 text-xs text-sky-400 undelrine underline-offset-auto" to="/myAccount">
+					<span
+						className={`inline-block  text-sm mr-2 ${darkmode && "text-white"} ${
+							personifo && "flex flex-col "
+						}`}
+					>
+						{personifo ? personifo.address : "Yangon"}
+						<NavLink className=" text-xs text-sky-400 undelrine underline-offset-auto" to="/myAccount">
 							Change Location
 						</NavLink>
 					</span>

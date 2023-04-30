@@ -37,7 +37,10 @@ const HavntLogin = () => {
 				username: usernameRef.current.value,
 				email: emailRef.current.value,
 				password: passwordRef.current.value,
-				confirmpw: confirmpwRef.current.value,
+				phone: null,
+				address: "Yangon",
+				gender: null,
+				about: "",
 			};
 
 			dispatch(updateAccount(registerData));
@@ -59,6 +62,7 @@ const HavntLogin = () => {
 			email: loginemailRef.current.value,
 			password: loginpwRef.current.value,
 		};
+		console.warn(logindata);
 
 		const getDatafromLS = {
 			email: personinfo.email,

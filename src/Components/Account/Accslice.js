@@ -5,9 +5,10 @@ const AccSlice = createSlice({
 	initialState: {
 		personData: JSON.parse(localStorage.getItem("person")) || {},
 		AccNav: "accinfo",
-		isLoggedIn: false,
+		isLoggedIn: JSON.parse(localStorage.getItem("person")) || false,
 		reEnterpw: true,
 		LoggingIn: null,
+		fillAllInputs: false,
 	},
 	reducers: {
 		updateAccount: (state, action) => {
@@ -17,6 +18,9 @@ const AccSlice = createSlice({
 		},
 		login: (state, action) => {
 			state.isLoggedIn = !state.isLoggedIn;
+		},
+		fillinputs: (state, action) => {
+			state.fillAllInputs = action.payload;
 		},
 		password: (state, action) => {
 			state.reEnterpw = action.payload;
@@ -34,6 +38,7 @@ export const navAcc = (state) => state.acc.AccNav;
 export const isloggedin = (state) => state.acc.isLoggedIn;
 export const loggIn = (state) => state.acc.LoggingIn;
 export const pwCondition = (state) => state.acc.reEnterpw;
-export const { updateAccount, changeNavlink, login, password, accDoesntExist } = AccSlice.actions;
+export const inputs = (state) => state.acc.fillAllInputs;
+export const { updateAccount, changeNavlink, login, password, accDoesntExist, fillinputs } = AccSlice.actions;
 
 export default AccSlice.reducer;

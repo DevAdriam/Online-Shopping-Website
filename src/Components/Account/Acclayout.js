@@ -5,7 +5,6 @@ import { navAcc, userData } from "./Accslice";
 import { darkMode } from "../Products/ProductSlice";
 import Accinfo from "./Accinfo";
 import Accwishlist from "./Accwishlist";
-
 const Acclayout = () => {
 	const darkmode = useSelector(darkMode);
 	const accNav = useSelector(navAcc);
@@ -16,14 +15,15 @@ const Acclayout = () => {
 	return (
 		<>
 			<Nav />
+
 			<div className={`w-full md:pt-40 pt-28 lg:px-48 sm:px-15 px-5 ${darkmode ? "bg-[var(--blue-dark)]" : "bg-white"}`}>
 				<h1 className={`w-full font-bold lg:text-4xl text-2xl ${darkmode && "text-white/90"}`}>Account</h1>
 				<h2 className="flex items-center flex-wrap py-8">
 					<span className={`font-bold lg:text-2xl text-xl ${darkmode && "text-white/90"}`}>
-						{personinfo ? personinfo.username : "eden smith"} ,
+						{personinfo ? personinfo.username : "User"} ,
 					</span>
 					<span className={`text-gray-500 lg:text-2xl sm:text-xl text-md`}>
-						ciseco@gmail.com · Los Angeles, CA
+						{personinfo ? personinfo.email : "example@gmail.com"} , {personinfo ? personinfo.address : "yangon"}{" "}
 					</span>
 				</h2>
 				<hr />

@@ -1,13 +1,14 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { isloggedin } from "./Accslice";
+import { useDispatch, useSelector } from "react-redux";
+import { isloggedin, login, userData } from "./Accslice";
 import IfLogin from "./IfLogin";
 import HavntLogin from "./HavntLogin";
 
 const DetermineLogin = () => {
-	const isloggedIn = useSelector(isloggedin);
+	const isLoggedIn = useSelector(isloggedin);
+	const personifo = useSelector(userData);
 
-	return <>{isloggedIn ? <IfLogin /> : <HavntLogin />}</>;
+	return <>{isLoggedIn && personifo.password !== "" ? <IfLogin /> : <HavntLogin />}</>;
 };
 
 export default DetermineLogin;

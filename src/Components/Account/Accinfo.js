@@ -1,17 +1,20 @@
 import React, { useRef } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { updateAccount, userData } from "./Accslice";
+import { fillinputs, inputs, updateAccount, userData } from "./Accslice";
 import { darkMode } from "../Products/ProductSlice";
+import { toast } from "react-toastify";
 const Accinfo = () => {
 	const darkmode = useSelector(darkMode);
 	const dispatch = useDispatch();
 	const personinfo = useSelector(userData);
+	const hasinputs = useSelector(inputs);
+	const oldpassword = personinfo.password;
+	console.log(oldpassword);
 	console.log(personinfo);
 
 	let usernameRef = useRef();
 	let emailRef = useRef();
-	let dateRef = useRef();
 	let genderRef = useRef();
 	let phoneRef = useRef();
 	let addressRef = useRef();
@@ -19,17 +22,36 @@ const Accinfo = () => {
 
 	const updAccount = (e) => {
 		e.preventDefault();
-		const personalInfo = {
-			username: usernameRef.current.value,
-			email: emailRef.current.value,
-			date: dateRef.current.value,
-			gender: genderRef.current.value,
-			phone: phoneRef.current.value,
-			address: addressRef.current.value,
-			about: aboutRef.current.value,
-		};
-		console.log(personalInfo);
-		dispatch(updateAccount(personalInfo));
+		if (
+			usernameRef.current.value &&
+			emailRef.current.value &&
+			genderRef.current.value &&
+			phoneRef.current.value &&
+			addressRef.current.value &&
+			aboutRef.current.value
+		) {
+			const personalInfo = {
+				username: usernameRef.current.value,
+				email: emailRef.current.value,
+				phone: phoneRef.current.value,
+				address: addressRef.current.value,
+				gender: genderRef.current.value,
+				about: aboutRef.current.value,
+				password: oldpassword,
+			};
+			console.log(personalInfo);
+			dispatch(updateAccount(personalInfo));
+			dispatch(fillinputs(false));
+
+			usernameRef.current.value = "";
+			emailRef.current.value = "";
+			phoneRef.current.value = "";
+			addressRef.current.value = "";
+			genderRef.current.value = "";
+			aboutRef.current.value = "";
+		} else {
+			dispatch(fillinputs(true));
+		}
 	};
 	return (
 		<div className="pt-5 pb-14">
@@ -51,7 +73,7 @@ const Accinfo = () => {
 					<input
 						type="text"
 						name="fullname"
-						placeholder="Eden Smith"
+						placeholder="Enter your new username"
 						ref={usernameRef}
 						className="inline-block w-full  py-2 px-4 rounded-xl focus:outline-none border focus:shadow-cyan-400 focus:shadow-sm"
 					/>
@@ -64,17 +86,6 @@ const Accinfo = () => {
 						name="email"
 						ref={emailRef}
 						placeholder="example@email.com"
-						className="inline-block w-full  py-2 px-4 rounded-xl focus:outline-none border focus:shadow-cyan-400 focus:shadow-sm"
-					/>
-
-					<label htmlFor="fullname" className="inline-block w-full font-bold pt-6 pb-2">
-						Date
-					</label>
-					<input
-						type="date"
-						name="date"
-						ref={dateRef}
-						placeholder="Date of birth"
 						className="inline-block w-full  py-2 px-4 rounded-xl focus:outline-none border focus:shadow-cyan-400 focus:shadow-sm"
 					/>
 
@@ -125,6 +136,8 @@ const Accinfo = () => {
 						placeholder="..."
 						className="inline-block w-full  py-2 px-4 rounded-xl focus:outline-none border focus:shadow-cyan-400 focus:shadow-sm"
 					/>
+
+					{hasinputs && <span className="text-red-500 block w-full ">Please fill all input fields</span>}
 
 					<button
 						className={`w-[200px] h-[60px] shadow-md my-5 rounded-full py-3 px-10 font-bold hover:opacity-90 hover:shadow-sm hover:shadow-slate-300/70 ${
