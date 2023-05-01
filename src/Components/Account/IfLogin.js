@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import { darkMode } from "../Products/ProductSlice";
 import { changeNavlink, isloggedin, login, userData } from "./Accslice";
+import userphoto from "../images/user.png";
 
 import { AiOutlineHeart } from "react-icons/ai";
 import { IoHelpBuoyOutline } from "react-icons/io5";
@@ -15,17 +15,16 @@ const IfLogin = () => {
 	const navigate = useNavigate();
 	const islogin = useSelector(isloggedin);
 	const personifo = useSelector(userData);
-	console.log(personifo);
-	console.log(islogin);
+
 	return (
 		<div
-			className={`w-[280px] h-[400px] rounded-3xl  absolute top-[83px] right-[20px] shadow-md ${
+			className={`w-[280px] min-h-[400px] h-max-content  rounded-3xl  absolute top-[83px] right-[20px] shadow-md ${
 				darkmode ? "bg-[var(--blue-minidark)]" : "bg-white"
 			}`}
 		>
 			<div className="flex items-center justify-start gap-3 p-5">
 				<img
-					src="https://ciseco-nextjs.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FImage-8.a9a0d423.png&w=128&q=75"
+					src={personifo.image === "" ? userphoto : personifo.image}
 					alt="userphoto"
 					className="w-[50px] h-[50px] object-cover rounded-full"
 				/>
@@ -35,12 +34,12 @@ const IfLogin = () => {
 						{personifo ? personifo.username : "User"}
 					</span>
 					<span
-						className={`inline-block  text-sm mr-2 ${darkmode && "text-white"} ${
+						className={`inline-block  text-sm mr-2 mx-0 w-full ${darkmode && "text-white"} ${
 							personifo && "flex flex-col "
 						}`}
 					>
 						{personifo ? personifo.address : "Yangon"}
-						<NavLink className=" text-xs text-sky-400 undelrine underline-offset-auto" to="/myAccount">
+						<NavLink className=" text-xs text-sky-400 underline  underline-offset-auto" to="/myAccount">
 							Change Location
 						</NavLink>
 					</span>

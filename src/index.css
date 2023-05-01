@@ -37,11 +37,10 @@
 		width: 5px;
 	}
 	::-webkit-scrollbar-track {
-		background: var(--pastel-blue);
+		background-color: var(--pastel-blue);
 	}
 	::-webkit-scrollbar-thumb {
-		background-color: var(--pastel-blue);
-		box-shadow: 0 -100vh 0 100vh var(--blue-dark), 0 0 15px 5px black;
+		background: var(--blue-dark);
 	}
 
 	.slick-slide {
@@ -159,6 +158,35 @@
 			margin: auto;
 			left: 40% !important;
 		}
+	}
+	.inputfile {
+		color: transparent;
+		display: block;
+		max-width: 130px;
+		overflow: hidden;
+	}
+	.inputfile::-webkit-file-upload-button {
+		display: none;
+	}
+
+	.inputfile::before {
+		content: "Choose Photo";
+		font-size: 15px;
+		font-weight: 700;
+		background-color: rgb(70, 70, 243);
+
+		padding: 10px;
+		color: white;
+		text-align: center;
+		border-radius: 10px;
+
+		margin-top: 10px;
+		cursor: pointer;
+
+		display: block;
+	}
+	.inputfile:hover .inputfile::before {
+		opacity: 0.9;
 	}
 }
 

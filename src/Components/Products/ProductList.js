@@ -10,7 +10,19 @@ const ProductList = () => {
 	return (
 		<div>
 			<Nav />
-
+			<ToastContainer
+				className="toast-position"
+				position="top-right"
+				autoClose={500}
+				hideProgressBar={true}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme="light"
+			/>
 			<div className={`md:px-20 px-4 pt-32 w-full ${darkmode ? "bg-[var(--blue-dark)]" : "bg-transparent"}`}>
 				<div aria-label="title">
 					<h1 className={`text-3xl font-bold ${darkmode ? "text-white" : "text-black"}`}>All Products</h1>
@@ -26,19 +38,6 @@ const ProductList = () => {
 					className={`w-full flex md:justify-start justify-center relative z-20 items-center px-5 flex-wrap md:gap-16 gap-2 
 					`}
 				>
-					<ToastContainer
-						className="toast-position"
-						position="top-right"
-						autoClose={500}
-						hideProgressBar={true}
-						newestOnTop={false}
-						closeOnClick
-						rtl={false}
-						pauseOnFocusLoss
-						draggable
-						pauseOnHover
-						theme="light"
-					/>
 					{data?.map((item) => (
 						<Products key={item.id} item={item} />
 					))}

@@ -1,17 +1,16 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { fillinputs, inputs, updateAccount, userData } from "./Accslice";
+import { fillinputs, updateAccount, userData } from "./Accslice";
 import { darkMode } from "../Products/ProductSlice";
+import userphoto from "../images/user.png";
 import { toast } from "react-toastify";
+
 const Accinfo = () => {
 	const darkmode = useSelector(darkMode);
 	const dispatch = useDispatch();
 	const personinfo = useSelector(userData);
-	const hasinputs = useSelector(inputs);
 	const oldpassword = personinfo.password;
-	console.log(oldpassword);
-	console.log(personinfo);
 
 	let usernameRef = useRef();
 	let emailRef = useRef();
@@ -20,28 +19,38 @@ const Accinfo = () => {
 	let addressRef = useRef();
 	let aboutRef = useRef();
 
+	const [viewImg, SetviewImg] = useState(personinfo.image);
+
+	const previewImg = (file) => {
+		const reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onloadend = () => {
+			SetviewImg(reader.result);
+		};
+	};
+
+	const handleFileInputChange = (e) => {
+		const file = e.target.files[0];
+		previewImg(file);
+	};
+
 	const updAccount = (e) => {
 		e.preventDefault();
-		if (
-			usernameRef.current.value &&
-			emailRef.current.value &&
-			genderRef.current.value &&
-			phoneRef.current.value &&
-			addressRef.current.value &&
-			aboutRef.current.value
-		) {
+		{
 			const personalInfo = {
-				username: usernameRef.current.value,
-				email: emailRef.current.value,
-				phone: phoneRef.current.value,
-				address: addressRef.current.value,
-				gender: genderRef.current.value,
-				about: aboutRef.current.value,
+				username: usernameRef.current.value ? usernameRef.current.value : personinfo.username,
+				email: emailRef.current.value ? emailRef.current.value : personinfo.email,
+				phone: phoneRef.current.value ? phoneRef.current.value : personinfo.phone,
+				address: addressRef.current.value ? addressRef.current.value : personinfo.address,
+				gender: genderRef.current.value ? genderRef.current.value : personinfo.gender,
+				about: aboutRef.current.value ? aboutRef.current.value : personinfo.about,
 				password: oldpassword,
+				image: viewImg,
 			};
 			console.log(personalInfo);
 			dispatch(updateAccount(personalInfo));
 			dispatch(fillinputs(false));
+			toast.success("Account Updated");
 
 			usernameRef.current.value = "";
 			emailRef.current.value = "";
@@ -49,31 +58,42 @@ const Accinfo = () => {
 			addressRef.current.value = "";
 			genderRef.current.value = "";
 			aboutRef.current.value = "";
-		} else {
-			dispatch(fillinputs(true));
 		}
 	};
 	return (
 		<div className="pt-5 pb-14">
 			<h1 className={`py-10 text-2xl font-bold ${darkmode && "text-white"}`}>Account Information</h1>
 
-			<div className="flex w-full sm:gap-10 gap-4 flex-col sm:flex-row ">
+			<div className="flex w-full sm:gap-10 gap-4 flex-col sm:flex-row relative">
 				<div>
-					<img
-						src="https://ciseco-nextjs.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2FImage-8.a9a0d423.png&w=128&q=75"
-						alt="userphoto"
-						className="sm:w-[250px] max-w-[120px] rounded-full object-cover border mt-4"
-					/>
+					{viewImg ? (
+						<div className="w-[120px] h-[120px] rounded-full object-cover  mt-4">
+							<img
+								src={viewImg}
+								alt="Preview"
+								className="sm:w-[250px] w-full h-full rounded-full object-cover border mt-4"
+							></img>
+						</div>
+					) : (
+						<div className="w-[120px] h-[120px] rounded-full object-cover  mt-4">
+							<img
+								src={userphoto}
+								alt="Preview"
+								className="sm:w-[250px] w-full h-full rounded-full object-cover border mt-4"
+							></img>
+						</div>
+					)}
+					<input type="file" accept="image/*" title="" onChange={handleFileInputChange} className="inputfile" />
 				</div>
 
-				<form onSubmit={updAccount} className={`w-[90%] mx-auto ${darkmode && "text-white"}`}>
+				<form onSubmit={updAccount} className={`w-[90%]  ${darkmode && "text-white"}`}>
 					<label htmlFor="fullname" className="inline-block w-full font-bold pt-6 pb-2">
 						Full name
 					</label>
 					<input
 						type="text"
 						name="fullname"
-						placeholder="Enter your new username"
+						placeholder={personinfo ? personinfo.username : "Enter your username"}
 						ref={usernameRef}
 						className="inline-block w-full  py-2 px-4 rounded-xl focus:outline-none border focus:shadow-cyan-400 focus:shadow-sm"
 					/>
@@ -85,7 +105,7 @@ const Accinfo = () => {
 						type="email"
 						name="email"
 						ref={emailRef}
-						placeholder="example@email.com"
+						placeholder={personinfo ? personinfo.email : "Enter your email"}
 						className="inline-block w-full  py-2 px-4 rounded-xl focus:outline-none border focus:shadow-cyan-400 focus:shadow-sm"
 					/>
 
@@ -96,7 +116,7 @@ const Accinfo = () => {
 						type="text"
 						name="address"
 						ref={addressRef}
-						placeholder="New York , US"
+						placeholder={personinfo ? personinfo.address : "Yangon"}
 						className="inline-block w-full  py-2 px-4 rounded-xl focus:outline-none border focus:shadow-cyan-400 focus:shadow-sm"
 					/>
 
@@ -105,6 +125,7 @@ const Accinfo = () => {
 					</label>
 					<select
 						ref={genderRef}
+						placeholder={personinfo ? personinfo.gender : "Choose your gender"}
 						className="inline-block w-full  py-2 px-4 rounded-xl focus:outline-none border focus:shadow-cyan-400 focus:shadow-sm"
 					>
 						<option value="male" key="male">
@@ -122,7 +143,7 @@ const Accinfo = () => {
 						type="phone"
 						ref={phoneRef}
 						name="phone"
-						placeholder="01-11129993"
+						placeholder={personinfo ? personinfo.phone : "01-111 222 333"}
 						className="inline-block w-full  py-2 px-4 rounded-xl focus:outline-none border focus:shadow-cyan-400 focus:shadow-sm"
 					/>
 
@@ -133,11 +154,9 @@ const Accinfo = () => {
 						type="text"
 						name="about you"
 						ref={aboutRef}
-						placeholder="..."
+						placeholder={personinfo ? personinfo.about : "..."}
 						className="inline-block w-full  py-2 px-4 rounded-xl focus:outline-none border focus:shadow-cyan-400 focus:shadow-sm"
 					/>
-
-					{hasinputs && <span className="text-red-500 block w-full ">Please fill all input fields</span>}
 
 					<button
 						className={`w-[200px] h-[60px] shadow-md my-5 rounded-full py-3 px-10 font-bold hover:opacity-90 hover:shadow-sm hover:shadow-slate-300/70 ${

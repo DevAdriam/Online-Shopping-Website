@@ -16,6 +16,8 @@ import DetermineLogin from "../Account/DetermineLogin";
 const Nav = () => {
 	const [open, SetOpen] = useState(false);
 	const [acc, Setacc] = useState(false);
+	const [viewImg, SetviewImg] = useState("");
+
 	const darkmode = useSelector(darkMode);
 	const cartLength = useSelector(cartCount);
 

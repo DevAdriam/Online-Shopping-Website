@@ -41,6 +41,7 @@ const HavntLogin = () => {
 				address: "Yangon",
 				gender: null,
 				about: "",
+				image: "",
 			};
 
 			dispatch(updateAccount(registerData));
@@ -87,8 +88,7 @@ const HavntLogin = () => {
 					register && "translate-x-[-300px] transition-transform duration-500"
 				} min-w-[280px] max-h-[380px]`}
 			>
-				<h1 className={`font-bold pt-6 pb-3 text-center text-xl`}>Log in to my account</h1>
-				<h2 className={`  text-center text-md`}>Enter your email and password</h2>
+				<h1 className={`font-bold pt-8  text-center text-xl`}>Log in to my account</h1>
 
 				<form className="py-5 mx-3">
 					<label htmlFor="email" className="mb-2 ml-1">
@@ -97,20 +97,22 @@ const HavntLogin = () => {
 					<input
 						type="email"
 						name="email"
+						autoComplete
 						ref={loginemailRef}
 						placeholder="Enter your email..."
-						className={`inline-block w-full  py-2 px-4 rounded-xl focus:outline-none border focus:shadow-cyan-400 focus:shadow-sm 
+						className={`inline-block w-full py-2 px-4 rounded-xl focus:outline-none border focus:shadow-cyan-400 focus:shadow-sm 
 								${loggingIn && "border-red-500 focus:shadow-red-500"}
 							`}
 					/>
 
-					<label htmlFor="password" className="mb-2 ml-1">
+					<label htmlFor="password" className=" ml-1 mt-5 block">
 						Password
 					</label>
 					<span className="relative block">
 						<input
 							type={showpw ? "text" : "password"}
 							name="password"
+							autoComplete
 							ref={loginpwRef}
 							placeholder="Enter your password..."
 							className={`inline-block w-full  py-2 px-4 rounded-xl focus:outline-none border focus:shadow-cyan-400 focus:shadow-sm 
@@ -159,7 +161,7 @@ const HavntLogin = () => {
 
 					<h1 className="mx-auto pt-3 text-sm text-gray-500">
 						by creating your account , you will get
-						<span className="font-bold text-sky-400 text-sm leading-5">10% Discount Promocode</span>
+						<span className="font-bold text-sky-400 text-sm leading-5"> 10% Discount Promocode</span>
 					</h1>
 
 					<h1 className="mx-auto pt-2 text-sm text-sky-400/90 ">
@@ -178,6 +180,7 @@ const HavntLogin = () => {
 					<input
 						type="text"
 						name="username"
+						autoComplete
 						ref={usernameRef}
 						placeholder="Enter your username..."
 						className="inline-block w-full mb-2 py-2 px-4 rounded-xl focus:outline-none border focus:shadow-cyan-400 focus:shadow-sm"
@@ -189,6 +192,7 @@ const HavntLogin = () => {
 					<input
 						type="email"
 						name="email"
+						autoComplete
 						ref={emailRef}
 						placeholder="Enter your email..."
 						className="inline-block w-full mb-2  py-2 px-4 rounded-xl focus:outline-none border focus:shadow-cyan-400 focus:shadow-sm"
@@ -201,6 +205,7 @@ const HavntLogin = () => {
 						<input
 							type={showpw ? "text" : "password"}
 							name="password"
+							autoComplete
 							ref={passwordRef}
 							placeholder="Enter your password..."
 							className={`inline-block w-full  py-2 px-4 rounded-xl focus:outline-none border focus:shadow-cyan-400 focus:shadow-sm ${
@@ -232,6 +237,7 @@ const HavntLogin = () => {
 						<input
 							type={confirmshowpw ? "text" : "password"}
 							name="confirmpw"
+							autoComplete
 							ref={confirmpwRef}
 							placeholder="Confirm your password..."
 							className={`inline-block w-full  py-2 px-4 rounded-xl focus:outline-none border focus:shadow-cyan-400 focus:shadow-sm ${

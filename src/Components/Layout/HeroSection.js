@@ -13,9 +13,11 @@ const HeroSection = () => {
 						Exclusive collection for everyone
 					</h1>
 
-					<button className="w-[180px] py-5  flex items-center justify-center bg-[var(--blue-dark)] text-white  rounded-full font-bold font-[Roboto] leading-normal hover:opacity-90">
-						<span onClick={() => navigate("/allProducts")}>Explore now</span>{" "}
-						<CiSearch size={25} className="text-slate-400 ml-2" />
+					<button
+						onClick={() => navigate("/allProducts")}
+						className="w-[180px] py-5  flex items-center justify-center bg-[var(--blue-dark)] text-white  rounded-full font-bold font-[Roboto] leading-normal hover:opacity-90"
+					>
+						<span>Explore now</span> <CiSearch size={25} className="text-slate-400 ml-2" />
 					</button>
 				</div>
 				<img

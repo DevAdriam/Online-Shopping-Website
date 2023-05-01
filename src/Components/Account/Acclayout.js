@@ -30,28 +30,48 @@ const Acclayout = () => {
 
 				<ul className="flex justify-between items-center py-5 h-[80px] text-gray-500/80 sm:text-[18px] text-[13.5px] gap-2 accNav">
 					<li
-						className={` ${darkmode && "hover:text-white/90"} cursor-pointer `}
+						className={` ${darkmode && "hover:text-white/90"} ${
+							chgLi === "accinfo" && "text-black font-bold"
+						} cursor-pointer relative`}
 						onClick={() => SetchgLi("accinfo")}
 					>
 						Account info
+						{chgLi === "accinfo" && (
+							<span className="absolute block bottom-[-27px] w-full h-[3px] bg-sky-300"></span>
+						)}
 					</li>
 					<li
-						className={` ${darkmode && "hover:text-white/90"} cursor-pointer `}
+						className={` ${darkmode && "hover:text-white/90"} ${
+							chgLi === "wishlist" && "text-black font-bold"
+						} relative cursor-pointer `}
 						onClick={() => SetchgLi("wishlist")}
 					>
 						Wishlist
+						{chgLi === "wishlist" && (
+							<span className="absolute block bottom-[-27px] w-full h-[3px] bg-sky-300"></span>
+						)}
 					</li>
 					<li
-						className={` ${darkmode && "hover:text-white/90"} cursor-pointer `}
+						className={` ${darkmode && "hover:text-white/90"} ${
+							chgLi === "myorder" && "text-black font-bold"
+						} relative cursor-pointer `}
 						onClick={() => SetchgLi("myorder")}
 					>
 						My order
+						{chgLi === "myorder" && (
+							<span className="absolute block bottom-[-27px] w-full h-[3px] bg-sky-300"></span>
+						)}
 					</li>
 					<li
-						className={` ${darkmode && "hover:text-white/90"} cursor-pointer `}
+						className={` ${darkmode && "hover:text-white/90"} ${
+							chgLi === "chgpw" && "text-black font-bold"
+						} relative cursor-pointer `}
 						onClick={() => SetchgLi("chgpw")}
 					>
 						Change password
+						{chgLi === "chgpw" && (
+							<span className="absolute block bottom-[-27px] w-full h-[3px] bg-sky-300"></span>
+						)}
 					</li>
 				</ul>
 
