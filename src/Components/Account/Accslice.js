@@ -8,7 +8,8 @@ const AccSlice = createSlice({
 		isLoggedIn: JSON.parse(localStorage.getItem("person")) || false,
 		reEnterpw: true,
 		LoggingIn: null,
-		fillAllInputs: false,
+		matchPw: null,
+		match_with_oldPw: null,
 	},
 	reducers: {
 		updateAccount: (state, action) => {
@@ -19,9 +20,6 @@ const AccSlice = createSlice({
 		login: (state, action) => {
 			state.isLoggedIn = !state.isLoggedIn;
 		},
-		fillinputs: (state, action) => {
-			state.fillAllInputs = action.payload;
-		},
 		password: (state, action) => {
 			state.reEnterpw = action.payload;
 		},
@@ -31,6 +29,12 @@ const AccSlice = createSlice({
 		accDoesntExist: (state, action) => {
 			state.LoggingIn = action.payload;
 		},
+		doesntMatchOldpw: (state, action) => {
+			state.matchPw = action.payload;
+		},
+		checkCurrentPw_with_Oldpw: (state, action) => {
+			state.match_with_oldPw = action.payload;
+		},
 	},
 });
 export const userData = (state) => state.acc.personData;
@@ -38,7 +42,18 @@ export const navAcc = (state) => state.acc.AccNav;
 export const isloggedin = (state) => state.acc.isLoggedIn;
 export const loggIn = (state) => state.acc.LoggingIn;
 export const pwCondition = (state) => state.acc.reEnterpw;
-export const inputs = (state) => state.acc.fillAllInputs;
-export const { updateAccount, changeNavlink, login, password, accDoesntExist, fillinputs } = AccSlice.actions;
+export const matchpassword = (state) => state.acc.matchPw;
+export const matchOldpw = (state) => state.acc.match_with_oldPw;
+
+export const {
+	updateAccount,
+	changeNavlink,
+	login,
+	password,
+	accDoesntExist,
+	doesntMatchOldpw,
+	changePw,
+	checkCurrentPw_with_Oldpw,
+} = AccSlice.actions;
 
 export default AccSlice.reducer;

@@ -3,8 +3,10 @@ import Nav from "../Layout/Nav";
 import { useSelector } from "react-redux";
 import { navAcc, userData } from "./Accslice";
 import { darkMode } from "../Products/ProductSlice";
+import { ToastContainer } from "react-toastify";
 import Accinfo from "./Accinfo";
 import Accwishlist from "./Accwishlist";
+import ChgPw from "./ChgPw";
 const Acclayout = () => {
 	const darkmode = useSelector(darkMode);
 	const accNav = useSelector(navAcc);
@@ -15,6 +17,19 @@ const Acclayout = () => {
 	return (
 		<>
 			<Nav />
+			<ToastContainer
+				className="toast-position"
+				position="top-right"
+				autoClose={2000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme="light"
+			/>
 
 			<div className={`w-full md:pt-40 pt-28 lg:px-48 sm:px-15 px-5 ${darkmode ? "bg-[var(--blue-dark)]" : "bg-white"}`}>
 				<h1 className={`w-full font-bold lg:text-4xl text-2xl ${darkmode && "text-white/90"}`}>Account</h1>
@@ -30,47 +45,48 @@ const Acclayout = () => {
 
 				<ul className="flex justify-between items-center py-5 h-[80px] text-gray-500/80 sm:text-[18px] text-[13.5px] gap-2 accNav">
 					<li
-						className={` ${darkmode && "hover:text-white/90"} ${
+						className={` ${darkmode && "hover:text-white/90 text-gray-500"} ${
 							chgLi === "accinfo" && "text-black font-bold"
-						} cursor-pointer relative`}
+						} ${(chgLi === "accinfo") & darkmode && "text-white font-bold"} cursor-pointer relative`}
 						onClick={() => SetchgLi("accinfo")}
 					>
 						Account info
 						{chgLi === "accinfo" && (
-							<span className="absolute block bottom-[-27px] w-full h-[3px] bg-sky-300"></span>
+							<span className="absolute block bottom-[-30px] sm:bottom-[-27px] w-full h-[3px] bg-sky-300"></span>
 						)}
 					</li>
 					<li
-						className={` ${darkmode && "hover:text-white/90"} ${
+						className={` ${darkmode && "hover:text-white/90 text-gray-500"} ${
 							chgLi === "wishlist" && "text-black font-bold"
-						} relative cursor-pointer `}
+						} 
+						${(chgLi === "wishlist") & darkmode && "text-white font-bold"} relative cursor-pointer `}
 						onClick={() => SetchgLi("wishlist")}
 					>
 						Wishlist
 						{chgLi === "wishlist" && (
-							<span className="absolute block bottom-[-27px] w-full h-[3px] bg-sky-300"></span>
+							<span className="absolute block bottom-[-30px] sm:bottom-[-27px] w-full h-[3px] bg-sky-300"></span>
 						)}
 					</li>
 					<li
-						className={` ${darkmode && "hover:text-white/90"} ${
+						className={` ${darkmode && "hover:text-white/90 text-gray-500"} ${
 							chgLi === "myorder" && "text-black font-bold"
-						} relative cursor-pointer `}
+						} ${(chgLi === "myorder") & darkmode && "text-white font-bold"} relative cursor-pointer `}
 						onClick={() => SetchgLi("myorder")}
 					>
 						My order
 						{chgLi === "myorder" && (
-							<span className="absolute block bottom-[-27px] w-full h-[3px] bg-sky-300"></span>
+							<span className="absolute block bottom-[-30px] sm:bottom-[-27px] w-full h-[3px] bg-sky-300"></span>
 						)}
 					</li>
 					<li
-						className={` ${darkmode && "hover:text-white/90"} ${
+						className={` ${darkmode && "hover:text-white/90 text-gray-500"} ${
 							chgLi === "chgpw" && "text-black font-bold"
-						} relative cursor-pointer `}
+						} ${(chgLi === "chgpw") & darkmode && "text-white font-bold"} relative cursor-pointer `}
 						onClick={() => SetchgLi("chgpw")}
 					>
 						Change password
 						{chgLi === "chgpw" && (
-							<span className="absolute block bottom-[-27px] w-full h-[3px] bg-sky-300"></span>
+							<span className="absolute block bottom-[-30px] sm:bottom-[-27px] w-full h-[3px] bg-sky-300"></span>
 						)}
 					</li>
 				</ul>
@@ -78,13 +94,9 @@ const Acclayout = () => {
 				<hr />
 
 				{chgLi === "accinfo" && <Accinfo />}
-				{chgLi === "wishlist" && (
-					<div>
-						<Accwishlist />
-					</div>
-				)}
-				{chgLi === "myorder" && <div>myorder</div>}
-				{chgLi === "chgpw" && <div>chgpw</div>}
+				{chgLi === "wishlist" && <Accwishlist />}
+				{chgLi === "myorder" && <div>order</div>}
+				{chgLi === "chgpw" && <ChgPw />}
 			</div>
 		</>
 	);

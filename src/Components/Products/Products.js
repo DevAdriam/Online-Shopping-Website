@@ -81,7 +81,7 @@ const Products = ({ item }) => {
 					className="w-[120px] h-[37px] rounded-full shadow-sm bg-white  hover:bg-gray-300/60"
 					onClick={() => navigate(`/allProducts/${item.id}`)}
 				>
-					Quick View
+					Detail
 				</button>
 			</div>
 

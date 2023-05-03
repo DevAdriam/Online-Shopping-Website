@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { wishList } from "../Cart/CartSLice";
 import Products from "../Products/Products";
-import { ToastContainer } from "react-toastify";
 import { ReactComponent as EmptyWishlist } from "../SVG/Empty-pana.svg";
 import { darkMode } from "../Products/ProductSlice";
 const Accwishlist = () => {
@@ -11,19 +10,6 @@ const Accwishlist = () => {
 
 	return (
 		<div className={`w-full ${darkmode && "bg-[var(--blue-dark)]"}`}>
-			<ToastContainer
-				className="toast-position"
-				position="top-right"
-				autoClose={500}
-				hideProgressBar={true}
-				newestOnTop={false}
-				closeOnClick
-				rtl={false}
-				pauseOnFocusLoss
-				draggable
-				pauseOnHover
-				theme="light"
-			/>
 			<h1 className={`py-10 text-2xl font-bold ${darkmode && "text-white"}`}>List of wishList</h1>
 
 			{wishlist.length === 0 ? (

@@ -18,7 +18,7 @@ const IfLogin = () => {
 
 	return (
 		<div
-			className={`w-[280px] min-h-[400px] h-max-content  rounded-3xl  absolute top-[83px] right-[20px] shadow-md ${
+			className={`w-[280px] min-h-[400px] h-max-content  rounded-3xl  absolute top-[73px] right-[15px] shadow-md ${
 				darkmode ? "bg-[var(--blue-minidark)]" : "bg-white"
 			}`}
 		>
@@ -39,8 +39,8 @@ const IfLogin = () => {
 						}`}
 					>
 						{personifo ? personifo.address : "Yangon"}
-						<NavLink className=" text-xs text-sky-400 underline  underline-offset-auto" to="/myAccount">
-							Change Location
+						<NavLink className=" text-sm underline underline-offset-auto text-sky-400  mt-1 " to="/myAccount">
+							update account
 						</NavLink>
 					</span>
 				</div>

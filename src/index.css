@@ -42,6 +42,9 @@
 	::-webkit-scrollbar-thumb {
 		background: var(--blue-dark);
 	}
+	button {
+		user-select: none;
+	}
 
 	.slick-slide {
 		padding: 0 10px;
@@ -173,7 +176,7 @@
 		content: "Choose Photo";
 		font-size: 15px;
 		font-weight: 700;
-		background-color: rgb(70, 70, 243);
+		background-color: #10b1e2;
 
 		padding: 10px;
 		color: white;
@@ -187,6 +190,15 @@
 	}
 	.inputfile:hover .inputfile::before {
 		opacity: 0.9;
+	}
+	.productColor {
+	}
+	.productColor::before {
+		content: "";
+		width: 50px;
+		height: 50px;
+		background-color: black;
+		border-radius: 50%;
 	}
 }
 

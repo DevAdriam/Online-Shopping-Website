@@ -13,7 +13,6 @@ const HavntLogin = () => {
 	const personinfo = useSelector(userData);
 	const loggingIn = useSelector(loggIn);
 	console.log(personinfo);
-	const hadlogin = useSelector(isloggedin);
 
 	const [register, Setregister] = useState(false);
 	const [showpw, Setshowpw] = useState(false);

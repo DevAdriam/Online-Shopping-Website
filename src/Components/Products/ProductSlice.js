@@ -4,7 +4,7 @@ const ProductSlice = createSlice({
 	name: "products",
 	initialState: {
 		darkMode: false,
-		productList: [],
+		productList: null,
 	},
 	reducers: {
 		changeMode: (state) => {

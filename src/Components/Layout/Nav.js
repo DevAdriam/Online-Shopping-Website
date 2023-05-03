@@ -16,7 +16,6 @@ import DetermineLogin from "../Account/DetermineLogin";
 const Nav = () => {
 	const [open, SetOpen] = useState(false);
 	const [acc, Setacc] = useState(false);
-	const [viewImg, SetviewImg] = useState("");
 
 	const darkmode = useSelector(darkMode);
 	const cartLength = useSelector(cartCount);
@@ -83,8 +82,8 @@ const Nav = () => {
 							</NavLink>
 						</li>
 						<li>
-							<NavLink to="/jewelery" style={navlinkStyles}>
-								Jewelery
+							<NavLink to="/Jewelry" style={navlinkStyles}>
+								Jewelry
 							</NavLink>
 						</li>
 					</ul>
@@ -172,8 +171,8 @@ const Nav = () => {
 							<hr />
 
 							<li>
-								<NavLink to="/jewelery" style={navlinkStyles}>
-									Jewelery
+								<NavLink to="/Jewelry" style={navlinkStyles}>
+									Jewelry
 								</NavLink>
 							</li>
 							<hr />
