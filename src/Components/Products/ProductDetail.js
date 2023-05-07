@@ -1,18 +1,27 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { allProducts, darkMode } from "./ProductSlice";
 import Nav from "../Layout/Nav";
-import { AiFillStar } from "react-icons/ai";
 import { CiShoppingCart } from "react-icons/ci";
 import { FaShippingFast } from "react-icons/fa";
 import { GiReturnArrow } from "react-icons/gi";
-import { RiGlobalLine, RiRefund2Line, RiRefundLine } from "react-icons/ri";
+import { RiGlobalLine, RiRefund2Line } from "react-icons/ri";
+import { addToCart } from "../Cart/CartSLice";
+import { ToastContainer, toast } from "react-toastify";
+import Review from "../Reviews/Review";
+import Slider from "react-slick";
+import { AiFillStar } from "react-icons/ai";
+
+import { GrPrevious, GrNext } from "react-icons/gr";
+import Products from "./Products";
 const ProductDetail = () => {
 	const sizeArr = ["XS", "S", "M", "L", "XL", "2XL", "3XL"];
 	const param = useParams();
+	const dispatch = useDispatch();
 	const [color, Setcolor] = useState("black");
 	const [size, Setsize] = useState(sizeArr[2]);
+	const [productCount, SetproductCount] = useState(1);
 
 	// accordions
 	const [desc, Setdesc] = useState(true);
@@ -23,11 +32,80 @@ const ProductDetail = () => {
 	const darkmode = useSelector(darkMode);
 	const allItems = useSelector(allProducts);
 	const item = allItems.find((product) => product.id === Number(param.pId));
+	const recommenndItems = allItems
+		.filter((product) => product.category === item.category)
+		.filter((product) => product.id !== item.id);
+	console.warn(recommenndItems);
+
+	const settings = {
+		dots: true,
+		infinite: true,
+		speed: 500,
+		slidesToShow: 3,
+		slidesToScroll: 2,
+		autoplay: true,
+		autoplaySpeed: 3000,
+		pauseOnHover: true,
+		prevArrow: <GrPrevious />,
+		nextArrow: <GrNext />,
+		responsive: [
+			{
+				breakpoint: 1100,
+				settings: {
+					slidesToShow: 2,
+					slidesToScroll: 1,
+					initialSLide: 1,
+				},
+			},
+			{
+				breakpoint: 845,
+				settings: {
+					slidesToShow: 1,
+					slidesToScroll: 1,
+					initialSLide: 1,
+				},
+			},
+		],
+	};
+
+	//functions
+
+	const addingCart = () => {
+		dispatch(
+			addToCart({
+				id: item.id,
+				totalprice: item.price,
+				quantity: productCount,
+				price: item.price,
+				title: item.title,
+				image: item.image,
+				color: color,
+				size: size,
+			})
+		);
+		console.log(color, size, productCount);
+		toast.success("item added to cart");
+	};
 	return (
 		<>
 			<Nav />
-			cursor-pointer
-			<div className={`py-[100px] sm:px-10 px-2 ${darkmode ? "bg-[var(--blue-dark)] text-white/90" : "bg-white"}`}>
+			<ToastContainer
+				className="toast-position"
+				position="top-right"
+				autoClose={500}
+				hideProgressBar={true}
+				newestOnTop={false}
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				theme="light"
+			/>
+
+			<div
+				className={`py-[100px] sm:px-10 px-2 w-[100vw] overflow-x-hidden ${
+					darkmode ? "bg-[var(--blue-dark)] text-white/90" : "bg-white text-black"
+				}`}
+			>
 				<div className="lg:flex w-full ">
 					<div
 						className={`lg:w-[50%] w-[100%] h-[80vh] rounded-xl lg:flex grid items-center ${
@@ -37,7 +115,7 @@ const ProductDetail = () => {
 						<img
 							src={item.image}
 							alt={item.category}
-							className="min-w-[80%] h-[500px] object-contain mx-auto  "
+							className="max-w-[50%] h-[400px] object-contain mx-auto  "
 						/>
 					</div>
 
@@ -50,7 +128,11 @@ const ProductDetail = () => {
 							{item.title}
 						</h1>
 
-						<div className="pt-5 pb-9 relative flex w-full items-center">
+						<div
+							className={`pt-5 pb-9 relative flex w-full items-center ${
+								darkmode ? "text-white/90" : "text-black"
+							}`}
+						>
 							<button className="sm:w-[90px] w-[100px] h-[40px] lg:leading-[30px]  border-[3px]  border-[var(--light-green)] text-[var(--light-green)]  text-lg  font-bold rounded-md">
 								{item.price} $
 							</button>
@@ -66,7 +148,7 @@ const ProductDetail = () => {
 							Color : <span className="font-bold">{color}</span>
 						</h2>
 
-						<div className="flex gap-[15px] items-center mt-3">
+						<div className={`flex gap-[15px] items-center mt-3 ${darkmode ? "text-white/90" : "text-black"}`}>
 							{/* Colors */}
 							<div
 								className={`w-[25px] h-[25px] rounded-full bg-red-500 ${
@@ -177,11 +259,22 @@ const ProductDetail = () => {
 							{/* + 1 - buttons */}
 
 							<div className="sm:w-[35%] w-[38%] bg-[var(--pastel-blue)] rounded-full h-[50px] sm:mr-5 mr-3 px-3 flex items-center justify-around">
-								<button className="w-[35px] h-[35px] rounded-full border border-gray-400  text-gray-500 grid items-center">
+								<button
+									disabled={productCount === 1 && true}
+									className={`w-[35px] h-[35px] rounded-full border   ${
+										productCount === 1
+											? "text-gray-300/90 border-gray-300/90"
+											: "text-gray-500 border-gray-400"
+									} grid items-center`}
+									onClick={() => SetproductCount(productCount - 1)}
+								>
 									-
 								</button>
-								<span className="text-gray-500 mx-3">1</span>
-								<button className="w-[35px] h-[35px] rounded-full border border-gray-400 text-gray-500 grid items-center">
+								<span className="text-gray-500 mx-3">{productCount}</span>
+								<button
+									onClick={() => SetproductCount(productCount + 1)}
+									className="w-[35px] h-[35px] rounded-full border border-gray-400 text-gray-500 grid items-center"
+								>
 									+
 								</button>
 							</div>
@@ -190,6 +283,7 @@ const ProductDetail = () => {
 								className={`w-[60%] rounded-full h-[50px] shadow-sm shadow-[var(--blue-dark)] text-xl tracking-wide flex items-center justify-center ${
 									darkmode ? "bg-white text-[var(--blue-dark)]" : "bg-[var(--blue-dark)] text-white"
 								} hover:opacity-[0.9]`}
+								onClick={addingCart}
 							>
 								<CiShoppingCart className="mx-1" size={25} /> Add To Cart
 							</button>
@@ -279,18 +373,18 @@ const ProductDetail = () => {
 
 						{/*Shipping about 4 divs */}
 
-						<div className="py-8 w-full flex items-center flex-wrap gap-4">
-							<div className="lg:w-[48%] w-[97%] h-[150px] rounded-xl bg-rose-100/80 flex flex-col justify-center items-start px-5">
+						<div className="py-8 w-full flex items-center flex-wrap gap-4 text-black">
+							<div className="lg:w-[48%] w-[97%] h-[150px] rounded-xl bg-rose-100 flex flex-col justify-center items-start px-5">
 								<FaShippingFast size={25} />
 								<h1 className="font-bold py-1">Free Shipping</h1>
 								<span className="text-gray-500">On orders over a $50.00</span>
 							</div>
-							<div className="lg:w-[48%] w-[97%] h-[150px] rounded-xl bg-cyan-100/60 flex flex-col justify-center items-start px-5">
+							<div className="lg:w-[48%] w-[97%] h-[150px] rounded-xl bg-cyan-100 flex flex-col justify-center items-start px-5">
 								<GiReturnArrow size={25} />
 								<h1 className="font-bold py-1">Very Easy To Return</h1>
 								<span className="text-gray-500">Just phone number</span>
 							</div>
-							<div className="lg:w-[48%] w-[97%] h-[150px] rounded-xl bg-cyan-100/60 flex flex-col justify-center items-start px-5">
+							<div className="lg:w-[48%] w-[97%] h-[150px] rounded-xl bg-cyan-100 flex flex-col justify-center items-start px-5">
 								<RiGlobalLine size={25} />
 								<h1 className="font-bold py-1">Nationwide Delivery </h1>
 								<span className="text-gray-500">Fast delivery nationwide</span>
@@ -302,6 +396,33 @@ const ProductDetail = () => {
 							</div>
 						</div>
 					</div>
+				</div>
+				<div className="lg:w-[70%] w-full px-5 my-5">
+					<h1 className="py-5 font-bold text-2xl">Product Details</h1>
+					<p className="text-md tracking-wide leading-8">{item.description}</p>
+				</div>
+
+				<hr className="my-14" />
+
+				<div>
+					<h1 className="font-bold text-2xl flex">
+						<AiFillStar size={35} className="mx-1" /> {item.rating.rate} /
+						<span className="mx-1">{item.rating.count} Reviews</span>
+					</h1>
+				</div>
+				<Review />
+
+				{/* Recommended Products  */}
+				<div>
+					<h1 className={`font-bold text-2xl text-[var(--blue-dark)] mt-10 mb-8 ${darkmode && "text-white"} `}>
+						Customers also purchased
+					</h1>
+
+					<Slider {...settings} className={`py-10 w-full text-black`}>
+						{recommenndItems.map((item) => (
+							<Products item={item} key={item.id} />
+						))}
+					</Slider>
 				</div>
 			</div>
 		</>

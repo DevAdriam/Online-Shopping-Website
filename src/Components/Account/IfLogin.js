@@ -9,6 +9,7 @@ import { IoHelpBuoyOutline } from "react-icons/io5";
 import { CiLogout, CiUser } from "react-icons/ci";
 import { TbClipboard } from "react-icons/tb";
 import { NavLink, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 const IfLogin = () => {
 	const darkmode = useSelector(darkMode);
 	const dispatch = useDispatch();
@@ -91,6 +92,8 @@ const IfLogin = () => {
 						onClick={() => {
 							dispatch(login());
 							console.log(islogin);
+							navigate("/");
+							toast.warn("Logged out from account!");
 						}}
 						className="w-full py-3 px-4 hover:bg-gray-300/60 cursor-pointer rounded-md transition-all duration-300"
 					>

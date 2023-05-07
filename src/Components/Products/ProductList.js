@@ -10,19 +10,7 @@ const ProductList = () => {
 	return (
 		<div>
 			<Nav />
-			<ToastContainer
-				className="toast-position"
-				position="top-right"
-				autoClose={500}
-				hideProgressBar={true}
-				newestOnTop={false}
-				closeOnClick
-				rtl={false}
-				pauseOnFocusLoss
-				draggable
-				pauseOnHover
-				theme="light"
-			/>
+
 			<div className={`md:px-20 px-4 pt-32 w-full ${darkmode ? "bg-[var(--blue-dark)]" : "bg-transparent"}`}>
 				<div aria-label="title">
 					<h1 className={`text-3xl font-bold ${darkmode ? "text-white" : "text-black"}`}>All Products</h1>

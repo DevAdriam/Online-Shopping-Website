@@ -18,11 +18,13 @@ const CartSlice = createSlice({
 			} else {
 				state.cartList.push({
 					id: newItem.id,
-					totalprice: newItem.price,
-					quantity: 1,
+					totalprice: newItem.price * newItem.quantity || newItem.price,
+					quantity: newItem.quantity || 1,
 					price: newItem.price,
 					title: newItem.title,
 					image: newItem.image,
+					color: newItem.color || "black",
+					size: newItem.size || "M",
 				});
 			}
 			localStorage.setItem("cartlist", JSON.stringify(state.cartList));

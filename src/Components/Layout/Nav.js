@@ -150,7 +150,7 @@ const Nav = () => {
 					<div>
 						<ul className="flex justify-start  w-full flex-col gap-3">
 							<li>
-								<NavLink to="/manCollection" style={navlinkStyles}>
+								<NavLink to="/manCollection" style={navlinkStyles} className="w-full">
 									Men
 								</NavLink>
 							</li>
@@ -173,6 +173,13 @@ const Nav = () => {
 							<li>
 								<NavLink to="/Jewelry" style={navlinkStyles}>
 									Jewelry
+								</NavLink>
+							</li>
+							<hr />
+
+							<li>
+								<NavLink to="/allProducts" style={navlinkStyles}>
+									All
 								</NavLink>
 							</li>
 							<hr />

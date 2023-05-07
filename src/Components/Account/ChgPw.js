@@ -4,6 +4,7 @@ import { darkMode } from "../Products/ProductSlice";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import {
 	changePw,
+	checkCurrentPw_with_Oldpw,
 	doesntMatchOldpw,
 	matchOldpw,
 	matchpassword,
@@ -19,13 +20,13 @@ const ChgPw = () => {
 	const dispatch = useDispatch();
 	const check_newpassword_match = useSelector(pwCondition);
 	const previousPw_correct = useSelector(matchOldpw);
+	console.error(previousPw_correct);
 	console.log(check_newpassword_match);
 
 	//for show and hide pw
 	const [showCurrent, SetshowCurrent] = useState(false);
 	const [showNew, SetshowNew] = useState(false);
 	const [showConfirm, SetshowConfirm] = useState(false);
-
 	const [newPassword, SetnewPassword] = useState("");
 
 	const sameWithOldPw = useSelector(matchpassword);
@@ -38,13 +39,14 @@ const ChgPw = () => {
 		console.log(personinfo.password, previous_password.current.value);
 
 		if (personinfo.password === previous_password.current.value && previous_password.current.value !== newPassword) {
-			dispatch(doesntMatchOldpw(false));
-			dispatch(check_newpassword_match(false));
+			dispatch(checkCurrentPw_with_Oldpw(false));
+			console.error(previousPw_correct);
 
 			if (confirm_newpassword.current.value === newPassword) {
 				dispatch(password(true));
 			} else {
 				dispatch(password(false));
+				dispatch(doesntMatchOldpw(true));
 				return;
 			}
 
@@ -66,7 +68,7 @@ const ChgPw = () => {
 			toast.success("updated password");
 			console.log("successs");
 		} else {
-			dispatch(doesntMatchOldpw(true));
+			dispatch(checkCurrentPw_with_Oldpw(true));
 			console.warn(personinfo.password, previous_password.current.value);
 
 			return;
@@ -105,7 +107,7 @@ const ChgPw = () => {
 						/>
 					)}
 				</span>
-				{!previousPw_correct && <span className="text-red-500">The password is incorrect</span>}
+				{previousPw_correct && <span className="text-red-500">The password is incorrect</span>}
 
 				<label htmlFor="showNew" className="inline-block w-full font-bold pt-6 pb-2">
 					New Password

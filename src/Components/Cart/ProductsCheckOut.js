@@ -5,10 +5,10 @@ import { addItem, cartList, deleteItem, removeItem } from "../Cart/CartSLice";
 import { darkMode } from "../Products/ProductSlice";
 import { VscSymbolColor } from "react-icons/vsc";
 import { IoIosResize } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 const ProductsCheckOut = () => {
 	const darkmode = useSelector(darkMode);
 	const cartlist = useSelector(cartList);
-	console.log(cartlist);
 
 	const shippingEstimate = 2.89;
 	const taxEstimate = 4.76;
@@ -59,10 +59,12 @@ const ProductsCheckOut = () => {
 												}`}
 											>
 												<span>
-													<VscSymbolColor size={20} className="mr-1 inline-block" /> black
+													<VscSymbolColor size={20} className="mr-1 inline-block" />
+													{item.color}
 												</span>
 												<span>
-													<IoIosResize size={20} className="mr-1 inline-block" /> 2xl
+													<IoIosResize size={20} className="mr-1 inline-block" />
+													{item.size}
 												</span>
 											</div>
 										</div>

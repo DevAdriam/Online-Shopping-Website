@@ -9,7 +9,7 @@ const Accwishlist = () => {
 	const wishlist = useSelector(wishList);
 
 	return (
-		<div className={`w-full ${darkmode && "bg-[var(--blue-dark)]"}`}>
+		<div className={`w-full min-h-[100vh] ${darkmode && "bg-[var(--blue-dark)]"}`}>
 			<h1 className={`py-10 text-2xl font-bold ${darkmode && "text-white"}`}>List of wishList</h1>
 
 			{wishlist.length === 0 ? (

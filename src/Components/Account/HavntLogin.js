@@ -6,6 +6,7 @@ import { darkMode } from "../Products/ProductSlice";
 import { updateAccount, login, pwCondition, password, userData, isloggedin, loggIn, accDoesntExist } from "./Accslice";
 
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
+import { toast } from "react-toastify";
 
 const HavntLogin = () => {
 	const darkmode = useSelector(darkMode);
@@ -46,6 +47,7 @@ const HavntLogin = () => {
 			dispatch(updateAccount(registerData));
 			dispatch(login());
 			dispatch(password(true));
+			toast.success("Account successfully created!");
 
 			console.log(registerData);
 			usernameRef.current.value = "";
@@ -72,6 +74,7 @@ const HavntLogin = () => {
 		if (logindata.email === getDatafromLS.email && logindata.password === getDatafromLS.password) {
 			dispatch(login());
 			dispatch(accDoesntExist(false));
+			toast.success("Log in to your account!");
 		} else {
 			dispatch(accDoesntExist(true));
 		}
@@ -158,12 +161,18 @@ const HavntLogin = () => {
 						</NavLink>
 					</h1>
 
-					<h1 className="mx-auto pt-3 text-sm text-gray-500">
+					<h1 className={`mx-auto pt-3 text-sm text-gray-500 ${darkmode && "text-white"}`}>
 						by creating your account , you will get
-						<span className="font-bold text-sky-400 text-sm leading-5"> 10% Discount Promocode</span>
+						<span
+							className={`font-bold text-[var(--blue-dark)] mx-1 ${
+								darkmode && "text-sky-500"
+							} text-sm leading-5`}
+						>
+							10% Discount Promocode
+						</span>
 					</h1>
 
-					<h1 className="mx-auto pt-2 text-sm text-sky-400/90 ">
+					<h1 className={`mx-auto pt-3 text-sm text-gray-500 ${darkmode && "text-white"}`}>
 						(Promocode will be automatically added to your cart!)
 					</h1>
 				</form>

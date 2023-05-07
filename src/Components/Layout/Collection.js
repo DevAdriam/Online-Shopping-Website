@@ -40,7 +40,7 @@ const Collection = () => {
 				Discover More.<span className="text-gray-500">Good Things are waiting For You</span>
 			</h1>
 
-			<Slider {...settings} className="py-10">
+			<Slider {...settings} className="py-10 w-full">
 				<div className="slick-slide  h-[250px] rounded-xl bg-[var(--light-yellow)] px-2 ">
 					<div className="flex flex-col gap-3 pl-2 px-2 ">
 						<span className="text-sm text-slate-700/80">Explore new arrivals</span>

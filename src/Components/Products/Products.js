@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { AiFillStar, AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { BiDetail } from "react-icons/bi";
 import { TbShoppingCartPlus } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, addToWishList, deleteFromWishList, wishList } from "../Cart/CartSLice";
@@ -31,12 +32,16 @@ const Products = ({ item }) => {
 			price: item.price,
 		};
 		dispatch(addToCart(product));
-		notiAddCart();
+		try {
+			notiAddCart();
+		} catch (error) {
+			console.log(error);
+		}
 	};
 	return (
 		<div
 			key={item.id}
-			className={`slick-slide arrivals relative mb-10  w-full sm:max-w-[280px] lg:min-w-[300px] h-[350px] rounded-xl  flex flex-col items-center justify-center shadow-sm ${
+			className={`slick-slide arrivals relative mb-10  lg:min-w-[310px] h-[350px] min-w-[370px] rounded-xl  flex flex-col items-center justify-center shadow-sm ${
 				darkmode ? "bg-white " : "bg-sky-100/20"
 			}  `}
 		>
@@ -78,9 +83,10 @@ const Products = ({ item }) => {
 					<span className="mx-2">AddToCart</span>
 				</button>
 				<button
-					className="w-[120px] h-[37px] rounded-full shadow-sm bg-white  hover:bg-gray-300/60"
+					className="w-[120px] h-[37px] rounded-full shadow-sm  flex gap-2 items-center justify-center bg-gray-300 hover:bg-gray-300/50"
 					onClick={() => navigate(`/allProducts/${item.id}`)}
 				>
+					<BiDetail size={20} className="ml-3" />
 					Detail
 				</button>
 			</div>

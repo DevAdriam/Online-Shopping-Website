@@ -17,19 +17,6 @@ const Acclayout = () => {
 	return (
 		<>
 			<Nav />
-			<ToastContainer
-				className="toast-position"
-				position="top-right"
-				autoClose={2000}
-				hideProgressBar={false}
-				newestOnTop={false}
-				closeOnClick
-				rtl={false}
-				pauseOnFocusLoss
-				draggable
-				pauseOnHover
-				theme="light"
-			/>
 
 			<div className={`w-full md:pt-40 pt-28 lg:px-48 sm:px-15 px-5 ${darkmode ? "bg-[var(--blue-dark)]" : "bg-white"}`}>
 				<h1 className={`w-full font-bold lg:text-4xl text-2xl ${darkmode && "text-white/90"}`}>Account</h1>
