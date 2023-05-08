@@ -87,7 +87,7 @@ const ProductDetail = () => {
 		toast.success("item added to cart");
 	};
 	return (
-		<>
+		<div className="max-w-[100vw] overflow-x-hidden">
 			<Nav />
 			<ToastContainer
 				className="toast-position"
@@ -425,7 +425,7 @@ const ProductDetail = () => {
 					</Slider>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 };
 

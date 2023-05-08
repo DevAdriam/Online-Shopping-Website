@@ -5,6 +5,7 @@ const ProductSlice = createSlice({
 	initialState: {
 		darkMode: false,
 		productList: null,
+		historyArr: JSON.parse(localStorage.getItem("history")) || [],
 	},
 	reducers: {
 		changeMode: (state) => {
@@ -14,12 +15,26 @@ const ProductSlice = createSlice({
 			console.log(action.payload);
 			state.productList = action.payload;
 		},
+		addHistory: (state, action) => {
+			state.historyArr.push(action.payload);
+			localStorage.setItem("history", JSON.stringify(state.historyArr));
+		},
+		deleteSingleHistory: (state, action) => {
+			console.log(action.payload);
+			state.historyArr = state.historyArr.filter((item) => item !== action.payload);
+			localStorage.setItem("history", JSON.stringify(state.historyArr));
+		},
+		deleteAllHistory: (state, action) => {
+			state.historyArr = [];
+			localStorage.setItem("history", JSON.stringify(state.historyArr));
+		},
 	},
 });
 
 export const darkMode = (state) => state.products.darkMode;
 export const allProducts = (state) => state.products.productList;
+export const history = (state) => state.products.historyArr;
 
-export const { changeMode, setProducts } = ProductSlice.actions;
+export const { changeMode, setProducts, addHistory, deleteSingleHistory, deleteAllHistory } = ProductSlice.actions;
 
 export default ProductSlice.reducer;

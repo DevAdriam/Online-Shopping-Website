@@ -1,11 +1,37 @@
 import React from "react";
 import { CiSearch } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
+import Slider from "react-slick";
+import { GrPrevious, GrNext } from "react-icons/gr";
+
 const HeroSection = () => {
 	const navigate = useNavigate();
+	const settings = {
+		dots: true,
+		infinite: true,
+		speed: 500,
+		slidesToShow: 1,
+		slidesToScroll: 1,
+		autoplay: true,
+		autoplaySpeed: 3000,
+		pauseOnHover: true,
+		prevArrow: <GrPrevious />,
+		nextArrow: <GrNext />,
+		responsive: [
+			{
+				breakpoint: 1000,
+				settings: {
+					slidesToShow: 1,
+					slidesToScroll: 1,
+					initialSLide: 1,
+				},
+			},
+		],
+	};
+
 	return (
 		<div className="w-full lg:h-[100vh] md:h-[80vh] h-[55vh] bg-[var(--soft-blue)] relative overflow-hidden mt-20">
-			<div className="w-full ">
+			<div className="w-full h-full">
 				<div className="absolute z-10 md:top-[35%] sm:top-[50%] top-[40%] lg:w-1/2 w-full sm:px-10 px-5">
 					<span className="text-xl text-slate-800 mb-10 font-[Roboto] ">In this season , find the best</span>
 

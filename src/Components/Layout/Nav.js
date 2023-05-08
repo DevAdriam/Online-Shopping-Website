@@ -3,22 +3,28 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 
 import { AiOutlineUser } from "react-icons/ai";
+import { RxCross2 } from "react-icons/rx";
+import { FiSearch } from "react-icons/fi";
 import { MdOutlineDarkMode, MdDarkMode } from "react-icons/md";
 import { IoCartOutline } from "react-icons/io5";
 import { VscClose } from "react-icons/vsc";
 import { BsFacebook, BsMessenger, BsTwitter } from "react-icons/bs";
 import { HiMenuAlt2 } from "react-icons/hi";
 
-import { changeMode, darkMode } from "../Products/ProductSlice";
+import { allProducts, changeMode, darkMode } from "../Products/ProductSlice";
 import { cartCount } from "../Cart/CartSLice";
 import DetermineLogin from "../Account/DetermineLogin";
 
 const Nav = () => {
 	const [open, SetOpen] = useState(false);
 	const [acc, Setacc] = useState(false);
+	const [search, Setsearch] = useState(false);
+	const [filteredArr, SetfilteredArr] = useState([]);
 
 	const darkmode = useSelector(darkMode);
 	const cartLength = useSelector(cartCount);
+
+	const allItems = useSelector(allProducts);
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -34,22 +40,31 @@ const Nav = () => {
 	const chgDarkMode = () => {
 		dispatch(changeMode());
 	};
-
 	const openNav = () => {
 		SetOpen(!open);
 	};
 	const openAcc = () => {
 		Setacc(!acc);
 	};
+	const searchProducts = (e) => {
+		if (e.target.value === "") {
+			SetfilteredArr([]);
+		} else {
+			const newFilter = allItems.filter((item) => {
+				let searchWord = e.target.value.toLowerCase();
+				return item.title.toLowerCase().includes(searchWord);
+			});
+			SetfilteredArr(newFilter);
+		}
+	};
 
 	return (
 		<div>
 			<nav
-				className={`flex justify-between items-center px-5 md:px-18 py-4 fixed top-0 z-50 w-full ${
-					darkmode ? "bg-[var(--blue-dark)] text-slate-300" : "bg-white"
-				}`}
+				className={`flex justify-between 
+				 items-center px-2 md:px-18 py-4 fixed top-0 z-50 w-full ${darkmode ? "bg-[var(--blue-dark)] text-slate-300" : "bg-white"}`}
 			>
-				<div className="flex items-center gap-4">
+				<div className="flex items-center md:gap-4 gap-2">
 					<HiMenuAlt2 className="md:hidden inline-block cursor-pointer" size={30} onClick={openNav} />
 					<span onClick={() => navigate("/")} className="cursor-pointer">
 						<img
@@ -65,7 +80,11 @@ const Nav = () => {
 				</div>
 
 				<div>
-					<ul className="hidden md:flex justify-between items-center gap-5">
+					<ul
+						className={`justify-between items-center lg:gap-2 xl:gap-4 ${
+							search ? "md:hidden hidden" : "md:flex hidden"
+						}`}
+					>
 						<li>
 							<NavLink to="/manCollection" style={navlinkStyles}>
 								Men
@@ -89,11 +108,58 @@ const Nav = () => {
 					</ul>
 				</div>
 
-				<div className="flex gap-2">
+				<div className="flex lg:gap-1 xl:gap-2 items-center justify-between  gap-1 lg:px-5">
+					<button onClick={() => navigate("/searchProducts")}>
+						<FiSearch
+							size={38}
+							className={`cursor-pointer py-2 md:hidden hover:bg-slate-400/20 rounded-full ${
+								darkmode && "text-slate-300"
+							}`}
+						/>
+					</button>
+
+					<div className={`md:flex items-center relative hidden left-[-3rem] text-black cursor-pointer`}>
+						<input
+							type="text"
+							placeholder="Search products ..."
+							onChange={searchProducts}
+							className={`w-[40vw] lg:w-[50vw] h-full ${
+								darkmode ? "bg-sky-100" : "bg-sky-100/50"
+							} inline-block border outline-none px-10 rounded-md ${!search && "hidden"}`}
+						/>
+						<FiSearch
+							size={23}
+							className={`absolute left-3 cursor-pointer ${darkmode && "text-slate-300"}`}
+							onClick={() => Setsearch(true)}
+						/>
+						<RxCross2
+							size={23}
+							className={`absolute right-3 cursor-pointer ${search ? "inline-block" : "hidden"} `}
+							onClick={() => {
+								Setsearch(!search);
+								SetfilteredArr([]);
+							}}
+						/>
+						<div className="absolute w-[30rem] xl:w-[45rem] h-max-content max-h-[25rem] overflow-y-scroll bg-white h-max-content flex flex-col left-0 top-12 shadow-md">
+							{filteredArr.map((item) => {
+								return (
+									<div
+										key={item.id}
+										onClick={() => navigate(`/allProducts/${item.id}`)}
+										className="hover:bg-slate-50  w-full h-max-content border-b rounded-md flex gap-2 items-center p-5"
+									>
+										<img src={item.image} alt={item.category} className="w-[50px] object-contain" />
+										<h1>{item.title}</h1>
+									</div>
+								);
+							})}
+						</div>
+					</div>
+
 					<button onClick={openAcc}>
 						<AiOutlineUser
 							size={40}
-							className="py-2 px-2 hover:bg-slate-400/20 rounded-full "
+							className="py-2  hover:bg-slate-400/20 rounded-full "
 							style={navlinkStyles}
 						/>
 					</button>
@@ -104,13 +170,13 @@ const Nav = () => {
 						<div className="w-[18px] h-[18px] bg-sky-500 rounded-full absolute top-[2px] right-[2px] font-bold  text-xs text-center text-white">
 							{cartLength}
 						</div>
-						<IoCartOutline size={40} className="py-2 px-2 hover:bg-slate-400/20 rounded-full " />
+						<IoCartOutline size={40} className="py-2  hover:bg-slate-400/20 rounded-full " />
 					</button>
 					<button onClick={chgDarkMode}>
 						{darkmode ? (
-							<MdOutlineDarkMode size={40} className="py-2 px-2 hover:bg-slate-400/20 rounded-full " />
+							<MdOutlineDarkMode size={40} className="py-2  hover:bg-slate-400/20 rounded-full " />
 						) : (
-							<MdDarkMode size={40} className="py-2 px-2 hover:bg-slate-400/20 rounded-full " />
+							<MdDarkMode size={40} className="py-2  hover:bg-slate-400/20 rounded-full " />
 						)}
 					</button>
 				</div>

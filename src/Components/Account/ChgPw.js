@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { darkMode } from "../Products/ProductSlice";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import {
-	changePw,
 	checkCurrentPw_with_Oldpw,
 	doesntMatchOldpw,
 	matchOldpw,
@@ -18,58 +17,55 @@ import { toast } from "react-toastify";
 const ChgPw = () => {
 	const darkmode = useSelector(darkMode);
 	const dispatch = useDispatch();
-	const check_newpassword_match = useSelector(pwCondition);
-	const previousPw_correct = useSelector(matchOldpw);
-	console.error(previousPw_correct);
-	console.log(check_newpassword_match);
+
+	const user = useSelector(userData);
+	const oldPassword = user.password;
+	let newPassword;
+
+	const [sameWithOldpw, SetsameWithOldpw] = useState(false);
+	const [sameWithNewpw, SetsameWithNewpw] = useState(true);
 
 	//for show and hide pw
 	const [showCurrent, SetshowCurrent] = useState(false);
 	const [showNew, SetshowNew] = useState(false);
 	const [showConfirm, SetshowConfirm] = useState(false);
-	const [newPassword, SetnewPassword] = useState("");
 
-	const sameWithOldPw = useSelector(matchpassword);
-
-	const personinfo = useSelector(userData);
 	let previous_password = useRef();
 	let confirm_newpassword = useRef();
 	const updatePw = (e) => {
 		e.preventDefault();
-		console.log(personinfo.password, previous_password.current.value);
 
-		if (personinfo.password === previous_password.current.value && previous_password.current.value !== newPassword) {
-			dispatch(checkCurrentPw_with_Oldpw(false));
-			console.error(previousPw_correct);
+		if (oldPassword === previous_password.current.value && previous_password.current.value !== newPassword) {
+			SetsameWithOldpw(false);
 
 			if (confirm_newpassword.current.value === newPassword) {
-				dispatch(password(true));
+				SetsameWithNewpw(true);
 			} else {
-				dispatch(password(false));
+				SetsameWithNewpw(false);
 				dispatch(doesntMatchOldpw(true));
 				return;
 			}
 
 			dispatch(
 				updateAccount({
-					username: personinfo.username,
+					username: user.username,
 					password: newPassword,
-					email: personinfo.email,
-					gender: personinfo.gender,
-					phone: personinfo.phone,
-					address: personinfo.address,
-					about: personinfo.about,
-					image: personinfo.image,
+					email: user.email,
+					gender: user.gender,
+					phone: user.phone,
+					address: user.address,
+					about: user.about,
+					image: user.image,
 				})
 			);
-			SetnewPassword("");
+
 			previous_password.current.value = "";
 			confirm_newpassword.current.value = "";
 			toast.success("updated password");
 			console.log("successs");
 		} else {
-			dispatch(checkCurrentPw_with_Oldpw(true));
-			console.warn(personinfo.password, previous_password.current.value);
+			SetsameWithOldpw(true);
+			console.warn(user.password, previous_password.current.value);
 
 			return;
 		}
@@ -107,7 +103,7 @@ const ChgPw = () => {
 						/>
 					)}
 				</span>
-				{previousPw_correct && <span className="text-red-500">The password is incorrect</span>}
+				{sameWithOldpw && <span className="text-red-500">The password is incorrect</span>}
 
 				<label htmlFor="showNew" className="inline-block w-full font-bold pt-6 pb-2">
 					New Password
@@ -142,11 +138,7 @@ const ChgPw = () => {
 						/>
 					)}
 				</span>
-				{sameWithOldPw && (
-					<span className={`text-red-500 text-sm ${newPassword.length > 0 && "hidden"}`}>
-						password must be different
-					</span>
-				)}
+				{sameWithOldPw && <span className={`text-red-500 text-sm `}>password must be different</span>}
 				{newPassword.length > 0 && newPassword.length < 5 && <span className="text-red-500 text-sm">weak</span>}
 				{newPassword.length >= 5 && (
 					<span className={`text-green-500 text-sm ${sameWithOldPw && "hidden"}`}>strong</span>
@@ -183,9 +175,7 @@ const ChgPw = () => {
 					)}
 				</span>
 
-				{check_newpassword_match === false && (
-					<span className="text-red-500 text-sm block">The password doesn't match</span>
-				)}
+				{sameWithNewpw === false && <span className="text-red-500 text-sm block">The password doesn't match</span>}
 
 				<button
 					className={`w-[220px] h-[60px] shadow-md my-9 rounded-full py-3 px-4 font-bold hover:opacity-90 hover:shadow-sm hover:shadow-slate-300/70 ${

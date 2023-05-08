@@ -10,6 +10,7 @@ import ShoppingCart from "../Components/Cart/ShoppingCart";
 import Acclayout from "../Components/Account/Acclayout";
 import ProductDetail from "../Components/Products/ProductDetail";
 import { ToastContainer } from "react-toastify";
+import SearchProducts from "../Components/multi-pages/SearchProducts";
 
 const ScrollToTop = () => {
 	const pathname = useLocation();
@@ -30,9 +31,7 @@ const CableSystem = () => {
 				hideProgressBar={true}
 				newestOnTop={false}
 				rtl={false}
-				pauseOnFocusLoss
 				draggable
-				pauseOnHover
 				theme="light"
 			/>
 			<Routes>
@@ -48,6 +47,7 @@ const CableSystem = () => {
 				<Route path="/shoppingCart" element={<ShoppingCart />}></Route>
 
 				<Route path="/myAccount" element={<Acclayout />}></Route>
+				<Route path="/searchProducts" element={<SearchProducts />}></Route>
 			</Routes>
 		</>
 	);

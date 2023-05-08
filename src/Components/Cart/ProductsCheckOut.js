@@ -73,7 +73,7 @@ const ProductsCheckOut = () => {
 										</button>
 									</div>
 
-									<div className="flex justify-between w-full px-5 pt-6">
+									<div className="flex justify-between w-full px-5 pb-3 pt-4 ">
 										<div className="flex gap-3 items-center sm:px-5 px-1">
 											<button
 												className={`w-[30px] h-[30px]  border-2 leading-[20px] rounded-full text-center ${
