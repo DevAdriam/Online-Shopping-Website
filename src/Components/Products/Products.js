@@ -41,7 +41,7 @@ const Products = ({ item }) => {
 	return (
 		<div
 			key={item.id}
-			className={`slick-slide arrivals relative mb-10  lg:min-w-[310px] min-h-[350px] min-w-[330px] w-full rounded-xl  flex flex-col items-center justify-center shadow-sm ${
+			className={`slick-slide arrivals relative mb-10  lg:w-[300px] min-h-[340px] w-[330px]  rounded-xl  flex flex-col items-center justify-center shadow-sm ${
 				darkmode ? "bg-white " : "bg-sky-100/20"
 			}  `}
 		>
@@ -77,7 +77,7 @@ const Products = ({ item }) => {
 			<div className="actionsBtn flex ">
 				<button
 					onClick={addCart}
-					className="w-[130px] h-[37px]  rounded-full flex gap-1 items-center shadow-sm mx-2 text-white bg-[var(--blue-dark)] text-center hover:opacity-90"
+					className="w-[130px] h-[37px]  rounded-full flex gap-1 items-center shadow-sm mx-2 text-white/90 bg-[var(--blue-dark)] text-center hover:opacity-90"
 				>
 					<TbShoppingCartPlus size={20} className="ml-2" />
 					<span className="mx-2">AddToCart</span>

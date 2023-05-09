@@ -10,7 +10,7 @@ const Accwishlist = () => {
 
 	return (
 		<div className={`w-full min-h-[100vh] ${darkmode && "bg-[var(--blue-dark)]"}`}>
-			<h1 className={`py-10 text-2xl font-bold ${darkmode && "text-white"}`}>List of wishList</h1>
+			<h1 className={`py-10 text-2xl font-bold ${darkmode && "text-white/90"}`}>List of wishList</h1>
 
 			{wishlist.length === 0 ? (
 				<EmptyWishlist className="w-[50%] mx-auto" />

@@ -202,7 +202,7 @@ const ProductDetail = () => {
 							{/* size */}
 							<div
 								className={`w-[70px] h-[40px] border-2 cursor-pointer rounded-2xl grid items-center text-center font-bold ${
-									size === sizeArr[0] && "bg-sky-500 text-white"
+									size === sizeArr[0] && "bg-sky-500 text-white/90"
 								}`}
 								onClick={() => Setsize(sizeArr[0])}
 							>
@@ -211,7 +211,7 @@ const ProductDetail = () => {
 
 							<div
 								className={`w-[70px] h-[40px] border-2 cursor-pointer rounded-2xl grid items-center text-center font-bold ${
-									size === sizeArr[1] && "bg-sky-500 text-white"
+									size === sizeArr[1] && "bg-sky-500 text-white/90"
 								}`}
 								onClick={() => Setsize(sizeArr[1])}
 							>
@@ -220,7 +220,7 @@ const ProductDetail = () => {
 
 							<div
 								className={`w-[70px] h-[40px] border-2 cursor-pointer rounded-2xl grid items-center text-center font-bold ${
-									size === sizeArr[2] && "bg-sky-500 text-white"
+									size === sizeArr[2] && "bg-sky-500 text-white/90"
 								}`}
 								onClick={() => Setsize(sizeArr[2])}
 							>
@@ -229,7 +229,7 @@ const ProductDetail = () => {
 
 							<div
 								className={`w-[70px] h-[40px] border-2 cursor-pointer rounded-2xl grid items-center text-center font-bold ${
-									size === sizeArr[3] && "bg-sky-500 text-white"
+									size === sizeArr[3] && "bg-sky-500 text-white/90"
 								}`}
 								onClick={() => Setsize(sizeArr[3])}
 							>
@@ -238,7 +238,7 @@ const ProductDetail = () => {
 
 							<div
 								className={`w-[70px] h-[40px] border-2 cursor-pointer rounded-2xl grid items-center text-center font-bold ${
-									size === sizeArr[4] && "bg-sky-500 text-white"
+									size === sizeArr[4] && "bg-sky-500 text-white/90"
 								}`}
 								onClick={() => Setsize(sizeArr[4])}
 							>
@@ -247,7 +247,7 @@ const ProductDetail = () => {
 
 							<div
 								className={`w-[70px] h-[40px] border-2 cursor-pointer rounded-2xl grid items-center text-center font-bold ${
-									size === sizeArr[5] && "bg-sky-500 text-white"
+									size === sizeArr[5] && "bg-sky-500 text-white/90"
 								}`}
 								onClick={() => Setsize(sizeArr[5])}
 							>
@@ -281,7 +281,7 @@ const ProductDetail = () => {
 
 							<button
 								className={`w-[60%] rounded-full h-[50px] shadow-sm shadow-[var(--blue-dark)] text-xl tracking-wide flex items-center justify-center ${
-									darkmode ? "bg-white text-[var(--blue-dark)]" : "bg-[var(--blue-dark)] text-white"
+									darkmode ? "bg-white text-[var(--blue-dark)]" : "bg-[var(--blue-dark)] text-white/90"
 								} hover:opacity-[0.9]`}
 								onClick={addingCart}
 							>
@@ -414,7 +414,7 @@ const ProductDetail = () => {
 
 				{/* Recommended Products  */}
 				<div>
-					<h1 className={`font-bold text-2xl text-[var(--blue-dark)] mt-10 mb-8 ${darkmode && "text-white"} `}>
+					<h1 className={`font-bold text-2xl text-[var(--blue-dark)] mt-10 mb-8 ${darkmode && "text-white/90"} `}>
 						Customers also purchased
 					</h1>
 

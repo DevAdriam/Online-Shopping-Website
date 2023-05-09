@@ -60,7 +60,7 @@ const Accinfo = () => {
 	};
 	return (
 		<div className="pt-5 pb-14">
-			<h1 className={`py-10 text-2xl font-bold ${darkmode && "text-white"}`}>Account Information</h1>
+			<h1 className={`py-10 text-2xl font-bold ${darkmode && "text-white/90"}`}>Account Information</h1>
 
 			<div className="flex w-full sm:gap-10 gap-4 flex-col sm:flex-row relative">
 				<div>
@@ -84,7 +84,7 @@ const Accinfo = () => {
 					<input type="file" accept="image/*" title="" onChange={handleFileInputChange} className="inputfile " />
 				</div>
 
-				<form onSubmit={updAccount} className={`w-[90%]  ${darkmode && "text-white"}`}>
+				<form onSubmit={updAccount} className={`w-[90%]  ${darkmode && "text-white/90"}`}>
 					<label htmlFor="fullname" className="inline-block w-full font-bold pt-6 pb-2">
 						Full name
 					</label>
@@ -158,7 +158,7 @@ const Accinfo = () => {
 
 					<button
 						className={`w-[140px] h-[50px] shadow-md my-5 rounded-full py-3 px-10 font-bold hover:opacity-90 hover:shadow-sm hover:shadow-slate-300/70 ${
-							!darkmode ? "bg-[var(--blue-dark)] text-white" : "bg-white text-black"
+							!darkmode ? "bg-[var(--blue-dark)] text-white/90" : "bg-white text-black"
 						}`}
 						type="submit"
 					>

@@ -20,7 +20,7 @@ const Jewelery = () => {
 			<Nav />
 			<div className={`md:px-20 px-4 pt-32 w-full ${darkmode ? "bg-[var(--blue-dark)]" : "bg-transparent"}`}>
 				<div aria-label="title">
-					<h1 className={`text-3xl font-bold ${darkmode ? "text-white" : "text-black"}`}>Jewelery</h1>
+					<h1 className={`text-3xl font-bold ${darkmode ? "text-white/90" : "text-black"}`}>Jewelery</h1>
 					<p className="py-10 text-gray-500 leading-6">
 						Jewelery has the power to be the one litle thing that makes you feel unique.
 					</p>

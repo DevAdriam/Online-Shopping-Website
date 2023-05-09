@@ -31,11 +31,11 @@ const IfLogin = () => {
 				/>
 
 				<div>
-					<span className={`block ${darkmode && "text-white"} font-bold text-[17px]`}>
+					<span className={`block ${darkmode && "text-white/90"} font-bold text-[17px]`}>
 						{personifo ? personifo.username : "User"}
 					</span>
 					<span
-						className={`inline-block  text-sm mr-2 mx-0 w-full ${darkmode && "text-white"} ${
+						className={`inline-block  text-sm mr-2 mx-0 w-full ${darkmode && "text-white/90"} ${
 							personifo && "flex flex-col "
 						}`}
 					>

@@ -18,7 +18,7 @@ const WomenClothing = () => {
 			<Nav />
 			<div className={`md:px-20 px-4 pt-32 w-full ${darkmode ? "bg-[var(--blue-dark)]" : "bg-transparent"}`}>
 				<div aria-label="title">
-					<h1 className={`text-3xl font-bold ${darkmode ? "text-white" : "text-black"}`}>Women Collection</h1>
+					<h1 className={`text-3xl font-bold ${darkmode ? "text-white/90" : "text-black"}`}>Women Collection</h1>
 					<p className="py-10 text-gray-500 leading-6">
 						We not only help you design exceptional products, but also make it easy for you to share your
 						designs with more like-minded people.

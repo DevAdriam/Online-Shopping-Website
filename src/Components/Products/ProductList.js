@@ -13,7 +13,7 @@ const ProductList = () => {
 
 			<div className={`md:px-20 px-4 pt-32 w-full ${darkmode ? "bg-[var(--blue-dark)]" : "bg-transparent"}`}>
 				<div aria-label="title">
-					<h1 className={`text-3xl font-bold ${darkmode ? "text-white" : "text-black"}`}>All Products</h1>
+					<h1 className={`text-3xl font-bold ${darkmode ? "text-white/90" : "text-black"}`}>All Products</h1>
 					<p className="py-10 text-gray-500 leading-6">
 						Quality in a product or service is not what the supplier puts in. it is what the customer gets out
 						and is willing to pay for. A product is not quality because it is hard to make and costs a lot of

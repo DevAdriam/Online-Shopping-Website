@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
 
-import { AiOutlineUser } from "react-icons/ai";
+import { AiOutlineHistory, AiOutlineUser } from "react-icons/ai";
 import { RxCross2 } from "react-icons/rx";
 import { FiSearch } from "react-icons/fi";
 import { MdOutlineDarkMode, MdDarkMode } from "react-icons/md";
@@ -11,23 +11,33 @@ import { VscClose } from "react-icons/vsc";
 import { BsFacebook, BsMessenger, BsTwitter } from "react-icons/bs";
 import { HiMenuAlt2 } from "react-icons/hi";
 
-import { allProducts, changeMode, darkMode } from "../Products/ProductSlice";
+import { addHistory, allProducts, changeMode, darkMode } from "../Products/ProductSlice";
 import { cartCount } from "../Cart/CartSLice";
 import DetermineLogin from "../Account/DetermineLogin";
+import SearchProductList from "../multi-pages/SearchProductList";
 
 const Nav = () => {
-	const [open, SetOpen] = useState(false);
-	const [acc, Setacc] = useState(false);
-	const [search, Setsearch] = useState(false);
-	const [filteredArr, SetfilteredArr] = useState([]);
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const darkmode = useSelector(darkMode);
 	const cartLength = useSelector(cartCount);
-
 	const allItems = useSelector(allProducts);
 
-	const dispatch = useDispatch();
-	const navigate = useNavigate();
+	// sidebar Icon Open and Close (Mobile)
+	const [open, SetOpen] = useState(false);
+
+	// account Icon Open and Close
+	const [acc, Setacc] = useState(false);
+
+	// Open and Close search icon
+	const [search, Setsearch] = useState(false);
+
+	// getting filtered Array
+	const [filteredArr, SetfilteredArr] = useState([]);
+
+	// Search Word value for Desktop
+	const [inputWord, SetinputWord] = useState("");
 
 	const navlinkStyles = ({ isActive }) => {
 		return {
@@ -47,11 +57,12 @@ const Nav = () => {
 		Setacc(!acc);
 	};
 	const searchProducts = (e) => {
-		if (e.target.value === "") {
+		SetinputWord(e.target.value);
+		if (inputWord === "") {
 			SetfilteredArr([]);
 		} else {
 			const newFilter = allItems.filter((item) => {
-				let searchWord = e.target.value.toLowerCase();
+				let searchWord = inputWord.toLowerCase();
 				return item.title.toLowerCase().includes(searchWord);
 			});
 			SetfilteredArr(newFilter);
@@ -64,6 +75,7 @@ const Nav = () => {
 				className={`flex justify-between 
 				 items-center px-2 md:px-18 py-4 fixed top-0 z-50 w-full ${darkmode ? "bg-[var(--blue-dark)] text-slate-300" : "bg-white"}`}
 			>
+				{/* Logo */}
 				<div className="flex items-center md:gap-4 gap-2">
 					<HiMenuAlt2 className="md:hidden inline-block cursor-pointer" size={30} onClick={openNav} />
 					<span onClick={() => navigate("/")} className="cursor-pointer">
@@ -79,6 +91,7 @@ const Nav = () => {
 					</span>
 				</div>
 
+				{/* Categories */}
 				<div>
 					<ul
 						className={`justify-between items-center lg:gap-2 xl:gap-4 ${
@@ -108,7 +121,9 @@ const Nav = () => {
 					</ul>
 				</div>
 
+				{/* Icons */}
 				<div className="flex lg:gap-1 xl:gap-2 items-center justify-between  gap-1 lg:px-5">
+					{/* Search Icon for mobile */}
 					<button onClick={() => navigate("/searchProducts")}>
 						<FiSearch
 							size={38}
@@ -118,12 +133,14 @@ const Nav = () => {
 						/>
 					</button>
 
+					{/* Search icon for desktop */}
 					<div className={`md:flex items-center relative hidden left-[-3rem] text-black cursor-pointer`}>
 						<input
 							type="text"
 							placeholder="Search products ..."
 							onChange={searchProducts}
-							className={`w-[40vw] lg:w-[50vw] h-full ${
+							value={inputWord}
+							className={`w-[40vw] lg:w-[50vw] py-2 ${
 								darkmode ? "bg-sky-100" : "bg-sky-100/50"
 							} inline-block border outline-none px-10 rounded-md ${!search && "hidden"}`}
 						/>
@@ -141,21 +158,33 @@ const Nav = () => {
 							}}
 						/>
 						<div className="absolute w-[30rem] xl:w-[45rem] h-max-content max-h-[25rem] overflow-y-scroll bg-white h-max-content flex flex-col left-0 top-12 shadow-md">
-							{filteredArr.map((item) => {
-								return (
-									<div
-										key={item.id}
-										onClick={() => navigate(`/allProducts/${item.id}`)}
-										className="hover:bg-slate-50  w-full h-max-content border-b rounded-md flex gap-2 items-center p-5"
-									>
-										<img src={item.image} alt={item.category} className="w-[50px] object-contain" />
-										<h1>{item.title}</h1>
-									</div>
-								);
-							})}
+							{(inputWord === "") & search ? (
+								<SearchProductList />
+							) : (
+								filteredArr.map((item) => {
+									return (
+										<div
+											key={item.id}
+											onClick={() => {
+												navigate(`/allProducts/${item.id}`);
+												dispatch(addHistory(item.title));
+											}}
+											className="hover:bg-slate-50  w-full h-max-content border-b rounded-md flex gap-2 items-center p-5"
+										>
+											<img
+												src={item.image}
+												alt={item.category}
+												className="w-[50px] object-contain"
+											/>
+											<h1>{item.title}</h1>
+										</div>
+									);
+								})
+							)}
 						</div>
 					</div>
 
+					{/* Account Icon*/}
 					<button onClick={openAcc}>
 						<AiOutlineUser
 							size={40}
@@ -163,15 +192,18 @@ const Nav = () => {
 							style={navlinkStyles}
 						/>
 					</button>
-					{/* account */}
+					{/* account Function*/}
 					{acc && <DetermineLogin />}
 
+					{/* ShoppingCart */}
 					<button className="relative" onClick={() => navigate("/shoppingCart")}>
-						<div className="w-[18px] h-[18px] bg-sky-500 rounded-full absolute top-[2px] right-[2px] font-bold  text-xs text-center text-white">
+						<div className="w-[18px] h-[18px] bg-sky-500 rounded-full absolute top-[2px] right-[2px] font-bold  text-xs text-center text-white/90">
 							{cartLength}
 						</div>
 						<IoCartOutline size={40} className="py-2  hover:bg-slate-400/20 rounded-full " />
 					</button>
+
+					{/* darkmode */}
 					<button onClick={chgDarkMode}>
 						{darkmode ? (
 							<MdOutlineDarkMode size={40} className="py-2  hover:bg-slate-400/20 rounded-full " />
@@ -181,7 +213,7 @@ const Nav = () => {
 					</button>
 				</div>
 
-				{/* for mobile */}
+				{/* for mobile Nav*/}
 				<div
 					className={`block md:hidden w-full  h-[100vh] absolute top-0 ${
 						darkmode ? "bg-[var(--blue-dark)]" : "bg-white"

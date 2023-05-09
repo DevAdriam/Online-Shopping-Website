@@ -26,7 +26,7 @@ const Step = () => {
 						<h2 className=" w-fit py-1 px-3 my-5 text-center bg-rose-200/80 rounded-full text-rose-800 font-bold  text-xs ">
 							Step 1
 						</h2>
-						<h1 className={`text-md font-bold my-4 ${darkmode ? "text-white" : "text-black"}`}>
+						<h1 className={`text-md font-bold my-4 ${darkmode ? "text-white/90" : "text-black"}`}>
 							Filter & Discover
 						</h1>
 						<p className=" text-gray-500 text-center">Smart filtering & suggestion make it easy to find</p>
@@ -43,7 +43,9 @@ const Step = () => {
 						<h2 className=" w-fit py-1 px-3 my-5 text-center bg-sky-200/80 rounded-full text-sky-800 font-bold  text-xs ">
 							Step 2
 						</h2>
-						<h1 className={`text-md font-bold my-4 ${darkmode ? "text-white" : "text-black"}`}>Add To Cart</h1>
+						<h1 className={`text-md font-bold my-4 ${darkmode ? "text-white/90" : "text-black"}`}>
+							Add To Cart
+						</h1>
 						<p className=" text-gray-500 text-center">Easily select the correct items and add them to cart</p>
 					</div>
 				</div>
@@ -58,7 +60,7 @@ const Step = () => {
 						<h2 className=" w-fit py-1 px-3 my-5 text-center  bg-orange-200/80 rounded-full text-orange-800 font-bold  text-xs ">
 							Step 3
 						</h2>
-						<h1 className={`text-md font-bold my-4 ${darkmode ? "text-white" : "text-black"}`}>
+						<h1 className={`text-md font-bold my-4 ${darkmode ? "text-white/90" : "text-black"}`}>
 							Fast Shipping
 						</h1>
 						<p className=" text-gray-500 text-center">The carrier will confirm and first shipping to you</p>
@@ -75,7 +77,7 @@ const Step = () => {
 						<h2 className=" w-fit py-1 px-3 my-5 text-center  bg-violet-200/80 rounded-full text-violet-800 font-bold  text-xs ">
 							Step 4
 						</h2>
-						<h1 className={`text-md font-bold my-4 ${darkmode ? "text-white" : "text-black"}`}>
+						<h1 className={`text-md font-bold my-4 ${darkmode ? "text-white/90" : "text-black"}`}>
 							Enjoy the Products
 						</h1>
 						<p className=" text-gray-500 text-center">Have fun and enjoy the 5-stars quality products</p>

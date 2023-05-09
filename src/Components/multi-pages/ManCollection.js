@@ -20,7 +20,7 @@ const ManCollection = () => {
 			<Nav />
 			<div className={`md:px-20 px-4 pt-32 w-full ${darkmode ? "bg-[var(--blue-dark)]" : "bg-transparent"}`}>
 				<div aria-label="title">
-					<h1 className={`text-3xl font-bold ${darkmode ? "text-white" : "text-black"}`}>Man Collection</h1>
+					<h1 className={`text-3xl font-bold ${darkmode ? "text-white/90" : "text-black"}`}>Man Collection</h1>
 					<p className="py-10 text-gray-500 leading-6">
 						Fashion is a playground up until a certain age. But then you have to find your own signature and
 						your own style.”

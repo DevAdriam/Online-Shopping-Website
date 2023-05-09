@@ -19,7 +19,7 @@ const ShoppingCart = () => {
 
 			<div className={`md:px-20 px-4 pt-32 w-full ${darkmode ? "bg-[var(--blue-dark)]" : "bg-transparent"}`}>
 				<div aria-label="title">
-					<h1 className={`text-3xl font-bold ${darkmode ? "text-white" : "text-black"}`}>Shopping Cart</h1>
+					<h1 className={`text-3xl font-bold ${darkmode ? "text-white/90" : "text-black"}`}>Shopping Cart</h1>
 					<p className="py-7 text-gray-500 leading-6">
 						<Link
 							to="/"

@@ -34,7 +34,7 @@ const Acclayout = () => {
 					<li
 						className={` ${darkmode && "hover:text-white/90 text-gray-500"} ${
 							chgLi === "accinfo" && "text-black font-bold"
-						} ${(chgLi === "accinfo") & darkmode && "text-white font-bold"} cursor-pointer relative`}
+						} ${(chgLi === "accinfo") & darkmode && "text-white/90 font-bold"} cursor-pointer relative`}
 						onClick={() => SetchgLi("accinfo")}
 					>
 						Account info
@@ -46,7 +46,7 @@ const Acclayout = () => {
 						className={` ${darkmode && "hover:text-white/90 text-gray-500"} ${
 							chgLi === "wishlist" && "text-black font-bold"
 						} 
-						${(chgLi === "wishlist") & darkmode && "text-white font-bold"} relative cursor-pointer `}
+						${(chgLi === "wishlist") & darkmode && "text-white/90 font-bold"} relative cursor-pointer `}
 						onClick={() => SetchgLi("wishlist")}
 					>
 						Wishlist
@@ -57,7 +57,7 @@ const Acclayout = () => {
 					<li
 						className={` ${darkmode && "hover:text-white/90 text-gray-500"} ${
 							chgLi === "myorder" && "text-black font-bold"
-						} ${(chgLi === "myorder") & darkmode && "text-white font-bold"} relative cursor-pointer `}
+						} ${(chgLi === "myorder") & darkmode && "text-white/90 font-bold"} relative cursor-pointer `}
 						onClick={() => SetchgLi("myorder")}
 					>
 						My order
@@ -68,7 +68,7 @@ const Acclayout = () => {
 					<li
 						className={` ${darkmode && "hover:text-white/90 text-gray-500"} ${
 							chgLi === "chgpw" && "text-black font-bold"
-						} ${(chgLi === "chgpw") & darkmode && "text-white font-bold"} relative cursor-pointer `}
+						} ${(chgLi === "chgpw") & darkmode && "text-white/90 font-bold"} relative cursor-pointer `}
 						onClick={() => SetchgLi("chgpw")}
 					>
 						Change password

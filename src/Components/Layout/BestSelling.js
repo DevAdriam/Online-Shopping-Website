@@ -42,7 +42,7 @@ const BestSelling = () => {
 
 	return (
 		<div className={` w-full overflow-x-hidden py-10 mx-auto ${darkmode ? "bg-[var(--blue-dark)] " : "bg-white"}`}>
-			<h1 className={`text-4xl font-bold px-8 leading-normal ${darkmode ? "text-white" : "text-[var(--blue-dark)]"}`}>
+			<h1 className={`text-4xl font-bold px-8 leading-normal ${darkmode ? "text-white/90" : "text-[var(--blue-dark)]"}`}>
 				Best Sellers.<span className="text-gray-500">Best selling of the month</span>
 			</h1>
 

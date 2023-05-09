@@ -141,7 +141,7 @@ const HavntLogin = () => {
 
 					<button
 						className={`w-[99%] h-[40px] shadow-md leading-[10px] mx-auto my-5 rounded-full py-3 px-10 font-bold hover:opacity-90 hover:shadow-sm hover:shadow-slate-300/70 ${
-							!darkmode ? "bg-[var(--blue-dark)] text-white" : "bg-white text-black"
+							!darkmode ? "bg-[var(--blue-dark)] text-white/90" : "bg-white text-black"
 						}`}
 						type="button"
 						onClick={loginToAcc}
@@ -153,7 +153,7 @@ const HavntLogin = () => {
 						New customer?
 						<NavLink
 							className={`font-bold mx-2 hover:underline hover:underline-offset-auto p-0  ${
-								darkmode ? "text-white" : "text-[var(--blue-dark)]"
+								darkmode ? "text-white/90" : "text-[var(--blue-dark)]"
 							}`}
 							onClick={() => Setregister(!register)}
 						>
@@ -161,7 +161,7 @@ const HavntLogin = () => {
 						</NavLink>
 					</h1>
 
-					<h1 className={`mx-auto pt-3 text-sm text-gray-500 ${darkmode && "text-white"}`}>
+					<h1 className={`mx-auto pt-3 text-sm text-gray-500 ${darkmode && "text-white/90"}`}>
 						by creating your account , you will get
 						<span
 							className={`font-bold text-[var(--blue-dark)] mx-1 ${
@@ -172,7 +172,7 @@ const HavntLogin = () => {
 						</span>
 					</h1>
 
-					<h1 className={`mx-auto pt-3 text-sm text-gray-500 ${darkmode && "text-white"}`}>
+					<h1 className={`mx-auto pt-3 text-sm text-gray-500 ${darkmode && "text-white/90"}`}>
 						(Promocode will be automatically added to your cart!)
 					</h1>
 				</form>
@@ -273,7 +273,7 @@ const HavntLogin = () => {
 
 					<button
 						className={`w-[99%] h-[40px] shadow-md leading-[10px] mx-auto my-5 rounded-full py-3 px-10 font-bold hover:opacity-90 hover:shadow-sm hover:shadow-slate-300/70 ${
-							!darkmode ? "bg-[var(--blue-dark)] text-white" : "bg-white text-black"
+							!darkmode ? "bg-[var(--blue-dark)] text-white/90" : "bg-white text-black"
 						}`}
 						type="submit"
 					>
@@ -284,7 +284,7 @@ const HavntLogin = () => {
 						Already have an account?
 						<NavLink
 							className={`font-bold mx-2 hover:underline hover:underline-offset-auto p-0  ${
-								darkmode ? "text-white" : "text-[var(--blue-dark)]"
+								darkmode ? "text-white/90" : "text-[var(--blue-dark)]"
 							}`}
 							onClick={() => Setregister(!register)}
 						>

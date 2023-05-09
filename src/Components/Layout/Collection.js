@@ -36,7 +36,7 @@ const Collection = () => {
 
 	return (
 		<div className={`py-28 w-full px-8 ${darkmode ? "bg-[var(--blue-dark)] " : "bg-white"}`}>
-			<h1 className={`text-4xl font-bold leading-normal ${darkmode ? "text-white" : "text-[var(--blue-dark)]"}`}>
+			<h1 className={`text-4xl font-bold leading-normal ${darkmode ? "text-white/90" : "text-[var(--blue-dark)]"}`}>
 				Discover More.<span className="text-gray-500">Good Things are waiting For You</span>
 			</h1>
 

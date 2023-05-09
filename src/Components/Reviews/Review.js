@@ -7,6 +7,7 @@ import { AiFillStar } from "react-icons/ai";
 import { darkMode } from "../Products/ProductSlice";
 import { userData } from "../Account/Accslice";
 import { toast } from "react-toastify";
+import { isloggedin } from "../Account/Accslice";
 
 const Review = () => {
 	const darkmode = useSelector(darkMode);
@@ -14,26 +15,29 @@ const Review = () => {
 	const userReviews = useSelector(reviews);
 
 	const personinfo = useSelector(userData);
+	const login = useSelector(isloggedin);
 	const dispatch = useDispatch();
 	const showReviews = userReviews.slice(0, reviewCount);
 
 	let commentRef = useRef();
 
 	const submitFeedback = () => {
-		dispatch(
-			addComment({
-				id: userReviews.length + 1,
-				name: personinfo.username,
-				image: personinfo.image,
-				rating: 4,
-				review: commentRef.current.value,
-			})
-		);
-		toast.success("uploaded your comment!");
-		SetreviewCount(reviewCount + 1);
-		console.log(userReviews.length, reviewCount);
+		if (commentRef.current.value !== "" && login) {
+			dispatch(
+				addComment({
+					id: userReviews.length + 1,
+					name: personinfo.username,
+					image: personinfo.image,
+					rating: 4,
+					review: commentRef.current.value,
+				})
+			);
+			toast.success("uploaded your comment!");
+			SetreviewCount(reviewCount + 1);
+			console.log(userReviews.length, reviewCount);
 
-		commentRef.current.value = "";
+			commentRef.current.value = "";
+		}
 	};
 
 	return (
@@ -143,7 +147,7 @@ const Review = () => {
 					}}
 					disabled={reviewCount === userReviews.length ? true : false}
 					className={`w-[200px] h-[50px] block  p-5 rounded-full leading-[10px] mx-auto hover:shadow-sm ${
-						darkmode ? "bg-white text-[var(--blue-dark)]" : "bg-[var(--blue-dark)] text-white"
+						darkmode ? "bg-white text-[var(--blue-dark)]" : "bg-[var(--blue-dark)] text-white/90"
 					} ${reviewCount === userReviews.length && "opacity-[0.5]"}`}
 				>
 					Show more
@@ -160,7 +164,7 @@ const Review = () => {
 				<button
 					onClick={submitFeedback}
 					className={`w-[200px] h-[50px] p-5 rounded-full  leading-[10px] hover:shadow-sm ${
-						darkmode ? "bg-white text-[var(--blue-dark)]" : "bg-[var(--blue-dark)] text-white"
+						darkmode ? "bg-white text-[var(--blue-dark)]" : "bg-[var(--blue-dark)] text-white/90"
 					} `}
 				>
 					Submit

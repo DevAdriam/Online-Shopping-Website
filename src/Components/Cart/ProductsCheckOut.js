@@ -50,12 +50,12 @@ const ProductsCheckOut = () => {
 								<div className="flex flex-col w-full">
 									<div className="flex justify-between w-full  sm:px-5 px-1 pt-3 ">
 										<div className="flex flex-col px-5 ">
-											<span className={`font-bold ${darkmode ? "text-white" : "text-black"}`}>
+											<span className={`font-bold ${darkmode ? "text-white/90" : "text-black"}`}>
 												{item.title}
 											</span>
 											<div
 												className={`flex gap-6 my-2 ${
-													darkmode ? "text-white" : "text-black"
+													darkmode ? "text-white/90" : "text-black"
 												}`}
 											>
 												<span>
@@ -118,14 +118,14 @@ const ProductsCheckOut = () => {
 			</div>
 
 			<div aria-label="checkout" className="lg:w-1/2 w-full h-[max-content] flex flex-col gap-10 lg:pl-20 px-5 py-10 ">
-				<h1 className={`font-bold  text-lg text-[var(--blue-dark)] tracking-wide ${darkmode && "text-white"}`}>
+				<h1 className={`font-bold  text-lg text-[var(--blue-dark)] tracking-wide ${darkmode && "text-white/90"}`}>
 					Order Summary
 				</h1>
 
 				<div className="flex flex-col ">
 					<div className="flex items-center justify-between py-4">
 						<p className={`text-gray-500/90`}>Subtotal</p>
-						<span className={`font-bold ${darkmode ? "text-white" : "text-[var(--blue-dark)]"}`}>
+						<span className={`font-bold ${darkmode ? "text-white/90" : "text-[var(--blue-dark)]"}`}>
 							$ {subTotalPrice}
 						</span>
 					</div>
@@ -133,18 +133,22 @@ const ProductsCheckOut = () => {
 
 					<div className="flex items-center justify-between py-4">
 						<p className={`text-gray-500/90`}>Shipping estimate</p>
-						<span className={`font-bold ${darkmode ? "text-white" : "text-[var(--blue-dark)]"}`}>$ 2.98</span>
+						<span className={`font-bold ${darkmode ? "text-white/90" : "text-[var(--blue-dark)]"}`}>
+							$ 2.98
+						</span>
 					</div>
 					<hr />
 
 					<div className="flex items-center justify-between py-4">
 						<p className={`text-gray-500/90`}>Tax estimate</p>
-						<span className={`font-bold ${darkmode ? "text-white" : "text-[var(--blue-dark)]"}`}>$ 4.76</span>
+						<span className={`font-bold ${darkmode ? "text-white/90" : "text-[var(--blue-dark)]"}`}>
+							$ 4.76
+						</span>
 					</div>
 					<hr />
 					<div className="flex items-center justify-between py-4">
-						<p className={`${darkmode ? "text-white" : "text-[var(--blue-dark)]"} font-bold`}>Order Total</p>
-						<span className={`font-bold ${darkmode ? "text-white" : "text-[var(--blue-dark)]"}`}>
+						<p className={`${darkmode ? "text-white/90" : "text-[var(--blue-dark)]"} font-bold`}>Order Total</p>
+						<span className={`font-bold ${darkmode ? "text-white/90" : "text-[var(--blue-dark)]"}`}>
 							$ {totalPrice}
 						</span>
 					</div>
@@ -152,7 +156,7 @@ const ProductsCheckOut = () => {
 
 				<button
 					className={`w-full mx-auto h-[50px] shadow-md font-bold  text-md tracking-widest rounded-full ${
-						darkmode ? "bg-white text-[var(--blue-dark)]" : "bg-[var(--blue-dark)] text-white"
+						darkmode ? "bg-white text-[var(--blue-dark)]" : "bg-[var(--blue-dark)] text-white/90"
 					}  hover:opacity-[0.9] duration-200 hover:shadow-sm hover:shadow-slate-300/70`}
 				>
 					Checkout
