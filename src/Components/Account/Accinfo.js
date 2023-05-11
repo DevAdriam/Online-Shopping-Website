@@ -18,6 +18,8 @@ const Accinfo = () => {
 	let phoneRef = useRef();
 	let addressRef = useRef();
 	let aboutRef = useRef();
+	let stateRef = useRef();
+	let cityRef = useRef();
 
 	const [viewImg, SetviewImg] = useState(personinfo.image);
 
@@ -44,6 +46,8 @@ const Accinfo = () => {
 			address: addressRef.current.value ? addressRef.current.value : personinfo.address,
 			gender: genderRef.current.value ? genderRef.current.value : personinfo.gender,
 			about: aboutRef.current.value ? aboutRef.current.value : personinfo.about,
+			state: stateRef.current.value ? stateRef.current.value : personinfo.state,
+			city: cityRef.current.value ? cityRef.current.value : personinfo.city,
 			password: oldpassword,
 			image: viewImg,
 		};
@@ -107,6 +111,28 @@ const Accinfo = () => {
 						className="inline-block w-full  py-2 px-4 rounded-xl focus:outline-none border focus:shadow-cyan-400 focus:shadow-sm"
 					/>
 
+					<label htmlFor="city" className="inline-block w-full font-bold pt-6 pb-2">
+						City
+					</label>
+					<input
+						type="text"
+						name="city"
+						ref={cityRef}
+						placeholder={personinfo ? personinfo.city : "Yangon"}
+						className="inline-block w-full  py-2 px-4 rounded-xl focus:outline-none border focus:shadow-cyan-400 focus:shadow-sm"
+					/>
+
+					<label htmlFor="fullname" className="inline-block w-full font-bold pt-6 pb-2">
+						State
+					</label>
+					<input
+						type="text"
+						name="state"
+						ref={stateRef}
+						placeholder={personinfo ? personinfo.state : ""}
+						className="inline-block w-full  py-2 px-4 rounded-xl focus:outline-none border focus:shadow-cyan-400 focus:shadow-sm"
+					/>
+
 					<label htmlFor="fullname" className="inline-block w-full font-bold pt-6 pb-2">
 						Address
 					</label>
@@ -114,7 +140,7 @@ const Accinfo = () => {
 						type="text"
 						name="address"
 						ref={addressRef}
-						placeholder={personinfo ? personinfo.address : "Yangon"}
+						placeholder={personinfo ? personinfo.address : ""}
 						className="inline-block w-full  py-2 px-4 rounded-xl focus:outline-none border focus:shadow-cyan-400 focus:shadow-sm"
 					/>
 

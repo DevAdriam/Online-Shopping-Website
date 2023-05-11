@@ -15,7 +15,7 @@ const IfLogin = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const islogin = useSelector(isloggedin);
-	const personifo = useSelector(userData);
+	const personinfo = useSelector(userData);
 
 	return (
 		<div
@@ -25,21 +25,21 @@ const IfLogin = () => {
 		>
 			<div className="flex items-center justify-start gap-3 p-5">
 				<img
-					src={personifo.image === "" ? userphoto : personifo.image}
+					src={personinfo.image === "" ? userphoto : personinfo.image}
 					alt="userphoto"
 					className="w-[50px] h-[50px] object-cover rounded-full"
 				/>
 
 				<div>
 					<span className={`block ${darkmode && "text-white/90"} font-bold text-[17px]`}>
-						{personifo ? personifo.username : "User"}
+						{personinfo ? personinfo.username : "User"}
 					</span>
 					<span
 						className={`inline-block  text-sm mr-2 mx-0 w-full ${darkmode && "text-white/90"} ${
-							personifo && "flex flex-col "
+							personinfo && "flex flex-col "
 						}`}
 					>
-						{personifo ? personifo.address : "Yangon"}
+						{personinfo ? personinfo.city : "Yangon"} , {personinfo ? personinfo.state : ""}
 						<NavLink className=" text-sm underline underline-offset-auto text-sky-400  mt-1 " to="/myAccount">
 							update account
 						</NavLink>

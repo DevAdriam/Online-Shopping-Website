@@ -12,7 +12,7 @@ import { BsFacebook, BsMessenger, BsTwitter } from "react-icons/bs";
 import { HiMenuAlt2 } from "react-icons/hi";
 
 import { addHistory, allProducts, changeMode, darkMode } from "../Products/ProductSlice";
-import { cartCount } from "../Cart/CartSLice";
+import { cartCount, completeOrder } from "../Cart/CartSLice";
 import DetermineLogin from "../Account/DetermineLogin";
 import SearchProductList from "../multi-pages/SearchProductList";
 
@@ -166,8 +166,12 @@ const Nav = () => {
 										<div
 											key={item.id}
 											onClick={() => {
+												const recentHistory = {
+													id: item.id,
+													title: item.title,
+												};
 												navigate(`/allProducts/${item.id}`);
-												dispatch(addHistory(item.title));
+												dispatch(addHistory(recentHistory));
 											}}
 											className="hover:bg-slate-50  w-full h-max-content border-b rounded-md flex gap-2 items-center p-5"
 										>
@@ -196,7 +200,13 @@ const Nav = () => {
 					{acc && <DetermineLogin />}
 
 					{/* ShoppingCart */}
-					<button className="relative" onClick={() => navigate("/shoppingCart")}>
+					<button
+						className="relative"
+						onClick={() => {
+							dispatch(completeOrder(false));
+							navigate("/shoppingCart");
+						}}
+					>
 						<div className="w-[18px] h-[18px] bg-sky-500 rounded-full absolute top-[2px] right-[2px] font-bold  text-xs text-center text-white/90">
 							{cartLength}
 						</div>

@@ -11,6 +11,7 @@ import Acclayout from "../Components/Account/Acclayout";
 import ProductDetail from "../Components/Products/ProductDetail";
 import { ToastContainer } from "react-toastify";
 import SearchProducts from "../Components/multi-pages/SearchProducts";
+import Checkout from "../Components/CompleteOrder.js/Checkout";
 
 const ScrollToTop = () => {
 	const pathname = useLocation();
@@ -44,7 +45,9 @@ const CableSystem = () => {
 
 				<Route path="/allProducts" element={<ProductList />}></Route>
 				<Route path="allProducts/:pId" element={<ProductDetail />}></Route>
+
 				<Route path="/shoppingCart" element={<ShoppingCart />}></Route>
+				<Route path="/checkOut" element={<Checkout />}></Route>
 
 				<Route path="/myAccount" element={<Acclayout />}></Route>
 				<Route path="/searchProducts" element={<SearchProducts />}></Route>

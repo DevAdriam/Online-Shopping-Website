@@ -16,12 +16,18 @@ const ProductSlice = createSlice({
 			state.productList = action.payload;
 		},
 		addHistory: (state, action) => {
-			state.historyArr.push(action.payload);
-			localStorage.setItem("history", JSON.stringify(state.historyArr));
+			const existHistory = state.historyArr.find((item) => item.id === action.payload.id);
+
+			if (existHistory) {
+				return;
+			} else {
+				state.historyArr.unshift(action.payload);
+				localStorage.setItem("history", JSON.stringify(state.historyArr));
+			}
 		},
 		deleteSingleHistory: (state, action) => {
 			console.log(action.payload);
-			state.historyArr = state.historyArr.filter((item) => item !== action.payload);
+			state.historyArr = state.historyArr.filter((item) => item.id !== action.payload);
 			localStorage.setItem("history", JSON.stringify(state.historyArr));
 		},
 		deleteAllHistory: (state, action) => {

@@ -1,7 +1,7 @@
 import React from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { addItem, cartList, deleteItem, removeItem } from "../Cart/CartSLice";
+import { addItem, cartList, completeOrder, deleteItem, removeItem } from "../Cart/CartSLice";
 import { darkMode } from "../Products/ProductSlice";
 import { VscSymbolColor } from "react-icons/vsc";
 import { IoIosResize } from "react-icons/io";
@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 const ProductsCheckOut = () => {
 	const darkmode = useSelector(darkMode);
 	const cartlist = useSelector(cartList);
+	const navigate = useNavigate();
 
 	const shippingEstimate = 2.89;
 	const taxEstimate = 4.76;
@@ -158,6 +159,10 @@ const ProductsCheckOut = () => {
 					className={`w-full mx-auto h-[50px] shadow-md font-bold  text-md tracking-widest rounded-full ${
 						darkmode ? "bg-white text-[var(--blue-dark)]" : "bg-[var(--blue-dark)] text-white/90"
 					}  hover:opacity-[0.9] duration-200 hover:shadow-sm hover:shadow-slate-300/70`}
+					onClick={() => {
+						dispatch(completeOrder("true"));
+						navigate("/checkOut");
+					}}
 				>
 					Checkout
 				</button>

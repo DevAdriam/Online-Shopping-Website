@@ -5,6 +5,7 @@ const CartSlice = createSlice({
 	initialState: {
 		cartList: JSON.parse(localStorage.getItem("cartlist")) || [],
 		wishList: JSON.parse(localStorage.getItem("wishlist")) || [],
+		completeOrder: false,
 	},
 	reducers: {
 		addToCart: (state, action) => {
@@ -81,6 +82,10 @@ const CartSlice = createSlice({
 			state.wishList = state.wishList.filter((item) => item.id !== action.payload);
 			localStorage.setItem("wishlist", JSON.stringify(state.wishList));
 		},
+
+		completeOrder: (state, action) => {
+			state.completeOrder = action.payload;
+		},
 	},
 });
 
@@ -88,7 +93,8 @@ export const wishList = (state) => state.carts.wishList;
 
 export const cartCount = (state) => state.carts.cartList.length;
 export const cartList = (state) => state.carts.cartList;
+export const goToCompleteOrder = (state) => state.carts.completeOrder;
 
-export const { addToCart, addToWishList, addItem, removeItem, deleteItem, deleteFromWishList } = CartSlice.actions;
+export const { addToCart, addToWishList, addItem, removeItem, deleteItem, deleteFromWishList, completeOrder } = CartSlice.actions;
 
 export default CartSlice.reducer;
