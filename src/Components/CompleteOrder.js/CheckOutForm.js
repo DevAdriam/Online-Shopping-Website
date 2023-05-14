@@ -6,26 +6,14 @@ import { RiGlobalLine } from "react-icons/ri";
 import { useSelector } from "react-redux";
 import { userData } from "../Account/Accslice";
 import { CiDeliveryTruck } from "react-icons/ci";
-import { cartList } from "../Cart/CartSLice";
 import { darkMode } from "../Products/ProductSlice";
+import OrderSummary from "./OrderSummary";
 const CheckOutForm = () => {
 	const personinfo = useSelector(userData);
 	const darkmode = useSelector(darkMode);
-	const cartArr = useSelector(cartList);
 	const [chgContact, SetchgContact] = useState(false);
 	const [shipping, Setshipping] = useState(true);
 	const [payment, Setpayment] = useState(true);
-
-	const shippingEstimate = 2.89;
-	const taxEstimate = 4.76;
-	const subTotalPrice = cartArr
-		? cartArr
-				.map((item) => item.totalprice)
-				.reduce((total, curr) => (total += curr))
-				.toFixed(2)
-		: 0;
-
-	const totalPrice = (Number(subTotalPrice) + shippingEstimate + taxEstimate).toFixed(2);
 
 	// Ref for tempoUserData
 	let firstnameRef = useRef();
@@ -48,30 +36,41 @@ const CheckOutForm = () => {
 		postalCode: "",
 	};
 
-	const [paymentMethod, SetpaymentMethod] = useState("debit/credit card");
+	const [paymentMethod, SetpaymentMethod] = useState("");
+	const [confirmBtn, SetconfirmBtn] = useState(false);
 	const [contactObj, SetcontactObj] = useState(tempoUserData);
 
 	const paymentFun = (e) => {
 		SetpaymentMethod(e.target.value);
 	};
 	return (
-		<div className=" w-full lg:flex grid md:px-20 px-4 min-h-[100vh] ">
+		<div
+			className={` w-full lg:flex grid md:pl-20 md:pr-10  px-4 min-h-[100vh]  ${
+				darkmode && "bg-[var(--blue-dark)] text-sky-50/90"
+			}`}
+		>
 			<div className="lg:w-[60%] w-full max-h-100vh lg:overflow-y-scroll overflow-x-hidden lg:pr-10 pr-1 md:pb-5 pb-3">
 				{/*******Contact Start******/}
 				<div className="w-full py-4 rounded-md border flex items-center justify-between px-5  ">
 					<div className="flex gap-4 items-center">
-						<HiOutlineUserCircle size={28} />
+						<div>
+							<HiOutlineUserCircle size={30} />
+						</div>
 
 						<div className="grid">
-							<h1 className="flex items-center gap-2">
-								<span className=" text-xl tracking-[0.022rem] text-uppercase font-semibold">
+							<h1>
+								<span className="sm:text-xl text-[1.1rem] flex items-center tracking-[0.022rem] text-uppercase font-semibold">
 									Contact Info
+									<FcCheckmark className="mx-1" />
 								</span>
-								<FcCheckmark />
 							</h1>
 							<h1 className="flex items-center gap-2 lg:text-md text-sm max-w-[80%] lg:min-w-full flex-wrap lg:flex-nowrap pt- ">
 								{(contactObj.firstname === "") & (contactObj.lastname === "") ? (
-									<span>{personinfo.username}</span>
+									personinfo.username ? (
+										<span>{personinfo.username}</span>
+									) : (
+										<span className="text-red-500">your username?</span>
+									)
 								) : (
 									<span>
 										{contactObj.firstname} {contactObj.lastname}
@@ -81,7 +80,11 @@ const CheckOutForm = () => {
 								<span> / </span>
 
 								{contactObj.email === "" ? (
-									<span>{personinfo.email}</span>
+									personinfo.email ? (
+										<span>{personinfo.email}</span>
+									) : (
+										<span className="text-red-500">your email?</span>
+									)
 								) : (
 									<span>{contactObj.email}</span>
 								)}
@@ -102,7 +105,7 @@ const CheckOutForm = () => {
 					</div>
 
 					<button
-						className="px-3 py-2 bg-sky-50 rounded-md"
+						className="px-3 py-2 bg-sky-50 rounded-md text-black"
 						onClick={() => {
 							SetchgContact(!chgContact);
 							if (chgContact) {
@@ -138,7 +141,9 @@ const CheckOutForm = () => {
 								type="text"
 								name="firstname"
 								ref={firstnameRef}
-								className="py-2 rounded-xl border outline-none px-4"
+								className={`py-2 rounded-xl border outline-none px-4 ${
+									(contactObj.firstname === "") & !personinfo.username && "border-red-500"
+								} `}
 							/>
 						</div>
 						<div className="flex flex-col gap-2 w-[47%]">
@@ -147,7 +152,9 @@ const CheckOutForm = () => {
 								type="text"
 								name="lastname"
 								ref={lastnameRef}
-								className="py-2 rounded-xl border outline-none px-4"
+								className={`py-2 rounded-xl border outline-none px-4 ${
+									(contactObj.lastname === "") & !personinfo.username && "border-red-500"
+								} `}
 							/>
 						</div>
 					</div>
@@ -158,7 +165,9 @@ const CheckOutForm = () => {
 							type="phone"
 							name="phone"
 							ref={phoneRef}
-							className="py-2 rounded-xl border outline-none px-4"
+							className={`py-2 rounded-xl border outline-none px-4 ${
+								(contactObj.phone === "") & !personinfo.phone && "border-red-500"
+							} `}
 						/>
 					</div>
 
@@ -179,12 +188,12 @@ const CheckOutForm = () => {
 					<div className="flex gap-4 items-center">
 						<BsTruck size={28} />
 
-						<div className="grid">
-							<h1 className="flex items-center gap-2">
-								<span className=" text-xl tracking-[0.022rem] text-uppercase font-semibold">
+						<div className="flex flex-col ">
+							<h1 className="flex items-center lg:gap-2">
+								<span className=" sm:text-xl gap-1 text-[1.1rem] tracking-[0.022rem] text-uppercase font-semibold flex  items-center ">
 									Shipping Address
+									<FcCheckmark />
 								</span>
-								<FcCheckmark />
 							</h1>
 							<h1 className="flex items-center gap-2 lg:text-md text-sm max-w-[80%] lg:min-w-full flex-wrap lg:flex-nowrap pt-">
 								{contactObj.address === "" ? (
@@ -225,7 +234,7 @@ const CheckOutForm = () => {
 					</div>
 
 					<button
-						className="px-3 py-2 bg-sky-50 rounded-md"
+						className="px-3 py-2 bg-sky-50 rounded-md text-black"
 						onClick={() => {
 							Setshipping(!shipping);
 							if (shipping) {
@@ -254,32 +263,39 @@ const CheckOutForm = () => {
 					<h1 className="w-full block py-4 font-bold text-xl tracking-wide">Delivery Information</h1>
 
 					{/* Change State & City & Postal Code & address*/}
-					<div className="flex w-full justify-between my-2">
-						<div className="flex flex-col gap-2 w-[30%]">
+					<div className="flex w-full justify-between my-2 gap-3 flex-wrap lg:flex-nowrap">
+						<div className="flex flex-col gap-2 sm:w-[30%] w-[45%] ">
 							<label htmlFor="state">State</label>
 							<input
 								type="text"
 								name="state"
 								ref={stateRef}
-								className="py-2 rounded-xl border outline-none px-4"
+								className={`py-2 rounded-xl border outline-none px-4 ${
+									(contactObj.state === "") & !personinfo.state && "border-red-500"
+								} `}
 							/>
 						</div>
-						<div className="flex flex-col gap-2 w-[30%]">
+						<div className="flex flex-col gap-2 sm:w-[30%] w-[45%]">
 							<label htmlFor="city">City</label>
 							<input
 								type="text"
 								name="city"
 								ref={cityRef}
-								className="py-2 rounded-xl border outline-none px-4"
+								className={`py-2 rounded-xl border outline-none px-4 ${
+									(contactObj.city === "") & !personinfo.city && "border-red-500"
+								} `}
 							/>
 						</div>
-						<div className="flex flex-col gap-2 w-[30%]">
+						<div className="flex flex-col gap-2 sm:w-[30%] w-[60%]">
 							<label htmlFor="postalCode">Postal Code</label>
 							<input
 								type="number"
 								name="postalCode"
 								ref={postalCodeRef}
-								className="py-2 rounded-xl border outline-none px-4"
+								className={`py-2 rounded-xl border outline-none px-4 ${
+									contactObj.postalCode === null && "border-red-500"
+								} `}
+								placeholder="eg- Yankin (11082)"
 							/>
 						</div>
 					</div>
@@ -290,7 +306,9 @@ const CheckOutForm = () => {
 							type="text"
 							name="address"
 							ref={addressRef}
-							className="py-2 rounded-xl border outline-none px-4"
+							className={`py-2 rounded-xl border outline-none px-4 ${
+								(contactObj.address === "") & !personinfo.address && "border-red-500"
+							} `}
 						/>
 					</div>
 				</div>
@@ -302,11 +320,11 @@ const CheckOutForm = () => {
 						<HiOutlineCreditCard size={28} />
 
 						<div className="grid">
-							<h1 className="flex items-center gap-2">
-								<span className=" text-xl tracking-[0.022rem] text-uppercase font-semibold">
+							<h1>
+								<span className=" sm:text-xl text-[1.1rem] flex items-center  tracking-[0.022rem] text-uppercase font-semibold">
 									Payment Method
+									<FcCheckmark />
 								</span>
-								<FcCheckmark />
 							</h1>
 							<h1 className="flex items-center gap-2 lg:text-md text-sm max-w-[80%] lg:min-w-full flex-wrap lg:flex-nowrap pt-">
 								<span>{paymentMethod}</span>
@@ -314,7 +332,7 @@ const CheckOutForm = () => {
 						</div>
 					</div>
 
-					<button className="px-3 py-2 bg-sky-50 rounded-md" onClick={() => Setpayment(!payment)}>
+					<button className="px-3 py-2 bg-sky-50 rounded-md text-black" onClick={() => Setpayment(!payment)}>
 						{payment ? "Apply" : "Change"}
 					</button>
 				</div>
@@ -327,7 +345,6 @@ const CheckOutForm = () => {
 							type="radio"
 							id="credit card"
 							value="Debit / Credit Card"
-							defaultChecked
 							checked={paymentMethod === "Debit / Credit Card"}
 							onChange={paymentFun}
 						/>
@@ -367,79 +384,7 @@ const CheckOutForm = () => {
 				</div>
 			</div>
 
-			<div className="lg:w-[40%] w-full md:pl-8 px-2 pr-2 pb-9">
-				<h1 className="font-bold text-xl">Order Summary</h1>
-
-				<ul className="mt-5">
-					{cartArr.map((item) => (
-						<li className="w-full border-b rounded-xl flex items-center justify-between py-5 my-2">
-							<div className="flex items-center gap-4">
-								<div className="relative p-4 bg-sky-50 max-w-[80px]">
-									<img
-										src={item.image}
-										alt={item.category}
-										className="w-full object-contain rounded-xl"
-									/>
-									<span className="absolute rounded-full w-[25px] h-[25px] bg-sky-400/90 right-[-10px] top-[-8px] text-center leading-[25px] text-white/90 ">
-										{item.quantity}
-									</span>
-								</div>
-
-								<div>
-									<h1 className="font-semibold">{item.title}</h1>
-									<h1 className="flex items-center gap-3 text-[15px]">
-										<span>{item.color}</span>
-										<span> | </span>
-										<span>{item.size}</span>
-									</h1>
-								</div>
-							</div>
-
-							<button className="min-w-[70px] h-[30px]  leading-[30px] border-2  border-[var(--light-green)] text-[var(--light-green)] text-sm font-bold rounded-md">
-								$ {item.price}
-							</button>
-						</li>
-					))}
-				</ul>
-
-				<label htmlFor="discountCode" className="block w-full pt-5 pb-1">
-					Discount Code
-				</label>
-
-				<div className="w-full flex items-center gap-4">
-					<input type="text" className="py-2 px-4 outline-none rounded-xl border block w-[65%]" />
-					<button className={`py-2 px-4 w-[30%] rounded-xl bg-gray-300/90`}>Apply</button>
-				</div>
-
-				<div className="py-9">
-					<h3 className="flex items-center justify-between py-3">
-						<span className=" text-gray-400">Subtotal</span>
-						<span className="font-bold">$ {subTotalPrice}</span>
-					</h3>
-					<h3 className="flex items-center justify-between py-3">
-						<span className=" text-gray-400">Shipping estimate</span>
-						<span className="font-bold">$ {shippingEstimate}</span>
-					</h3>
-					<h3 className="flex items-center justify-between py-3">
-						<span className=" text-gray-400">Tax estimate</span>
-						<span className="font-bold">$ {taxEstimate}</span>
-					</h3>
-
-					<hr className="w-full py-4" />
-
-					<h3 className="flex items-center justify-between">
-						<span className=" font-bold text-[16px]">Order Total</span>
-						<span className="font-bold">$ {totalPrice}</span>
-					</h3>
-				</div>
-				<button
-					className={`w-full mx-auto h-[50px] shadow-md font-bold  text-md tracking-widest rounded-full ${
-						darkmode ? "bg-white text-[var(--blue-dark)]" : "bg-[var(--blue-dark)] text-white/90"
-					}  hover:opacity-[0.9] duration-200 hover:shadow-sm hover:shadow-slate-300/70`}
-				>
-					Confirm Order
-				</button>
-			</div>
+			<OrderSummary />
 		</div>
 	);
 };

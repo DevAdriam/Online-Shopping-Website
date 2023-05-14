@@ -32,6 +32,9 @@
 	input {
 		color: black;
 	}
+	textarea {
+		color: black;
+	}
 
 	::-webkit-scrollbar {
 		width: 5px;

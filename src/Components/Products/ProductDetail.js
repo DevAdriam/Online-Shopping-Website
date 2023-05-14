@@ -144,14 +144,24 @@ const ProductDetail = () => {
 							<span className=" text-md underline">{item.rating.count} reviews</span>
 						</div>
 
-						<h2 className="text-lg">
+						<h2
+							className={`text-lg ${item.category === "jewelery" && "hidden"} ${
+								item.category === "electronics" && "hidden"
+							}`}
+						>
 							Color : <span className="font-bold">{color}</span>
 						</h2>
 
-						<div className={`flex gap-[15px] items-center mt-3 ${darkmode ? "text-white/90" : "text-black"}`}>
+						<div
+							className={`${item.category === "jewelery" && "hidden"} ${
+								item.category === "electronics" && "hidden"
+							} flex gap-[15px] items-center mt-3 ${darkmode ? "text-white/90" : "text-black"}`}
+						>
 							{/* Colors */}
 							<div
 								className={`w-[25px] h-[25px] rounded-full bg-red-500 ${
+									item.category === "jewelery" && "hidden"
+								} ${item.category === "electronics" && "hidden"} ${
 									color === "red" && "outline outline-offset-2 outline-blue-500 rounded-full"
 								} `}
 								onClick={() => Setcolor("red")}
@@ -194,16 +204,24 @@ const ProductDetail = () => {
 							></div>
 						</div>
 
-						<h2 className="text-lg mt-5">
+						<h2
+							className={`text-lg mt-5 ${item.category === "jewelery" && "hidden"} ${
+								item.category === "electronics" && "hidden"
+							}`}
+						>
 							Size : <span className="font-bold">{size}</span>
 						</h2>
 
-						<div className="flex gap-[15px] items-center mt-3">
+						<div
+							className={`flex gap-[15px] items-center mt-3 ${item.category === "jewelery" && "hidden"} ${
+								item.category === "electronics" && "hidden"
+							}`}
+						>
 							{/* size */}
 							<div
 								className={`w-[70px] h-[40px] border-2 cursor-pointer rounded-2xl grid items-center text-center font-bold ${
 									size === sizeArr[0] && "bg-sky-500 text-white/90"
-								}`}
+								} `}
 								onClick={() => Setsize(sizeArr[0])}
 							>
 								{sizeArr[0]}

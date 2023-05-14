@@ -42,7 +42,7 @@ const Products = ({ item }) => {
 		<div
 			key={item.id}
 			className={`slick-slide arrivals relative mb-10  lg:w-[310px] min-h-[345px] w-[330px]  rounded-xl  flex flex-col items-center justify-center shadow-sm ${
-				darkmode ? "bg-white " : "bg-sky-100/20"
+				darkmode ? "bg-sky-50 " : "bg-sky-100/20"
 			}  `}
 		>
 			<div

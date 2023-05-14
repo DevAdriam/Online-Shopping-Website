@@ -27,7 +27,7 @@ const ProductsCheckOut = () => {
 	console.log(cartlist);
 	return (
 		<div
-			className={`flex justify-between flex-col lg:flex-row md:px-20 px-4 min-h-[100vh] ${
+			className={`flex justify-between flex-col lg:flex-row md:px-20 px-4 pb-9 min-h-[100vh] ${
 				darkmode ? "bg-[var(--blue-dark)] " : "bg-white"
 			}`}
 		>
@@ -35,10 +35,10 @@ const ProductsCheckOut = () => {
 				{cartlist.map((item) => {
 					return (
 						<div key={item.id}>
-							<div className="w-full sm:h-[200px] h-fit-contet py-3 sm:py-1 sm:flex ">
+							<div className="w-full sm:h-[200px] h-fit-contet py-3 sm:py-5 sm:flex ">
 								<div
 									className={`md:w-[200px] w-1/2 block md:h-full sm:h-[100px] h-[150px] rounded-md mx-auto ${
-										darkmode ? "bg-white" : "bg-sky-100/20"
+										darkmode ? "bg-sky-50" : "bg-sky-100/20"
 									} `}
 								>
 									<img
@@ -57,9 +57,15 @@ const ProductsCheckOut = () => {
 											<div
 												className={`flex gap-6 my-2 ${
 													darkmode ? "text-white/90" : "text-black"
+												} ${item.category === "jewelery" && "hidden"} ${
+													item.category === "electronics" && "hidden"
 												}`}
 											>
-												<span>
+												<span
+													className={`${item.category === "jewelery" && "hidden"} ${
+														item.category === "electronics" && "hidden"
+													}`}
+												>
 													<VscSymbolColor size={20} className="mr-1 inline-block" />
 													{item.color}
 												</span>
