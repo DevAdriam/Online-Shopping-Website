@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { darkMode } from "../Products/ProductSlice";
-import { cartList } from "../Cart/CartSLice";
+import { allSuccessOrder, allTasksFinished, cartList } from "../Cart/CartSLice";
 import { MdDiscount } from "react-icons/md";
 
 const OrderSummary = () => {
 	const darkmode = useSelector(darkMode);
 	const cartArr = useSelector(cartList);
+
+	const dispatch = useDispatch();
 
 	const randomAlphabet = ["A", "B", "D", "E", "K", "L", "M", "O", "P", "L", "T"];
 	const [discountCode, SetdiscountCode] = useState("");
@@ -19,12 +21,13 @@ const OrderSummary = () => {
 
 	const shippingEstimate = 2.89;
 	const taxEstimate = 4.76;
-	const subTotalPrice = cartArr
-		? cartArr
-				.map((item) => item.totalprice)
-				.reduce((total, curr) => (total += curr))
-				.toFixed(2)
-		: 0;
+	const subTotalPrice =
+		cartArr.length > 0
+			? cartArr
+					.map((item) => item.totalprice)
+					.reduce((total, curr) => (total += curr))
+					.toFixed(2)
+			: 0;
 
 	const totalPrice = (Number(subTotalPrice) + shippingEstimate + taxEstimate - 20).toFixed(2);
 	return (
@@ -133,6 +136,9 @@ const OrderSummary = () => {
 				className={`w-full mx-auto h-[50px] shadow-md font-bold  text-md tracking-widest rounded-full ${
 					darkmode ? "bg-white text-[var(--blue-dark)]" : "bg-[var(--blue-dark)] text-white/90"
 				}  hover:opacity-[0.9] duration-200 hover:shadow-sm hover:shadow-slate-300/70`}
+				onClick={() => {
+					dispatch(allSuccessOrder(true));
+				}}
 			>
 				Confirm Order
 			</button>

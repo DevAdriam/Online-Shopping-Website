@@ -9,6 +9,7 @@
 :root {
 	--blue-dark: #111827;
 	--blue-minidark: #1b253bfd;
+	--blue-softdark: #1a23358e;
 
 	--dark-pink: #eee3e3;
 
@@ -493,5 +494,29 @@
 	100% {
 		opacity: 1;
 		transform: translateY(15px);
+	}
+}
+
+.animateIcon {
+	animation: animationIcon 0.3s ease-in-out;
+}
+@keyframes animationIcon {
+	0% {
+		scale: 0;
+	}
+	20% {
+		scale: 0.2;
+	}
+	40% {
+		scale: 0.4;
+	}
+	60% {
+		scale: 0.6;
+	}
+	80% {
+		scale: 0.8;
+	}
+	100% {
+		scale: 1;
 	}
 }
