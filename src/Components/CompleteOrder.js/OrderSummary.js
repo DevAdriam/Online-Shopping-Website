@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { darkMode } from "../Products/ProductSlice";
-import { allSuccessOrder, allTasksFinished, cartList } from "../Cart/CartSLice";
+import { allSuccessOrder, cartList, order_valid, showModalBox } from "../Cart/CartSLice";
 import { MdDiscount } from "react-icons/md";
 
 const OrderSummary = () => {
 	const darkmode = useSelector(darkMode);
 	const cartArr = useSelector(cartList);
-
+	const orderValid = useSelector(order_valid);
 	const dispatch = useDispatch();
 
 	const randomAlphabet = ["A", "B", "D", "E", "K", "L", "M", "O", "P", "L", "T"];
@@ -31,7 +31,7 @@ const OrderSummary = () => {
 
 	const totalPrice = (Number(subTotalPrice) + shippingEstimate + taxEstimate - 20).toFixed(2);
 	return (
-		<div className="lg:w-[40%] w-full md:pl-8 px-2 pr-2 lg:pr-0 pb-9">
+		<div className="xl:w-[50%] w-full md:pl-8 px-2 pr-2 lg:pr-0 pb-9 py-12 xl:py-0">
 			<h1 className="font-bold text-xl">Order Summary</h1>
 
 			<ul className="mt-5">
@@ -133,11 +133,14 @@ const OrderSummary = () => {
 				</h3>
 			</div>
 			<button
+				disabled={!orderValid}
 				className={`w-full mx-auto h-[50px] shadow-md font-bold  text-md tracking-widest rounded-full ${
 					darkmode ? "bg-white text-[var(--blue-dark)]" : "bg-[var(--blue-dark)] text-white/90"
-				}  hover:opacity-[0.9] duration-200 hover:shadow-sm hover:shadow-slate-300/70`}
+				}  ${!orderValid && "opacity-50"}
+				hover:opacity-[0.9] duration-200 hover:shadow-sm hover:shadow-slate-300/70`}
 				onClick={() => {
 					dispatch(allSuccessOrder(true));
+					dispatch(showModalBox(true));
 				}}
 			>
 				Confirm Order

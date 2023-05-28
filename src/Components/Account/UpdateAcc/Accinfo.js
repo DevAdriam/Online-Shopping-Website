@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { updateAccount, userData } from "./Accslice";
-import { darkMode } from "../Products/ProductSlice";
-import userphoto from "../images/user.png";
+import { updateAccount, userData } from "../AccMain/Accslice";
+import { darkMode } from "../../Products/ProductSlice";
+import userphoto from "../../images/user.png";
 import { toast } from "react-toastify";
 
 const Accinfo = () => {

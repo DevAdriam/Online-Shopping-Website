@@ -29,22 +29,27 @@ const SearchProductList = () => {
 						{getHistory.map((recent) => (
 							<li
 								key={recent.id}
-								className="flex items-center justify-between w-full border-b px-4 py-3"
-								onClick={() => {
-									const recentHistory = {
-										id: recent.id,
-										title: recent.title,
-									};
-									navigate(`/allProducts/${recent.id}`);
-									dispatch(deleteSingleHistory(recent.id));
-									dispatch(addHistory(recentHistory));
-								}}
+								className="flex items-center justify-between relative z-40 w-full border-b px-4 py-3"
 							>
-								<div className="flex items-center gap-2">
+								<div
+									onClick={() => {
+										const recentHistory = {
+											id: recent.id,
+											title: recent.title,
+										};
+										navigate(`/allProducts/${recent.id}`);
+										dispatch(deleteSingleHistory(recent.id));
+										dispatch(addHistory(recentHistory));
+									}}
+									className="flex items-center gap-2"
+								>
 									<AiOutlineHistory size={25} className="min-w-[30px]" />
 									<span>{recent.title}</span>
 								</div>
-								<div className="cursor-pointer" onClick={() => dispatch(deleteSingleHistory(recent.id))}>
+								<div
+									className="cursor-pointer relative z-50"
+									onClick={() => dispatch(deleteSingleHistory(recent.id))}
+								>
 									<RxCross2 />
 								</div>
 							</li>

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { darkMode } from "../Products/ProductSlice";
-import { changeNavlink, isloggedin, login, userData } from "./Accslice";
-import userphoto from "../images/user.png";
+import { darkMode } from "../../Products/ProductSlice";
+import { changeNavlink, isloggedin, login, userData } from "../AccMain/Accslice";
+import userphoto from "../../images/user.png";
 
 import { AiOutlineHeart } from "react-icons/ai";
 import { IoHelpBuoyOutline } from "react-icons/io5";

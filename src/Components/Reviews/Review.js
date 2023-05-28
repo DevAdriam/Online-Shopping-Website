@@ -1,13 +1,11 @@
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addComment, deleteComment, reviews } from "./userReviewSlice";
-import { RiDeleteBin2Fill, RiInsertRowBottom } from "react-icons/ri";
-import { addItem } from "../Cart/CartSLice";
+
 import { AiFillStar } from "react-icons/ai";
 import { darkMode } from "../Products/ProductSlice";
-import { userData } from "../Account/Accslice";
+import { userData, isloggedin } from "../Account/AccMain/Accslice";
 import { toast } from "react-toastify";
-import { isloggedin } from "../Account/Accslice";
 
 const Review = () => {
 	const darkmode = useSelector(darkMode);

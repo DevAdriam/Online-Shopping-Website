@@ -3,7 +3,7 @@ import cheerIcon from "../images/confetti.png";
 
 import { BsArrowRight } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
-import { allSuccessOrder, allTasksFinished } from "../Cart/CartSLice";
+import { allSuccessOrder, allTasksFinished, showModalBox } from "../Cart/CartSLice";
 import { useNavigate } from "react-router-dom";
 import { darkMode } from "../Products/ProductSlice";
 const ModalBoxCompleteOrder = () => {
@@ -25,7 +25,7 @@ const ModalBoxCompleteOrder = () => {
 						className="bg-green-300 rounded-md shadow-md w-max-content py-2 h-[50px] px-10 flex items-center hover:border-2 hover:border-yellow-300"
 						onClick={() => {
 							navigate("/allProducts");
-							dispatch(allSuccessOrder(false));
+							dispatch(showModalBox(false));
 						}}
 					>
 						Shop more products <BsArrowRight className="mx-2" size={22} />

@@ -4,8 +4,10 @@ const AccSlice = createSlice({
 	name: "acc",
 	initialState: {
 		personData: JSON.parse(localStorage.getItem("person")) || {},
+		tempoPersonData: {},
 		AccNav: "accinfo",
 		isLoggedIn: JSON.parse(localStorage.getItem("person")) || false,
+
 		reEnterpw: true,
 		LoggingIn: null,
 		matchPw: null,
@@ -17,6 +19,11 @@ const AccSlice = createSlice({
 			state.personData = personInfo;
 			localStorage.setItem("person", JSON.stringify(personInfo));
 		},
+		updatetempoData: (state, action) => {
+			const tempoPersoninfo = action.payload;
+			state.tempoPersonData = tempoPersoninfo;
+		},
+
 		login: (state, action) => {
 			state.isLoggedIn = !state.isLoggedIn;
 		},
@@ -44,6 +51,7 @@ export const loggIn = (state) => state.acc.LoggingIn;
 export const pwCondition = (state) => state.acc.reEnterpw;
 export const matchpassword = (state) => state.acc.matchPw;
 export const matchOldpw = (state) => state.acc.match_with_oldPw;
+export const tempoData = (state) => state.acc.tempoPersonData;
 
 export const {
 	updateAccount,
@@ -54,6 +62,7 @@ export const {
 	doesntMatchOldpw,
 	changePw,
 	checkCurrentPw_with_Oldpw,
+	updatetempoData,
 } = AccSlice.actions;
 
 export default AccSlice.reducer;

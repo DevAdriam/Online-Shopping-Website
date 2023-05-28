@@ -2,8 +2,8 @@ import React, { useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { darkMode } from "../Products/ProductSlice";
-import { updateAccount, login, pwCondition, password, userData, isloggedin, loggIn, accDoesntExist } from "./Accslice";
+import { darkMode } from "../../Products/ProductSlice";
+import { updateAccount, login, pwCondition, password, userData, loggIn, accDoesntExist } from "../AccMain/Accslice";
 
 import { AiOutlineEyeInvisible, AiOutlineEye } from "react-icons/ai";
 import { toast } from "react-toastify";

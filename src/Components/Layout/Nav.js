@@ -13,7 +13,7 @@ import { HiMenuAlt2 } from "react-icons/hi";
 
 import { addHistory, allProducts, changeMode, darkMode } from "../Products/ProductSlice";
 import { cartCount, completeOrder } from "../Cart/CartSLice";
-import DetermineLogin from "../Account/DetermineLogin";
+import DetermineLogin from "../Account/LogIn/DetermineLogin";
 import SearchProductList from "../multi-pages/SearchProductList";
 
 const Nav = () => {
@@ -76,7 +76,7 @@ const Nav = () => {
 				 items-center px-2 md:px-18 py-4 fixed top-0 z-50 w-full ${darkmode ? "bg-[var(--blue-dark)] text-slate-300" : "bg-white"}`}
 			>
 				{/* Logo */}
-				<div className="flex items-center md:gap-4 gap-2">
+				<div className="flex items-center md:gap-4 gap-2 lg:pl-4">
 					<HiMenuAlt2 className="md:hidden inline-block cursor-pointer" size={30} onClick={openNav} />
 					<span onClick={() => navigate("/")} className="cursor-pointer">
 						<img
@@ -157,7 +157,7 @@ const Nav = () => {
 								SetfilteredArr([]);
 							}}
 						/>
-						<div className="absolute w-[30rem] xl:w-[45rem] h-max-content max-h-[25rem] overflow-y-scroll bg-white h-max-content flex flex-col left-0 top-12 shadow-md">
+						<div className="absolute md:max-w-[25rem] lg:max-w-[48rem] lg:w-[35rem] xl:max-w-[50rem] xl:w-[43rem] h-max-content max-h-[25rem] overflow-y-scroll bg-white h-max-content flex flex-col left-0 top-12 shadow-md">
 							{(inputWord === "") & search ? (
 								<SearchProductList />
 							) : (

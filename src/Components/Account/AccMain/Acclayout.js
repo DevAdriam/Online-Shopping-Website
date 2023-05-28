@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import Nav from "../Layout/Nav";
+import Nav from "../../Layout/Nav";
 import { useSelector } from "react-redux";
-import { navAcc, userData } from "./Accslice";
-import { darkMode } from "../Products/ProductSlice";
-import { ToastContainer } from "react-toastify";
-import Accinfo from "./Accinfo";
-import Accwishlist from "./Accwishlist";
-import ChgPw from "./ChgPw";
+import { navAcc, userData } from "../AccMain/Accslice";
+import { darkMode } from "../../Products/ProductSlice";
+import Accinfo from "../UpdateAcc/Accinfo";
+import Accwishlist from "../AccWishlist/Accwishlist";
+import ChgPw from "../UpdatePw/ChgPw";
+import OrderHistory from "../AccOrder/OrderHistory";
 const Acclayout = () => {
 	const darkmode = useSelector(darkMode);
 	const accNav = useSelector(navAcc);
@@ -81,8 +81,8 @@ const Acclayout = () => {
 				<hr />
 
 				{chgLi === "accinfo" && <Accinfo />}
-				{chgLi === "wishlist" && <Accwishlist />}
-				{chgLi === "myorder" && <div>order</div>}
+				{chgLi === "wishlist" && <Accwishlist chgLi={chgLi} />}
+				{chgLi === "myorder" && <OrderHistory chgLi={chgLi} />}
 				{chgLi === "chgpw" && <ChgPw />}
 			</div>
 		</>

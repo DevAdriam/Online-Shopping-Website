@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { darkMode } from "../Products/ProductSlice";
+import { darkMode } from "../../Products/ProductSlice";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { doesntMatchOldpw, updateAccount, userData } from "./Accslice";
+import { doesntMatchOldpw, updateAccount, userData } from "../AccMain/Accslice";
 import { toast } from "react-toastify";
 
 const ChgPw = () => {

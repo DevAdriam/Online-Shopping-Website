@@ -30,11 +30,27 @@ const BestSelling = () => {
 		nextArrow: <GrNext />,
 		responsive: [
 			{
-				breakpoint: 1000,
+				breakpoint: 700,
 				settings: {
 					slidesToShow: 1,
 					slidesToScroll: 1,
 					initialSLide: 1,
+				},
+			},
+			{
+				breakpoint: 1000,
+				settings: {
+					slidesToShow: 2,
+					slidesToScroll: 1,
+					initialSLide: 1,
+				},
+			},
+			{
+				breakpoint: 1250,
+				settings: {
+					slidesToShow: 3,
+					slidesToScroll: 1,
+					initialSLide: 3,
 				},
 			},
 		],

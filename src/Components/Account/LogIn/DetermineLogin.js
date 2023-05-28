@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { isloggedin, login, userData } from "./Accslice";
-import IfLogin from "./IfLogin";
-import HavntLogin from "./HavntLogin";
+import { isloggedin, login, userData } from "../AccMain/Accslice";
+import IfLogin from "../LogIn/IfLogin";
+import HavntLogin from "../LogIn/HavntLogin";
 
 const DetermineLogin = () => {
 	const isLoggedIn = useSelector(isloggedin);

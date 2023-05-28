@@ -4,9 +4,19 @@ const CartSlice = createSlice({
 	name: "products",
 	initialState: {
 		cartList: JSON.parse(localStorage.getItem("cartlist")) || [],
+		orderList: JSON.parse(localStorage.getItem("orderlist")) || [],
 		wishList: JSON.parse(localStorage.getItem("wishlist")) || [],
 		completeOrder: false,
 		allSuccess: false,
+		orderDate: localStorage.getItem("orderDate") || null,
+		completeModalBox: false,
+		cancelModalBox: false,
+
+		contactValid: false,
+		shippingValid: false,
+		paymentValid: false,
+
+		orderValid: false,
 	},
 	reducers: {
 		addToCart: (state, action) => {
@@ -88,9 +98,43 @@ const CartSlice = createSlice({
 			state.completeOrder = action.payload;
 		},
 		allSuccessOrder: (state, action) => {
-			state.allSuccess = action.payload;
+			const allmonths = ["Jan", "Feb", "March", "April", "May", "Jun", "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
+			state.orderList = state.cartList;
 			state.cartList = [];
+			state.contactValid = false;
+			state.shippingValid = false;
+			state.paymentValid = false;
+			state.orderValid = false;
+			state.orderDate = `${allmonths[Number(new Date().getMonth())]}, ${new Date().getDate()}`;
+			localStorage.setItem("orderDate", state.orderDate);
+			localStorage.setItem("orderlist", JSON.stringify(state.orderList));
 			localStorage.setItem("cartlist", JSON.stringify(state.cartList));
+		},
+
+		showModalBox: (state, action) => {
+			state.completeModalBox = action.payload;
+		},
+		showCancelOrderMb: (state, action) => {
+			state.cancelModalBox = action.payload;
+		},
+		deleteOrder: (state) => {
+			state.orderList = [];
+			localStorage.setItem("orderlist", JSON.stringify(state.orderList));
+		},
+		validation: (state, action) => {
+			let condition = action.payload;
+
+			if (condition === "contactValid") {
+				state.contactValid = true;
+			} else if (condition === "shippingValid") {
+				state.shippingValid = true;
+			} else if (condition === "paymentValid") {
+				state.paymentValid = true;
+			}
+
+			if (state.contactValid && state.paymentValid && state.shippingValid) {
+				state.orderValid = true;
+			}
 		},
 	},
 });
@@ -100,9 +144,24 @@ export const wishList = (state) => state.carts.wishList;
 export const cartCount = (state) => state.carts.cartList.length;
 export const cartList = (state) => state.carts.cartList;
 export const goToCompleteOrder = (state) => state.carts.completeOrder;
-export const allTasksFinished = (state) => state.carts.allSuccess;
-
-export const { addToCart, addToWishList, addItem, removeItem, deleteItem, deleteFromWishList, completeOrder, allSuccessOrder } =
-	CartSlice.actions;
+export const allTasksFinished = (state) => state.carts.completeModalBox;
+export const orderdate = (state) => state.carts.orderDate;
+export const order_list = (state) => state.carts.orderList;
+export const cancel_ModalBox = (state) => state.carts.cancelModalBox;
+export const order_valid = (state) => state.carts.orderValid;
+export const {
+	addToCart,
+	addToWishList,
+	addItem,
+	removeItem,
+	deleteItem,
+	deleteFromWishList,
+	completeOrder,
+	allSuccessOrder,
+	showModalBox,
+	showCancelOrderMb,
+	deleteOrder,
+	validation,
+} = CartSlice.actions;
 
 export default CartSlice.reducer;

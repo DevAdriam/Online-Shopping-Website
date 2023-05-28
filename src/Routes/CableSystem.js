@@ -7,7 +7,7 @@ import Electronics from "../Components/multi-pages/Electronics";
 import Jewelry from "../Components/multi-pages/Jewelery";
 import ProductList from "../Components/Products/ProductList";
 import ShoppingCart from "../Components/Cart/ShoppingCart";
-import Acclayout from "../Components/Account/Acclayout";
+import Acclayout from "../Components/Account/AccMain/Acclayout";
 import ProductDetail from "../Components/Products/ProductDetail";
 import { ToastContainer } from "react-toastify";
 import SearchProducts from "../Components/multi-pages/SearchProducts";
