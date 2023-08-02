@@ -3,12 +3,12 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 
-#Project Explanation
+# Project Explanation
 
 This project is written by using React Query , Redux Toolkit , Tailwind and React. 
 
 
-#Features
+# Features
 
 Log in , Log out , register , upgrade Password,profile update
 
