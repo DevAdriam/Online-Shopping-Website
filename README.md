@@ -2,6 +2,19 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+
+#Project Explanation
+
+This project is written by using React Query , Redux Toolkit , Tailwind and React. 
+
+
+#Features
+
+Log in , Log out , register , upgrade Password,profile update
+
+add to cart , product checkout , product detail , reviews , recommend 
+
+
 ## Available Scripts
 
 In the project directory, you can run:
